@@ -14,7 +14,7 @@ import static org.usfirst.frc.team7327.robot.Robot.oi;
 // import org.usfirst.frc.team7327.robot.ElevatorPositions;
 
 public class Drive extends Command {
-  public Drive() { }
+  public Drive() { requires(Robot.Drivetrain); }
   protected void initialize() { }
   public static XboxController P1 = oi.Controller0;//, P2 = oi.Controller1;  
   double finalAngle, Redthrottle, ballThrottle, rotMag, rightArc, directMag, steering_adjust, x; 
