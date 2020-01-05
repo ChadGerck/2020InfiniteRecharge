@@ -3,14 +3,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 import com.kauailabs.navx.frc.AHRS;
-import org.usfirst.frc.team7327.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.cameraserver.CameraServer;
 //import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.I2C;
 
 public class Robot extends TimedRobot {
-  public static final DriveTrain kDrivetrain = new DriveTrain();
+  public static final Drivetrain Drivetrain = new Drivetrain();
   public static final OI oi = new OI();
   public static AHRS nav; 
   public boolean flag = true; 
@@ -19,7 +19,7 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture();
     // c0.setClosedLoopControl(true); 
   }
-  @Override public void robotPeriodic() { kDrivetrain.updateDashboard(); }
+  @Override public void robotPeriodic() { Drivetrain.updateDashboard(); }
 @Override public void teleopInit() { /*kDrivetrain.SetElevatorStatus(); kDrivetrain.ConfigElevator();*/ }
   @Override public void autonomousInit() { nav.reset(); }
   @Override public void autonomousPeriodic() { Scheduler.getInstance().run(); }
