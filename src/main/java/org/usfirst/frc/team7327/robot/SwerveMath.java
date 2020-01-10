@@ -1,5 +1,7 @@
 package org.usfirst.frc.team7327.robot;
 
+import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
+
 public class SwerveMath {
     static double wheelXcos, wheelYsin, NWwheelX, NWwheelY, NEwheelX, NEwheelY, SWwheelX, SWwheelY, SEwheelX, SEwheelY, max, 
     NWwheelMag, NEwheelMag, SWwheelMag, SEwheelMag, NWwheelRot, NEwheelRot, SWwheelRot, SEwheelRot;
@@ -33,9 +35,9 @@ public class SwerveMath {
         else if(SWwheelMag>max){max=SWwheelMag;}else if(SEwheelMag>max){max=SEwheelMag;}
         if(max>1){NWwheelMag/=max;NEwheelMag/=max;SWwheelMag/=max;SEwheelMag/=max;}
 
-        //kDrivetrain.setModule("NW",NWwheelRot,NWwheelMag);
-        //kDrivetrain.setModule("NE",NEwheelRot,NEwheelMag);
-        //kDrivetrain.setModule("SW",SWwheelRot,SWwheelMag);
-        //kDrivetrain.setModule("SE",SEwheelRot,SEwheelMag);
+        Drivetrain.setModule("NW",NWwheelRot,NWwheelMag);
+        Drivetrain.setModule("NE",NEwheelRot,NEwheelMag);
+        Drivetrain.setModule("SW",SWwheelRot,SWwheelMag);
+        Drivetrain.setModule("SE",SEwheelRot,SEwheelMag);
     }
 }
