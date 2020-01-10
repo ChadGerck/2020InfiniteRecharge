@@ -14,9 +14,11 @@ public class Drivetrain extends Subsystem {
   public TurnModule turning; 
   public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, 262.8), abeNE = new AnalogPotentiometer(1, 360, 131.2), 
                               abeSW = new AnalogPotentiometer(2, 360, 345.2), abeSE = new AnalogPotentiometer(3, 360, 220.3); 
-  double kSwerveP = .8, kSwerveD = .1; 
-  private SwerveModule moduleNW= new SwerveModule(1,2, abeNW, kSwerveP, kSwerveD, false), moduleNE = new SwerveModule(3,4, abeNE, kSwerveP, kSwerveD, false),
-                       moduleSW= new SwerveModule(5,6, abeSW, kSwerveP, kSwerveD, false), moduleSE= new SwerveModule(7,8, abeSE, kSwerveP, kSwerveD,  false);
+  static double kSwerveP = .8, kSwerveD = .1; 
+  private static SwerveModule moduleNW = new SwerveModule(1, 2, abeNW, kSwerveP, kSwerveD, false);
+  private static SwerveModule moduleNE = new SwerveModule(3, 4, abeNE, kSwerveP, kSwerveD, false);
+  private static SwerveModule moduleSW = new SwerveModule(5, 6, abeSW, kSwerveP, kSwerveD, false);
+  private static SwerveModule moduleSE = new SwerveModule(7, 8, abeSE, kSwerveP, kSwerveD, false);
   
   public static ElevatorModule Elevator;
   //public static VictorSPX BallVictor, Intake;
@@ -29,7 +31,7 @@ public class Drivetrain extends Subsystem {
     // pullout = new DoubleSolenoid(1,0,7); 
   }
   @Override public void initDefaultCommand() { setDefaultCommand(new Drive()); }
-  public void setModule(String loc,double degrees,double power){
+  public static void setModule(String loc,double degrees,double power){
     switch(loc){case "NW":moduleNW.set(degrees,power);break; case "NE":moduleNE.set(degrees,power);break;
                 case "SW":moduleSW.set(degrees,power);break; case "SE":moduleSE.set(degrees,power);break;
     }
