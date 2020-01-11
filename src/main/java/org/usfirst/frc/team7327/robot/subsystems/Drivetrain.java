@@ -12,8 +12,8 @@ import org.usfirst.frc.team7327.robot.TurnModule;
 
 public class Drivetrain extends Subsystem {
   public TurnModule turning; 
-  public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, 262.8), abeNE = new AnalogPotentiometer(1, 360, 131.2), 
-                              abeSW = new AnalogPotentiometer(2, 360, 345.2), abeSE = new AnalogPotentiometer(3, 360, 220.3); 
+  public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, 138), abeNE = new AnalogPotentiometer(1, 360, 131.2), 
+                              abeSW = new AnalogPotentiometer(2, 360, 0.2), abeSE = new AnalogPotentiometer(3, 360, 220.3); 
   static double kSwerveP = .8, kSwerveD = .1; 
   private static SwerveModule moduleNW = new SwerveModule(1, 2, abeNW, kSwerveP, kSwerveD, false);
   private static SwerveModule moduleNE = new SwerveModule(3, 4, abeNE, kSwerveP, kSwerveD, false);
