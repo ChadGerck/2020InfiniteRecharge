@@ -64,13 +64,15 @@ public class Drive extends Command {
     } else{fixRotation = true;}
     SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
 
-    SmartDashboard.putNumber (NavAngle);
+    SmartDashboard.putNumber ("Angle", Robot.NavAngle());
+
 		
 		// if(oi.RightBumperDown(P2)) { Redthrottle = .6; } else if(oi.LeftBumperDown(P2)) { Redthrottle = -.6;}
 		// else { Redthrottle = 0; } Robot.Drivetrain.setRawIntake(Redthrottle);
 		// if(oi.RightMag(P2) > .3) { ballThrottle = .75*oi.RightY(P2); } else if(oi.RightBumperDown(P2)) { ballThrottle = .5; }
     // else{ ballThrottle = 0; } Robot.Drivetrain.setRawBallIn(ballThrottle); 
-    
+    //SmartDashboard.putNumber("this", Robot.NavAngle());
+    //
     //if(oi.StartButton(P1)) { Robot.nav.reset(); } //if(oi.StartButton(P2)) { Robot.Drivetrain.ResetElevator(); }
     // ElevatorPositions.MoveElevators();
 
