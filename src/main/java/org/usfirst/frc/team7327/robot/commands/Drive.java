@@ -1,6 +1,7 @@
 package org.usfirst.frc.team7327.robot.commands;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -62,6 +63,8 @@ public class Drive extends Command {
       fixRotation = false; 
     } else{fixRotation = true;}
     SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
+
+    SmartDashboard.putNumber (NavAngle);
 		
 		// if(oi.RightBumperDown(P2)) { Redthrottle = .6; } else if(oi.LeftBumperDown(P2)) { Redthrottle = -.6;}
 		// else { Redthrottle = 0; } Robot.Drivetrain.setRawIntake(Redthrottle);
