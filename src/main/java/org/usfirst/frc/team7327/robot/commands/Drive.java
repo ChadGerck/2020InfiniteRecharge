@@ -51,7 +51,7 @@ public class Drive extends Command {
     if( oi.AButtonDown(P1)){ 
       x = oi.LimelightTx(); if(x >= -3 && x <= 3){ steering_adjust = 0; }else{ steering_adjust = SteerP*-x; } 
       finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(P1),steering_adjust))-90; directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(P1)))/2; 
-    }else if(oi.LeftMag(P1) >= .2){ finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(P1), oi.LeftX(P1))) + Robot.NavAngle(); directMag = .5*oi.LeftMag(P1); }
+    }else if(oi.LeftMag(P1) >= .2){ finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(P1), oi.LeftX(P1))) - Robot.NavAngle(); directMag = oi.LeftMag(P1); }
     else if(oi.RightBumperDown(P1)) { finalAngle = 90; directMag = .05; } else if(oi.LeftBumperDown(P1)) { finalAngle = 270; directMag = .05; }
     else { directMag = 0; }
 
