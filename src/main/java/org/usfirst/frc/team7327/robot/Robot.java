@@ -2,6 +2,7 @@ package org.usfirst.frc.team7327.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
 import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
@@ -19,7 +20,11 @@ public class Robot extends TimedRobot {
     // CameraServer.getInstance().startAutomaticCapture();
     // c0.setClosedLoopControl(true); 
   }
-  @Override public void robotPeriodic() { Drivetrain.updateDashboard(); }
+  @Override public void robotPeriodic() { Drivetrain.updateDashboard();
+    SmartDashboard.putNumber("abSW", Drivetrain.abeSW.get()); 
+    SmartDashboard.putNumber("abNW", Drivetrain.abeNW.get()); 
+    SmartDashboard.putNumber("abSE", Drivetrain.abeSE.get()); 
+  }
 @Override public void teleopInit() { /*Drivetrain.SetElevatorStatus(); Drivetrain.ConfigElevator();*/ }
   @Override public void autonomousInit() { nav.reset(); }
   @Override public void autonomousPeriodic() { Scheduler.getInstance().run(); }

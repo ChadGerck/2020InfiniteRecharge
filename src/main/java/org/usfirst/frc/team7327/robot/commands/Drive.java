@@ -28,9 +28,6 @@ public class Drive extends Command {
   private NetworkTableEntry angleR = tab.add("RocketAngle", rocketAngle).getEntry();
   DoubleSolenoid.Value Pincher, Extendor, pullout = Value.kOff; 
 
-
-
-
   protected void execute() {
 
     //if(Robot.oi.BackButton(P2)){ if(oi.LEDValue() == 1 || oi.LEDValue() == 0){ oi.LEDOn(); } else if(oi.LEDValue() == 3){ oi.LEDOff(); }}
@@ -54,7 +51,7 @@ public class Drive extends Command {
     if( oi.AButtonDown(P1)){ 
       x = oi.LimelightTx(); if(x >= -3 && x <= 3){ steering_adjust = 0; }else{ steering_adjust = SteerP*-x; } 
       finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(P1),steering_adjust))-90; directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(P1)))/2; 
-    }else if(oi.LeftMag(P1) >= .2){ finalAngle = Math.toDegrees(Math.atan2(oi.LeftX(P1), oi.LeftY(P1))) + Robot.NavAngle(); directMag = .5*oi.LeftMag(P1); }
+    }else if(oi.LeftMag(P1) >= .2){ finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(P1), oi.LeftX(P1))) + Robot.NavAngle(); directMag = .5*oi.LeftMag(P1); }
     else if(oi.RightBumperDown(P1)) { finalAngle = 90; directMag = .05; } else if(oi.LeftBumperDown(P1)) { finalAngle = 270; directMag = .05; }
     else { directMag = 0; }
 
@@ -72,7 +69,7 @@ public class Drive extends Command {
     // else{ ballThrottle = 0; } Robot.Drivetrain.setRawBallIn(ballThrottle); 
     //SmartDashboard.putNumber("this", Robot.NavAngle());
     //
-    //if(oi.StartButton(P1)) { Robot.nav.reset(); } //if(oi.StartButton(P2)) { Robot.Drivetrain.ResetElevator(); }
+    if(oi.StartButton(P1)) { Robot.nav.reset(); } //if(oi.StartButton(P2)) { Robot.Drivetrain.ResetElevator(); }
     // ElevatorPositions.MoveElevators();
 
     // if(oi.XButton(P2)){ Pincher = Value.kForward; } else if(oi.BButton(P2)){ Pincher = Value.kReverse; }
