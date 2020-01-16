@@ -1,7 +1,6 @@
 package org.usfirst.frc.team7327.robot.commands;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -86,5 +85,5 @@ public class Drive extends Command {
   }
   protected boolean isFinished() { return false;}
   protected void end() {}
-  protected void interrupted() {}
+
 }
