@@ -16,8 +16,8 @@ public class Drivetrain extends Subsystem {
   public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, 100), abeNE = new AnalogPotentiometer(1, 360, 203.2), 
                               abeSW = new AnalogPotentiometer(2, 360, 264 ), abeSE = new AnalogPotentiometer(3, 360, 38.3); 
   static double kSwerveP = .8, kSwerveD = .1; 
-  private static SwerveModule moduleNW = new SwerveModule(3, 4, abeNW, kSwerveP, kSwerveD, false);
-  private static SwerveModule moduleNE = new SwerveModule(1, 2, abeNE, kSwerveP, kSwerveD, false);
+  private static SwerveModule moduleNW = new SwerveModule(1, 2, abeNW, kSwerveP, kSwerveD, false);
+  private static SwerveModule moduleNE = new SwerveModule(3, 4, abeNE, kSwerveP, kSwerveD, false);
   private static SwerveModule moduleSW = new SwerveModule(5, 6, abeSW, kSwerveP, kSwerveD, false);
   private static SwerveModule moduleSE = new SwerveModule(7, 8, abeSE, kSwerveP, kSwerveD, false);
   
