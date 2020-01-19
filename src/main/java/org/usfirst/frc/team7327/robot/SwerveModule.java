@@ -4,6 +4,7 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -15,6 +16,7 @@ public class SwerveModule{
     private double setpoint, lastAngle;
     private static final double dt = 0.05;  
     private Potentiometer steeringEncoder;
+    private final PIDController m_drivePIDController = new PIDController(.1, 0, 0);
     private Boolean isFlipped; 
     private CANEncoder encoder; 
     /**
