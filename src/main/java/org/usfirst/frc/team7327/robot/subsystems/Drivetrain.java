@@ -25,14 +25,13 @@ public class Drivetrain extends Subsystem {
   private static final Translation2d m_backRightLocation = new Translation2d(-0.381, -0.381);
 
 
-  public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, 100), abeNE = new AnalogPotentiometer(1, 360, 203.2), 
-                              abeSW = new AnalogPotentiometer(2, 360, 264 ), abeSE = new AnalogPotentiometer(3, 360, 38.3); 
+  public static Potentiometer abeFL = new AnalogPotentiometer(0, 360, 100), abeFR = new AnalogPotentiometer(1, 360, 203.2), 
+                              abeBL = new AnalogPotentiometer(2, 360, 264 ), abeBR = new AnalogPotentiometer(3, 360, 38.3); 
 
   static double kSwerveP = .8, kSwerveD = .1; 
-  private static SwerveModule moduleFL = new SwerveModule(1, 2, abeNW, kSwerveP, kSwerveD, false);
-  private static SwerveModule moduleFR = new SwerveModule(3, 4, abeNE, kSwerveP, kSwerveD, false);
-  private static SwerveModule moduleBL = new SwerveModule(5, 6, abeSW, kSwerveP, kSwerveD, false);
-  private static SwerveModule moduleBR = new SwerveModule(7, 8, abeSE, kSwerveP, kSwerveD, false);
+  private static SwerveModule 
+  moduleFL = new SwerveModule(1, 2, abeFL, kSwerveP, kSwerveD, false), moduleFR = new SwerveModule(3, 4, abeFR, kSwerveP, kSwerveD, false),
+  moduleBL = new SwerveModule(5, 6, abeBL, kSwerveP, kSwerveD, false), moduleBR = new SwerveModule(7, 8, abeBR, kSwerveP, kSwerveD, false);
   
   private static final SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
   public static final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(m_kinematics, Rotation2d.fromDegrees(0));
