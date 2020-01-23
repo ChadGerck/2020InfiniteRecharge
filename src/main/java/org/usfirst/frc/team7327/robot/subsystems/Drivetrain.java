@@ -87,4 +87,6 @@ public class Drivetrain extends Subsystem {
         moduleBR.getState()
     );
   }
+  public double ODOX() { return m_odometry.getPoseMeters().getTranslation().getX(); }
+  public double ODOY() { return m_odometry.getPoseMeters().getTranslation().getY(); }
 }

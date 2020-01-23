@@ -27,28 +27,32 @@ public class Robot extends TimedRobot {
     nav.reset();
     
     RobotMoveY(1);
-    RobotMoveY(1);
-    RobotMoveX(1);
-    RobotMoveY(4);
+    // RobotMoveY(1);
+    // RobotMoveX(1);
+    // RobotMoveY(4);
   }
   public void RobotMoveY(int y){
     if (y > 0){while (m_swerve.ODOY() > 1){
-      m_swerve.drive (0, 1, 0, true);}
-    }else if (y < 0){while (m_swerve.m_odometry.getPoseMeters().getTranslation().getY() < 1){
-      m_swerve.drive (0, -1, 0, true);}
+      SwerveMath(0,.25,0,true);
+      //m_swerve.drive (0, 1, 0, true);}
+    }else if (y < 0){while (Drivetrain.m_odometry.getPoseMeters().getTranslation().getY() < 1){
+      SwerveMath(0,.25,0,true);
+      //m_swerve.drive (0, -1, 0, true);}
     }
 }public void RobotMoveX(int x){
+  /*
     if (x > 0){while(m_swerve.ODOX() > 1){
       m_swerve.drive (1, 0, 0, true); }
-    }else if(x < 0){while (m_swerve.m_odometry.getPoseMeters().getTranslation().getX() < 1){
+    }else if(x < 0){while (Drivetrain.m_odometry.getPoseMeters().getTranslation().getX() < 1){
       m_swerve.drive (-1, 0, 0, true); 
     }
+    */
   }
   @Override public void autonomousPeriodic() { Scheduler.getInstance().run(); }
   @Override public void teleopPeriodic() { Scheduler.getInstance().run();
     Drivetrain.updateOdometry();
-    SmartDashboard.putNumber("ODOX", m_swerve.m_odometry.getPoseMeters().getTranslation().getX());
-    SmartDashboard.putNumber("ODOY", m_swerve.m_odometry.getPoseMeters().getTranslation().getY());
+    SmartDashboard.putNumber("ODOX", Drivetrain.m_odometry.getPoseMeters().getTranslation().getX());
+    SmartDashboard.putNumber("ODOY", Drivetrain.m_odometry.getPoseMeters().getTranslation().getY());
     // if(oi.LSClick(oi.Controller1)){
     //   if(flag){ c0.setClosedLoopControl(false); flag = false; }
     //   else{ c0.setClosedLoopControl(true); flag = true; }
