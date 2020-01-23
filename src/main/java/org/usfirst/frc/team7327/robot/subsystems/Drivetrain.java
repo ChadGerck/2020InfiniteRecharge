@@ -1,26 +1,41 @@
 package org.usfirst.frc.team7327.robot.subsystems;
+
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 // import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
+import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.wpilibj.kinematics.SwerveDriveOdometry;
 
 // import com.ctre.phoenix.motorcontrol.ControlMode;
 // import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import org.usfirst.frc.team7327.robot.ElevatorModule;
+import org.usfirst.frc.team7327.robot.Robot;
 import org.usfirst.frc.team7327.robot.commands.Drive;
 import org.usfirst.frc.team7327.robot.SwerveModule;
 import org.usfirst.frc.team7327.robot.TurnModule;
 
 public class Drivetrain extends Subsystem {
-  public TurnModule turning; 
+  public TurnModule turning;   
+  private static final Translation2d m_frontLeftLocation = new Translation2d(0.381, 0.381);
+  private static final Translation2d m_frontRightLocation = new Translation2d(-0.381, 0.381);
+  private static final Translation2d m_backLeftLocation = new Translation2d(0.381, -0.381);
+  private static final Translation2d m_backRightLocation = new Translation2d(-0.381, -0.381);
+
+
   public static Potentiometer abeNW = new AnalogPotentiometer(0, 360, 100), abeNE = new AnalogPotentiometer(1, 360, 203.2), 
                               abeSW = new AnalogPotentiometer(2, 360, 264 ), abeSE = new AnalogPotentiometer(3, 360, 38.3); 
+
   static double kSwerveP = .8, kSwerveD = .1; 
-  private static SwerveModule moduleNW = new SwerveModule(1, 2, abeNW, kSwerveP, kSwerveD, false);
-  private static SwerveModule moduleNE = new SwerveModule(3, 4, abeNE, kSwerveP, kSwerveD, false);
-  private static SwerveModule moduleSW = new SwerveModule(5, 6, abeSW, kSwerveP, kSwerveD, false);
-  private static SwerveModule moduleSE = new SwerveModule(7, 8, abeSE, kSwerveP, kSwerveD, false);
+  private static SwerveModule moduleFL = new SwerveModule(1, 2, abeNW, kSwerveP, kSwerveD, false);
+  private static SwerveModule moduleFR = new SwerveModule(3, 4, abeNE, kSwerveP, kSwerveD, false);
+  private static SwerveModule moduleBL = new SwerveModule(5, 6, abeSW, kSwerveP, kSwerveD, false);
+  private static SwerveModule moduleBR = new SwerveModule(7, 8, abeSE, kSwerveP, kSwerveD, false);
   
+  private static final SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
+  public static final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(m_kinematics, Rotation2d.fromDegrees(0));
   
   public static ElevatorModule Elevator;
   //public static VictorSPX BallVictor, Intake;
@@ -34,23 +49,24 @@ public class Drivetrain extends Subsystem {
   }
   @Override public void initDefaultCommand() { setDefaultCommand(new Drive()); }
   public static void setModule(String loc,double degrees,double power){
-    switch(loc){case "NW":moduleNW.set(degrees,power);break; case "NE":moduleNE.set(degrees,power);break;
-                case "SW":moduleSW.set(degrees,power);break; case "SE":moduleSE.set(degrees,power);break;
+    switch(loc){case "FL":moduleFL.set(degrees,power);break; case "FR":moduleFR.set(degrees,power);break;
+                case "BL":moduleBL.set(degrees,power);break; case "BR":moduleBR.set(degrees,power);break;
     }
-  }public SwerveModule getModuleNW(){ return moduleNW;}
-  public  SwerveModule getModuleNE(){ return moduleNE; }
-	public  SwerveModule getModuleSW(){ return moduleSW;}
-  public  SwerveModule getModuleSE(){ return moduleSE; }
+  }public SwerveModule getModuleNW(){ return moduleFL;}
+  public  SwerveModule getModuleNE(){ return moduleFR; }
+	public  SwerveModule getModuleSW(){ return moduleBL;}
+  public  SwerveModule getModuleSE(){ return moduleBR; }
+  public static Rotation2d getAngle() { return Rotation2d.fromDegrees(Robot.NavAngle()); }
   // public void setPincher(DoubleSolenoid.Value value){ Pincher.set(value); }
   // public void setExtendor(DoubleSolenoid.Value value){ Extendor.set(value); }
   // public void setPullout(DoubleSolenoid.Value value){ pullout.set(value); }
   
   public void setAllAngle(double degrees){
-    moduleNW.setSteeringDegrees(degrees); moduleNE.setSteeringDegrees(degrees);
-    moduleSW.setSteeringDegrees(degrees); moduleSE.setSteeringDegrees(degrees);
+    moduleFL.setSteeringDegrees(degrees); moduleFR.setSteeringDegrees(degrees);
+    moduleBL.setSteeringDegrees(degrees); moduleBR.setSteeringDegrees(degrees);
   }public void setAllPower(double power){
-    moduleNW.setDrivePower(power); moduleNE.setDrivePower(power);
-    moduleSW.setDrivePower(power); moduleSE.setDrivePower(power);
+    moduleFL.setDrivePower(power); moduleFR.setDrivePower(power);
+    moduleBL.setDrivePower(power); moduleBR.setDrivePower(power);
   }
   //  }public void setRawElevator(double speed){ Elevator.setRawElev(speed); }
 	// public void setElevatorPosition(double position){ Elevator.setPosition(position); }
@@ -63,4 +79,13 @@ public class Drivetrain extends Subsystem {
 	// public void setRawBallIn(double speed){ BallVictor.set(ControlMode.PercentOutput, speed); }
 	// public void setRawIntake(double intakevalue) { Intake.set(ControlMode.PercentOutput, intakevalue);	} 
   public void updateDashboard(){}
+  public static void updateOdometry() {
+    m_odometry.update(
+        getAngle(),
+        moduleFL.getState(),
+        moduleFR.getState(),
+        moduleBL.getState(),
+        moduleBR.getState()
+    );
+  }
 }

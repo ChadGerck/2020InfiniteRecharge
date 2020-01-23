@@ -4,7 +4,9 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
+import edu.wpi.first.wpilibj.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SwerveModule{
@@ -16,7 +18,7 @@ public class SwerveModule{
     private static final double dt = 0.05;  
     private Potentiometer steeringEncoder;
     private Boolean isFlipped; 
-    private CANEncoder encoder; 
+    private CANEncoder m_driveEncoder;
     /**
      * @param kSteeringID   the ID of the steering motor
      * @param kDriveID      the ID of the drive motor
@@ -26,7 +28,9 @@ public class SwerveModule{
     public SwerveModule(int kSteeringID, int kDriveID, Potentiometer steeringEncoder, double kP, double kD, boolean isFlipped){
         m_motor = new CANSparkMax(kDriveID, MotorType.kBrushless);
         mSteering = new CANSparkMax(kSteeringID, MotorType.kBrushless);
-        encoder = new CANEncoder(m_motor);
+        m_driveEncoder = new CANEncoder(m_motor);
+        m_driveEncoder.setVelocityConversionFactor(0.00064034191); //(2*Math.PI*2*2.54/100*(14/42*26/18*15/60))/60
+        m_driveEncoder.setPositionConversionFactor(0.0384205146);  //(2*Math.PI*2*2.54/100*(14/42*26/18*15/60))
         lastAngle = 0;
         this.steeringEncoder = steeringEncoder;
         
@@ -53,6 +57,7 @@ public class SwerveModule{
     }
     public void setSteeringDegrees(double deg){setpoint = boundHalfDegrees(deg);}
     public double getSetpointDegrees(){return setpoint;}
+    public SwerveModuleState getState() { return new SwerveModuleState(m_driveEncoder.getVelocity(), new Rotation2d(Math.toRadians(getSteeringEncoder()))); }
     public void set(double degrees, double power){
         double supplement = degrees > 0 ? degrees-180 : 180+degrees;
         if(Math.abs(supplement-lastAngle) <= 90){
@@ -66,5 +71,4 @@ public class SwerveModule{
     public double getSteeringEncoder(){
         double angle=steeringEncoder.get();while(angle>360)angle-=360;while(angle<0)angle+=360;return angle; 
     }
-    public double getDriveEncoder(){ return encoder.getPosition(); }
 }
