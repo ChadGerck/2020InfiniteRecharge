@@ -14,7 +14,7 @@ import static org.usfirst.frc.team7327.robot.Robot.oi;
 // import org.usfirst.frc.team7327.robot.ElevatorPositions;
 
 public class Drive extends Command {
-  public Drive() { requires(Robot.m_swerve); }
+  public Drive() { requires(Robot.swerve); }
   protected void initialize() { }
   double finalAngle, Redthrottle, ballThrottle, rotMag, rightArc, directMag, steering_adjust, x; 
   double SteerP = -0.025;
@@ -40,8 +40,8 @@ public class Drive extends Command {
       else if(oi.YButtonDown(1) && rocketAngle) { rightArc = 45;  } else if(oi.YButtonDown(1) && !rocketAngle){ rightArc = 315; }
       else if(oi.LeftTrigger(1) > .1) { rightArc = 270; }           else if(oi.RightTrigger(1) > .1) {rightArc = 90; }
       else if(oi.BButtonDown(1)){ rightArc = 0; }
-      try { Robot.m_swerve.turning.setYaw(rightArc - Robot.NavAngle());} catch (Exception e) {}
-      rotMag = Robot.m_swerve.turning.getPIDOutput();
+      try { Robot.swerve.turning.setYaw(rightArc - Robot.NavAngle());} catch (Exception e) {}
+      rotMag = Robot.swerve.turning.getPIDOutput();
     } else{ rotMag = 0; }
 
     if( oi.AButtonDown(1)){ 
@@ -60,20 +60,20 @@ public class Drive extends Command {
 
 		
 		// if(oi.RightBumperDown(2)) { Redthrottle = .6; } else if(oi.LeftBumperDown(2)) { Redthrottle = -.6;}
-		// else { Redthrottle = 0; } Robot.m_swerve.setRawIntake(Redthrottle);
+		// else { Redthrottle = 0; } Robot.swerve.setRawIntake(Redthrottle);
 		// if(oi.RightMag(2) > .3) { ballThrottle = .75*oi.RightY(2); } else if(oi.RightBumperDown(2)) { ballThrottle = .5; }
-    // else{ ballThrottle = 0; } Robot.m_swerve.setRawBallIn(ballThrottle); 
+    // else{ ballThrottle = 0; } Robot.swerve.setRawBallIn(ballThrottle); 
     //SmartDashboard.putNumber("this", Robot.NavAngle());
     //
-    if(oi.StartButton(1)) { Robot.nav.reset(); } //if(oi.StartButton(2)) { Robot.m_swerve.ResetElevator(); }
+    if(oi.StartButton(1)) { Robot.nav.reset(); } //if(oi.StartButton(2)) { Robot.swerve.ResetElevator(); }
     // ElevatorPositions.MoveElevators();
 
     // if(oi.XButton(2)){ Pincher = Value.kForward; } else if(oi.BButton(2)){ Pincher = Value.kReverse; }
-    // else { Pincher = Value.kOff; } Robot.m_swerve.setPincher(Pincher);
+    // else { Pincher = Value.kOff; } Robot.swerve.setPincher(Pincher);
     // if(oi.YButton(2)){Extendor = Value.kForward; } else if(oi.AButton(2)){Extendor = Value.kReverse; }
-    // else { Extendor = Value.kOff; } Robot.m_swerve.setExtendor(Extendor);
+    // else { Extendor = Value.kOff; } Robot.swerve.setExtendor(Extendor);
     // if(oi.LeftY(2) > .7){ pullout = Value.kForward; } else if(oi.LeftY(2) < -.7){ pullout = Value.kReverse; }
-    // else { pullout = Value.kOff; } Robot.m_swerve.setPullout(pullout);
+    // else { pullout = Value.kOff; } Robot.swerve.setPullout(pullout);
 
   }
   protected boolean isFinished() { return false;}

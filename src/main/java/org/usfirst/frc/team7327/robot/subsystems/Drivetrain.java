@@ -3,11 +3,13 @@ package org.usfirst.frc.team7327.robot.subsystems;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 // import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // import com.ctre.phoenix.motorcontrol.ControlMode;
 // import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -77,7 +79,10 @@ public class Drivetrain extends Subsystem {
 	// public double getLiftPosition() { return Elevator.getLiftPosition(); }
 	// public void setRawBallIn(double speed){ BallVictor.set(ControlMode.PercentOutput, speed); }
 	// public void setRawIntake(double intakevalue) { Intake.set(ControlMode.PercentOutput, intakevalue);	} 
-  public void updateDashboard(){}
+  public void updateDashboard(){
+    SmartDashboard.putNumber("ODOX", ODOX());
+    SmartDashboard.putNumber("ODOY", ODOY()); 
+  }
   public static void updateOdometry() {
     m_odometry.update(
         getAngle(),
@@ -89,4 +94,5 @@ public class Drivetrain extends Subsystem {
   }
   public double ODOX() { return m_odometry.getPoseMeters().getTranslation().getX(); }
   public double ODOY() { return m_odometry.getPoseMeters().getTranslation().getY(); }
+  public void OdoReset(){ m_odometry.resetPosition(new Pose2d(new Translation2d(0.0,0.0), Rotation2d.fromDegrees(0)), Rotation2d.fromDegrees(0));}
 }
