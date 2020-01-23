@@ -1,6 +1,8 @@
 package org.usfirst.frc.team7327.robot;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.navx.frc.AHRS;
 import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
@@ -24,6 +26,9 @@ public class Robot extends TimedRobot {
   @Override public void autonomousInit() { nav.reset(); }
   @Override public void autonomousPeriodic() { Scheduler.getInstance().run(); }
   @Override public void teleopPeriodic() { Scheduler.getInstance().run();
+    Drivetrain.updateOdometry();
+    SmartDashboard.putNumber("ODOX", Drivetrain.m_odometry.getPoseMeters().getTranslation().getX());
+    SmartDashboard.putNumber("ODOY", Drivetrain.m_odometry.getPoseMeters().getTranslation().getY());
     // if(oi.LSClick(oi.Controller1)){
     //   if(flag){ c0.setClosedLoopControl(false); flag = false; }
     //   else{ c0.setClosedLoopControl(true); flag = true; }
