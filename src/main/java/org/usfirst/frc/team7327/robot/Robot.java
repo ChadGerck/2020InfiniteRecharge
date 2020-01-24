@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
     autoFlag = true; 
     swerve.OdoReset();
     nav.reset();
-    Autonomous.Auto();
+    Autonomous.Auto2();
   }
   
   public static void MoveY(double y){
