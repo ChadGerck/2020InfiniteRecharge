@@ -35,19 +35,19 @@ public class Drive extends Command {
     //SmartDashboard.putNumber("NavAngle: ", Robot.NavAngle()); 
     if(evadeMode){ rotMag = oi.RightX(1); }
     else if(oi.RightMag(1) > .7  || oi.XButtonDown(1) || oi.YButtonDown(1) || oi.BButtonDown(1) || oi.LeftTrigger(1) > .1 || oi.RightTrigger(1) > .1){
-      if(oi.RightMag(1) > .7) { rightArc = oi.RightArc(1); }
+      if(oi.RightMag(1) > .7) { rightArc = -oi.RightArc(1); }
       else if(oi.XButtonDown(1) && rocketAngle) { rightArc = 135; } else if(oi.XButtonDown(1) && !rocketAngle){ rightArc = 225; }
       else if(oi.YButtonDown(1) && rocketAngle) { rightArc = 45;  } else if(oi.YButtonDown(1) && !rocketAngle){ rightArc = 315; }
       else if(oi.LeftTrigger(1) > .1) { rightArc = 270; }           else if(oi.RightTrigger(1) > .1) {rightArc = 90; }
       else if(oi.BButtonDown(1)){ rightArc = 0; }
-      try { Robot.swerve.turning.setYaw(rightArc - Robot.NavAngle());} catch (Exception e) {}
+      try { Robot.swerve.turning.setYaw(rightArc + Robot.NavAngle());} catch (Exception e) {}
       rotMag = Robot.swerve.turning.getPIDOutput();
     } else{ rotMag = 0; }
 
     if( oi.AButtonDown(1)){ 
       x = oi.LimelightTx(); if(x >= -3 && x <= 3){ steering_adjust = 0; }else{ steering_adjust = SteerP*-x; } 
       finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1),steering_adjust))-90; directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(1)))/2; 
-    }else if(oi.LeftMag(1) >= .2){ finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1), oi.LeftX(1))) - Robot.NavAngle(); directMag = 0.25* oi.LeftMag(1); }
+    }else if(oi.LeftMag(1) >= .2){ finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1), oi.LeftX(1))) - Robot.NavAngle(); directMag = 0.5 * oi.LeftMag(1); }
     else if(oi.RightBumperDown(1)) { finalAngle = 90; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 270; directMag = .05; }
     else { directMag = 0; }
 

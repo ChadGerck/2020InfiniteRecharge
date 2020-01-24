@@ -27,8 +27,8 @@ public class Drivetrain extends Subsystem {
   private static final Translation2d m_backRightLocation = new Translation2d(-0.381, -0.381);
 
 
-  public static Potentiometer abeFL = new AnalogPotentiometer(0, 360, 100), abeFR = new AnalogPotentiometer(1, 360, 203.2), 
-                              abeBL = new AnalogPotentiometer(2, 360, 264 ), abeBR = new AnalogPotentiometer(3, 360, 38.3); 
+  public static Potentiometer abeFL = new AnalogPotentiometer(0, 360, 280), abeFR = new AnalogPotentiometer(1, 360, 393.2), 
+                              abeBL = new AnalogPotentiometer(2, 360, 430 ), abeBR = new AnalogPotentiometer(3, 360, 218.3); 
 
   static double kSwerveP = .8, kSwerveD = .1; 
   private static SwerveModule 
@@ -82,6 +82,7 @@ public class Drivetrain extends Subsystem {
   public void updateDashboard(){
     SmartDashboard.putNumber("ODOX", ODOX());
     SmartDashboard.putNumber("ODOY", ODOY()); 
+    
   }
   public static void updateOdometry() {
     m_odometry.update(
