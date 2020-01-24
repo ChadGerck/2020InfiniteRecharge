@@ -17,16 +17,14 @@ public class Robot extends TimedRobot {
   public static AHRS nav; 
   public boolean flag = true; 
   static double finalAngle, directMag; 
-  static boolean autoFlag = false; 
   //Compressor c0 = new Compressor(0);
   @Override public void robotInit() { nav = new AHRS(I2C.Port.kMXP); 
     // CameraServer.getInstance().startAutomaticCapture();
     // c0.setClosedLoopControl(true); 
   }
   @Override public void robotPeriodic() { swerve.updateDashboard();}
-  @Override public void teleopInit() { autoFlag = false; /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/ }
+  @Override public void teleopInit() { /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/ }
   @Override public void autonomousInit() { 
-    autoFlag = true; 
     swerve.OdoReset();
     nav.reset();
     Autonomous.Auto2();
@@ -72,7 +70,7 @@ public class Robot extends TimedRobot {
     angle = -angle; 
     finalAngle = 0; 
     directMag = 0; 
-    while(Math.abs(swerve.ODOX()-x)+Math.abs(swerve.ODOY()-y)+(Math.abs(-angle-Robot.NavAngle())/10) > .1 && autoFlag){
+    while(Math.abs(swerve.ODOX()-x)+Math.abs(swerve.ODOY()-y)+(Math.abs(-angle-Robot.NavAngle())/50) > .1){
       try { Robot.swerve.turning.setYaw(angle + Robot.NavAngle());} catch (Exception e) {}
       finalAngle = Math.toDegrees(Math.atan2(-(swerve.ODOY()-y),-(swerve.ODOX()-x)))-Robot.NavAngle(); 
       directMag = Math.hypot(swerve.ODOY()-y,swerve.ODOX()-x);
@@ -99,6 +97,6 @@ public class Robot extends TimedRobot {
   @Override public void testPeriodic() {}
   public static double NavAngle() {return NavAngle(0);}
   public static double NavAngle(double add){double angle = Robot.nav.getAngle()+add;
-    while(angle>360)angle-=360;while(angle<0)angle+=360;return angle; 
+    while(angle>180)angle-=360;while(angle<-180)angle+=360;return angle; 
   }
 }

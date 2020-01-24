@@ -6,16 +6,16 @@ public class Autonomous {
         Robot.MoveTo(0, 0.25,0);
         Robot.MoveTo(.25, 0, 90);
         Robot.MoveTo(0, -0.25, 180);
-        Robot.MoveTo(-.25, 0, 270);
+        Robot.MoveTo(-.25, 0, -90);
         
 
     }   
-
+//use -180 to 180; ie, 270 = -90
     public static void Auto2(){
         Robot.MoveTo(0,0.30,0);
         Robot.MoveTo(0,.20,90);
         Robot.MoveTo(0,0.25,180);
-        Robot.MoveTo(-.25,0,270);
+        Robot.MoveTo(-.25,0,-90);
                                       
     }
 
