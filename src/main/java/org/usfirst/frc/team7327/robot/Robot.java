@@ -20,10 +20,6 @@ public class Robot extends TimedRobot {
   //Compressor c0 = new Compressor(0);
   @Override public void robotInit() { nav = new AHRS(I2C.Port.kMXP); 
     CameraServer.getInstance().startAutomaticCapture();
-<<<<<<< HEAD
-=======
-    
->>>>>>> 12de830984dc2c75748da50a2237b1eed3e915b6
     // c0.setClosedLoopControl(true); 
   }
   @Override public void robotPeriodic() { swerve.updateDashboard();}
