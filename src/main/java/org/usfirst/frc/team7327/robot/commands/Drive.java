@@ -26,8 +26,6 @@ public class Drive extends Command {
 
   protected void execute() {
 
-    Robot.autoFlag = false; 
-
     //if(Robot.oi.BackButton(2)){ if(oi.LEDValue() == 1 || oi.LEDValue() == 0){ oi.LEDOn(); } else if(oi.LEDValue() == 3){ oi.LEDOff(); }}
     if(Robot.oi.BackButton(1)){ if(rocketAngle){ rocketAngle = false;} else{ rocketAngle = true; } angleR.setBoolean(rocketAngle); }
 
@@ -40,7 +38,6 @@ public class Drive extends Command {
       if(oi.RightMag(1) > .7) { rightArc = -oi.RightArc(1); }
       else if(oi.XButtonDown(1) && rocketAngle) { rightArc = 135; } else if(oi.XButtonDown(1) && !rocketAngle){ rightArc = 225; }
       else if(oi.YButtonDown(1) && rocketAngle) { rightArc = 45;  } else if(oi.YButtonDown(1) && !rocketAngle){ rightArc = 315; }
-      else if(oi.LeftTrigger(1) > .1) { rightArc = 270; }           else if(oi.RightTrigger(1) > .1) {rightArc = 90; }
       else if(oi.BButtonDown(1)){ rightArc = 0; }
       try { Robot.swerve.turning.setYaw(rightArc + Robot.NavAngle());} catch (Exception e) {}
       rotMag = Robot.swerve.turning.getPIDOutput();
@@ -50,7 +47,8 @@ public class Drive extends Command {
       x = oi.LimelightTx(); if(x >= -3 && x <= 3){ steering_adjust = 0; }else{ steering_adjust = SteerP*-x; } 
       finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1),steering_adjust))-90; directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(1)))/2; 
     }else if(oi.LeftMag(1) >= .2){ finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1), oi.LeftX(1))) - Robot.NavAngle(); directMag =  .5 * oi.LeftMag(1); }
-    else if(oi.RightBumperDown(1)) { finalAngle = 90; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 270; directMag = .05; }
+    else if(oi.RightBumperDown(1)) { finalAngle = 0; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 180; directMag = .05; }
+    else if(oi.LeftTrigger(1) > .1) { finalAngle = 90; directMag = .125; } else if(oi.RightTrigger(1) > .1) {finalAngle = 270; directMag = .125; }
     else { directMag = 0; }
 
     if(oi.LeftBumperDown(1) || oi.RightBumperDown(1) || oi.RightTrigger(1) > .1 || oi.LeftTrigger(1) > .1 || oi.LeftMag(1) >= 0.2 || oi.RightMag(1) > 0.7 || oi.AButtonDown(1) || oi.XButtonDown(1) || oi.YButtonDown(1) || oi.BButtonDown(1)) {
