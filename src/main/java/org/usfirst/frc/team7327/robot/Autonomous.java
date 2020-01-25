@@ -7,6 +7,7 @@ public class Autonomous {
         Robot.MoveTo(.25, 0, 90);
         Robot.MoveTo(0, -0.25, 180);
         Robot.MoveTo(-.25, 0, -90);
+        Robot.MoveTo(0, 0, 0);
         
     }   
 //use -180 to 180; ie, 270 = -90
