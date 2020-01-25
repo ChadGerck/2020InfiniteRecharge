@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
     // if(oi.LSClick(oi.Controller1)){
     //   if(flag){ c0.setClosedLoopControl(false); flag = false; }
     //   else{ c0.setClosedLoopControl(true); flag = true; }
-    // }
+    // } 
   }
   @Override public void testPeriodic() {}
   public static double NavAngle() {return NavAngle(0);}
