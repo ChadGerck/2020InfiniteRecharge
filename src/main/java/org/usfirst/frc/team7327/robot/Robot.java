@@ -20,6 +20,10 @@ public class Robot extends TimedRobot {
   //Compressor c0 = new Compressor(0);
   @Override public void robotInit() { nav = new AHRS(I2C.Port.kMXP); 
     CameraServer.getInstance().startAutomaticCapture();
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 12de830984dc2c75748da50a2237b1eed3e915b6
     // c0.setClosedLoopControl(true); 
   }
   @Override public void robotPeriodic() { swerve.updateDashboard();}
@@ -92,7 +96,7 @@ public class Robot extends TimedRobot {
     // if(oi.LSClick(oi.Controller1)){
     //   if(flag){ c0.setClosedLoopControl(false); flag = false; }
     //   else{ c0.setClosedLoopControl(true); flag = true; }
-    // }
+    // } 
   }
   @Override public void testPeriodic() {}
   public static double NavAngle() {return NavAngle(0);}
