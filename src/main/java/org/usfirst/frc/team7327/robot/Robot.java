@@ -22,27 +22,26 @@ public class Robot extends TimedRobot {
   final double off  = 10; //offset for sensor. test with tape measure
   @Override public void robotInit() { nav = new AHRS(I2C.Port.kMXP); 
     CameraServer.getInstance().startAutomaticCapture();
-  }
-  @Override public void teleopInit() { 
-    
     m_LIDAR = new Counter(0); //plug the lidar into PWM 0
     m_LIDAR.setMaxPeriod(1.00); //set the max period that can be measured
     m_LIDAR.setSemiPeriodMode(true); //Set the counter to period measurement
     m_LIDAR.reset();
-  /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/
   }
+  @Override public void teleopInit() { /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/}
+  
+  double dist;
   @Override public void robotPeriodic() { 
     swerve.updateDashboard();
-    double dist;
-    try {
+    SmartDashboard.putNumber("dist", m_LIDAR.get()); 
+    SmartDashboard.putNumber("disti2:", m_LIDAR.getDistance()); 
+    SmartDashboard.putNumber("Period:", m_LIDAR.getPeriod()); 
+    SmartDashboard.putNumber("Rate:", m_LIDAR.getRate()); 
       if(m_LIDAR.get() < 1)
       dist = 0;
     else
       dist = (m_LIDAR.getPeriod()*1000000.0/10.0) - off; //convert to distance. sensor is high 10 us for every centimeter. 
     SmartDashboard.putNumber("Distance", dist); //put the distance on the dashboard
-    } catch (Exception e) {
-      //TODO: handle exception
-    }
+    
     
   
   }
