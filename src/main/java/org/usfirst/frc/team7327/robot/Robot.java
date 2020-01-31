@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Counter;
 //import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.I2C;
 
@@ -17,12 +18,27 @@ public class Robot extends TimedRobot {
   public static AHRS nav; 
   public boolean flag = true; 
   static double finalAngle, directMag; 
+  private Counter m_LIDAR;
+  final double off  = 10; //offset for sensor. test with tape measure
   //Compressor c0 = new Compressor(0);
-  @Override public void robotInit() { nav = new AHRS(I2C.Port.kMXP); 
+  @Override public void robotInit() { 
+    m_LIDAR = new Counter(0); //plug the lidar into PWM 0
+    m_LIDAR.setMaxPeriod(1.00); //set the max period that can be measured
+    m_LIDAR.setSemiPeriodMode(true); //Set the counter to period measurement
+    m_LIDAR.reset();
+    nav = new AHRS(I2C.Port.kMXP); 
     CameraServer.getInstance().startAutomaticCapture();
     // c0.setClosedLoopControl(true); 
   }
-  @Override public void robotPeriodic() { swerve.updateDashboard();}
+  @Override public void robotPeriodic() { 
+    double dist;
+    if(m_LIDAR.get() < 1)
+      dist = 0;
+    else
+      dist = (m_LIDAR.getPeriod()*1000000.0/10.0) - off; //convert to distance. sensor is high 10 us for every centimeter. 
+    SmartDashboard.putNumber("Distance", dist); //put the distance on the dashboard
+    swerve.updateDashboard();
+  }
   @Override public void teleopInit() { /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/ }
   @Override public void autonomousInit() { 
     swerve.OdoReset();
