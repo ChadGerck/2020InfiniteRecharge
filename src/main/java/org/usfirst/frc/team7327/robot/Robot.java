@@ -1,6 +1,7 @@
 package org.usfirst.frc.team7327.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.I2C;
 
 public class Robot extends TimedRobot {
   public static final Drivetrain swerve = new Drivetrain();
+  public static Timer myTimer = new Timer();
   public static final OI oi = new OI();
   public static AHRS nav; 
   public boolean flag = true; 
@@ -41,52 +43,21 @@ public class Robot extends TimedRobot {
   }
   @Override public void teleopInit() { /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/ }
   @Override public void autonomousInit() { 
+		myTimer.reset();
+		myTimer.start();
     swerve.OdoReset();
     nav.reset();
-    Autonomous.Auto3();
+    Autonomous.Auto();
   }
   
-  public static void MoveY(double y){
-    if (y > 0){
-      while (swerve.ODOY() < y){ SwerveMath.ComputeSwerve(90,.15,0,false); 
-        Drivetrain.updateOdometry(); swerve.updateDashboard();
-      }
-    }else if (y < 0){
-      while (swerve.ODOY() > y){ SwerveMath.ComputeSwerve(90,-.15,0,false); 
-        Drivetrain.updateOdometry(); swerve.updateDashboard();
-      }
-    }
-    SwerveMath.ComputeSwerve(0,0,0,false);
-  }public static void MoveX(double x){
-    if (x > 0){
-      while(swerve.ODOX() < x){ SwerveMath.ComputeSwerve(0,.15,0,false); 
-        Drivetrain.updateOdometry(); swerve.updateDashboard();
-      }
-    }else if(x < 0){
-      while (swerve.ODOX() > x){ SwerveMath.ComputeSwerve(0,-.15,0,false); 
-        Drivetrain.updateOdometry(); swerve.updateDashboard();
-      }
-    }
-    SwerveMath.ComputeSwerve(0,0,0,false);
-  }
-  public static void MoveTo(double x, double y){
-    y = -y; 
-    finalAngle = 0; 
-    directMag = 0;  
-    while(Math.abs(swerve.ODOX()-x)+Math.abs(swerve.ODOY()-y) > .1){
-      finalAngle = Math.toDegrees(Math.atan2(-(swerve.ODOY()-y),-(swerve.ODOX()-x)))-Robot.NavAngle(); 
-      directMag = Math.hypot(swerve.ODOY()-y,swerve.ODOX()-x);
-      SwerveMath.ComputeSwerve(finalAngle, directMag, 0, false);
-      Drivetrain.updateOdometry(); swerve.updateDashboard();
-    }
-    SwerveMath.ComputeSwerve(finalAngle, 0, 0, false);
-  }
   public static void MoveTo(double x, double y, double angle){
     y = -y; 
     angle = -angle; 
     finalAngle = 0; 
     directMag = 0; 
-    while(Math.sqrt(Math.pow(swerve.ODOX()-x,2)+Math.pow(swerve.ODOY()-y,2)) > .1 || Math.abs(-angle-Robot.NavAngle()) > 5){
+    while((Math.sqrt(Math.pow(swerve.ODOX()-x,2)+Math.pow(swerve.ODOY()-y,2)) > .1 || Math.abs(-angle-Robot.NavAngle()) > 5)){
+      SmartDashboard.putNumber("Time: ", myTimer.get());
+      if(myTimer.get() > 5){ break; }
       try { Robot.swerve.turning.setYaw(angle + Robot.NavAngle());} catch (Exception e) {}
       finalAngle = Math.toDegrees(Math.atan2(-(swerve.ODOY()-y),-(swerve.ODOX()-x)))-Robot.NavAngle(); 
       directMag = Math.hypot(swerve.ODOY()-y,swerve.ODOX()-x);
