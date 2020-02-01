@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
     angle = -angle; 
     finalAngle = 0; 
     directMag = 0; 
-    while(Math.abs(swerve.ODOX()-x)+Math.abs(swerve.ODOY()-y)+(Math.abs(-angle-Robot.NavAngle())/50) > .1){
+    while(Math.sqrt(Math.pow(swerve.ODOX()-x,2)+Math.pow(swerve.ODOY()-y,2)) > .1 || Math.abs(-angle-Robot.NavAngle()) > 5){
       try { Robot.swerve.turning.setYaw(angle + Robot.NavAngle());} catch (Exception e) {}
       finalAngle = Math.toDegrees(Math.atan2(-(swerve.ODOY()-y),-(swerve.ODOX()-x)))-Robot.NavAngle(); 
       directMag = Math.hypot(swerve.ODOY()-y,swerve.ODOX()-x);
