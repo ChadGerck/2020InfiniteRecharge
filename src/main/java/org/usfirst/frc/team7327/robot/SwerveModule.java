@@ -2,6 +2,7 @@ package org.usfirst.frc.team7327.robot;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -70,5 +71,9 @@ public class SwerveModule{
     public static double boundHalfDegrees(double angle){while(angle>=180)angle-=360;while(angle<-180)angle+=360; return angle;}
     public double getSteeringEncoder(){
         double angle=steeringEncoder.get();while(angle>360)angle-=360;while(angle<0)angle+=360;return angle; 
+    }
+    public void setBrakeOn(boolean brake){ 
+        if(brake){m_motor.setIdleMode(IdleMode.kBrake); }
+        else     {m_motor.setIdleMode(IdleMode.kCoast); }
     }
 }

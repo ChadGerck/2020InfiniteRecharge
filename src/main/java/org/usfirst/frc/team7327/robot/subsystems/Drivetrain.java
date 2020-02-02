@@ -69,6 +69,10 @@ public class Drivetrain extends Subsystem {
     moduleFL.setDrivePower(power); moduleFR.setDrivePower(power);
     moduleBL.setDrivePower(power); moduleBR.setDrivePower(power);
   }
+  public void setALLBrake(boolean brake){
+    moduleFL.setBrakeOn(brake); moduleFR.setBrakeOn(brake);
+    moduleBL.setBrakeOn(brake); moduleBR.setBrakeOn(brake);
+  }
   //  }public void setRawElevator(double speed){ Elevator.setRawElev(speed); }
 	// public void setElevatorPosition(double position){ Elevator.setPosition(position); }
 	// public void ElevOn(boolean On) { Elevator.setOn(On); }

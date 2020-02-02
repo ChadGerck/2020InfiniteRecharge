@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import java.util.concurrent.TimeUnit;
+
 import com.kauailabs.navx.frc.AHRS;
 import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
@@ -41,13 +43,19 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Distance", dist); //put the distance on the dashboard
     swerve.updateDashboard();
   }
-  @Override public void teleopInit() { /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/ }
+  @Override public void teleopInit() { 
+    swerve.setALLBrake(false); 
+    swerve.OdoReset(); 
+  /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/
+ }
   @Override public void autonomousInit() { 
+    swerve.setALLBrake(true); 
 		myTimer.reset();
 		myTimer.start();
     swerve.OdoReset();
     nav.reset();
-    Autonomous.Auto();
+    Autonomous.Auto(); 
+    swerve.setALLBrake(false); 
   }
   
   public static void MoveTo(double x, double y, double angle){
@@ -57,7 +65,7 @@ public class Robot extends TimedRobot {
     directMag = 0; 
     while((Math.sqrt(Math.pow(swerve.ODOX()-x,2)+Math.pow(swerve.ODOY()-y,2)) > .1 || Math.abs(-angle-Robot.NavAngle()) > 5)){
       SmartDashboard.putNumber("Time: ", myTimer.get());
-      if(myTimer.get() > 5){ break; }
+      if(myTimer.get() > 20){ break; }
       try { Robot.swerve.turning.setYaw(angle + Robot.NavAngle());} catch (Exception e) {}
       finalAngle = Math.toDegrees(Math.atan2(-(swerve.ODOY()-y),-(swerve.ODOX()-x)))-Robot.NavAngle(); 
       directMag = Math.hypot(swerve.ODOY()-y,swerve.ODOX()-x);
@@ -69,6 +77,7 @@ public class Robot extends TimedRobot {
     }
     SwerveMath.ComputeSwerve(finalAngle, 0, 0, false);
   }
+  public static void SleepFor(long x){try { TimeUnit.SECONDS.sleep(x); } catch (Exception e) {}}
   @Override public void autonomousPeriodic() {
     Drivetrain.updateOdometry();
   }
