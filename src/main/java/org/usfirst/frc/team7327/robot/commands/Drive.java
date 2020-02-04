@@ -56,6 +56,7 @@ public class Drive extends Command {
     } else{fixRotation = true;}
     SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
 
+    Robot.swerve.setTalonFX(oi.RightTrigger(2)-oi.LeftTrigger(2));
     SmartDashboard.putNumber ("Angle", Robot.NavAngle());
 
 		
