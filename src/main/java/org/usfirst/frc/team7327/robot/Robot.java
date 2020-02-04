@@ -23,8 +23,7 @@ public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
-  // public SendableChooser<>;
-  //private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  private final SendableChooser<Object> m_chooser = new SendableChooser<>();
   public static AHRS nav; 
   public boolean flag = true; 
   static double finalAngle, directMag; 
@@ -40,9 +39,9 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture();
     // c0.setClosedLoopControl(true); 
 
-    //m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-        //m_chooser.addOption("My Auto", kCustomAuto);
-    //SmartDashboard.putData("Auto choices", m_chooser);
+    m_chooser.setDefaultOption("Default Auto", Autonomous.Auto2());
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
   }
   @Override public void robotPeriodic() { 
     double dist;
@@ -66,8 +65,8 @@ public class Robot extends TimedRobot {
     nav.reset();
     Autonomous.Auto(); 
     swerve.setALLBrake(false); 
-    //m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+    m_autoSelected = m_chooser.getSelected();
+    m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     //System.out.println("Auto selected: " + m_autoSelected);
 
   }
