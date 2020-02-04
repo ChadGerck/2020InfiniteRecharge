@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +20,11 @@ public class Robot extends TimedRobot {
   public static final Drivetrain swerve = new Drivetrain();
   public static Timer myTimer = new Timer();
   public static final OI oi = new OI();
+  private static final String kDefaultAuto = "Default";
+  private static final String kCustomAuto = "My Auto";
+  private String m_autoSelected;
+  // public SendableChooser<>;
+  //private final SendableChooser<String> m_chooser = new SendableChooser<>();
   public static AHRS nav; 
   public boolean flag = true; 
   static double finalAngle, directMag; 
@@ -33,6 +39,10 @@ public class Robot extends TimedRobot {
     nav = new AHRS(I2C.Port.kMXP); 
     CameraServer.getInstance().startAutomaticCapture();
     // c0.setClosedLoopControl(true); 
+
+    //m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+        //m_chooser.addOption("My Auto", kCustomAuto);
+    //SmartDashboard.putData("Auto choices", m_chooser);
   }
   @Override public void robotPeriodic() { 
     double dist;
@@ -56,6 +66,10 @@ public class Robot extends TimedRobot {
     nav.reset();
     Autonomous.Auto(); 
     swerve.setALLBrake(false); 
+    //m_autoSelected = m_chooser.getSelected();
+    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+    //System.out.println("Auto selected: " + m_autoSelected);
+
   }
   
   public static void MoveTo(double x, double y, double angle){
