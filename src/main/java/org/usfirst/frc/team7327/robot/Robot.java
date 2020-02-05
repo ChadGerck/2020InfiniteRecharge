@@ -23,7 +23,7 @@ public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
-  private final SendableChooser<Object> m_chooser = new SendableChooser<>();
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
   public static AHRS nav; 
   public boolean flag = true; 
   static double finalAngle, directMag; 
@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture();
     // c0.setClosedLoopControl(true); 
 
-    m_chooser.setDefaultOption("Default Auto", Autonomous.Auto2());
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
     Autonomous.Auto(); 
     swerve.setALLBrake(false); 
     m_autoSelected = m_chooser.getSelected();
-    m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+    //m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     //System.out.println("Auto selected: " + m_autoSelected);
 
   }
@@ -93,6 +93,15 @@ public class Robot extends TimedRobot {
   public static void SleepFor(long x){try { TimeUnit.SECONDS.sleep(x); } catch (Exception e) {}}
   @Override public void autonomousPeriodic() {
     Drivetrain.updateOdometry();
+    switch (m_autoSelected){
+      case kCustomAuto:
+      Autonomous.Auto2();
+        break;
+      case kDefaultAuto:
+      default:
+      Autonomous.Auto();
+        break;
+    }
   }
   @Override public void teleopPeriodic() { Scheduler.getInstance().run();
     Drivetrain.updateOdometry();
