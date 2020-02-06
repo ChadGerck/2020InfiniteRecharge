@@ -44,7 +44,7 @@ public class Drivetrain extends Subsystem {
   
   public static ElevatorModule Elevator;
   public static TalonFX FalconMotor; 
-  //public static VictorSPX BallVictor, Intake;
+  //public static VictorSPX BallVictor, Intake; 
   //public static DoubleSolenoid Pincher, Extendor, pullout; 
   public Drivetrain(){
     // Elevator  = new ElevatorModule(8); Intake = new VictorSPX(9); 
