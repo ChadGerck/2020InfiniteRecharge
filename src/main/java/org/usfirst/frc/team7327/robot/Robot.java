@@ -20,8 +20,10 @@ public class Robot extends TimedRobot {
   public static final Drivetrain swerve = new Drivetrain();
   public static Timer myTimer = new Timer();
   public static final OI oi = new OI();
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
+  private static final String kAuto = "Auto";
+  private static final String kAuto2 = "Auto2";
+  private static final String kAuto3 = "Auto3";
+  private static final String kAuto4 = "Auto4";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   public static AHRS nav; 
@@ -39,8 +41,10 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture();
     // c0.setClosedLoopControl(true); 
 
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
+    m_chooser.setDefaultOption("Auto", kAuto);
+    m_chooser.addOption("Auto2", kAuto2);
+    m_chooser.addOption("Auto3", kAuto3);
+    m_chooser.addOption("Auto4", kAuto4);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
   @Override public void robotPeriodic() { 
@@ -63,7 +67,6 @@ public class Robot extends TimedRobot {
 		myTimer.start();
     swerve.OdoReset();
     nav.reset();
-    Autonomous.Auto(); 
     swerve.setALLBrake(false); 
     m_autoSelected = m_chooser.getSelected();
     //m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
@@ -94,12 +97,18 @@ public class Robot extends TimedRobot {
   @Override public void autonomousPeriodic() {
     Drivetrain.updateOdometry();
     switch (m_autoSelected){
-      case kCustomAuto:
-      Autonomous.Auto2();
-        break;
-      case kDefaultAuto:
+      case kAuto:
       default:
       Autonomous.Auto();
+        break;
+      case kAuto2:
+      Autonomous.Auto2();
+        break;
+      case kAuto3:
+        Autonomous.Auto3();
+        break;
+      case kAuto4:
+        Autonomous.Auto4();
         break;
     }
   }

@@ -43,13 +43,13 @@ public class Drivetrain extends Subsystem {
   public static final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(m_kinematics, Rotation2d.fromDegrees(0));
   
   public static ElevatorModule Elevator;
-  public static TalonFX FalconMotor; 
+  //public static TalonFX FalconMotor; 
   //public static VictorSPX BallVictor, Intake;
   //public static DoubleSolenoid Pincher, Extendor, pullout; 
   public Drivetrain(){
     // Elevator  = new ElevatorModule(8); Intake = new VictorSPX(9); 
     // BallVictor= new VictorSPX(10);    
-    FalconMotor = new TalonFX(9); 
+    //FalconMotor = new TalonFX(9); 
     turning = new TurnModule(); 
     // Pincher = new DoubleSolenoid(0,3, 4); Extendor = new DoubleSolenoid(0,2, 5);
     // pullout = new DoubleSolenoid(1,0,7); 
@@ -67,7 +67,7 @@ public class Drivetrain extends Subsystem {
   // public void setPincher(DoubleSolenoid.Value value){ Pincher.set(value); }
   // public void setExtendor(DoubleSolenoid.Value value){ Extendor.set(value); }
   // public void setPullout(DoubleSolenoid.Value value){ pullout.set(value); }
-  public void setTalonFX(double speed){ FalconMotor.set(ControlMode.PercentOutput, speed); }
+  //public void setTalonFX(double speed){ FalconMotor.set(ControlMode.PercentOutput, speed); }
   public void setAllAngle(double degrees){
     moduleFL.setSteeringDegrees(degrees); moduleFR.setSteeringDegrees(degrees);
     moduleBL.setSteeringDegrees(degrees); moduleBR.setSteeringDegrees(degrees);
