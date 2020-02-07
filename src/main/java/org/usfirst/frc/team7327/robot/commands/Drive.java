@@ -29,7 +29,7 @@ public class Drive extends Command {
     if(Robot.oi.BackButton(1)){ if(oi.LEDValue() == 1 || oi.LEDValue() == 0){ oi.LEDOn(); } else if(oi.LEDValue() == 3){ oi.LEDOff(); }}
     //if(Robot.oi.BackButton(2)){ if(rocketAngle){ rocketAngle = false;} else{ rocketAngle = true; } angleR.setBoolean(rocketAngle); }
 
-    if(oi.RSClick(1)){if(evadeMode){evadeMode=false;}else{evadeMode=true;}}
+    if(oi.RSClickDown(1)){if(evadeMode){evadeMode=false;}else{evadeMode=true;}}
 
     SmartDashboard.putBoolean("evademode: ", evadeMode); 
     //SmartDashboard.putNumber("NavAngle: ", Robot.NavAngle()); 
