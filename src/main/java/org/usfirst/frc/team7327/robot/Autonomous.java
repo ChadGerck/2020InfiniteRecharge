@@ -40,6 +40,27 @@ public class Autonomous {
         Robot.MoveTo(0,0,0); 
         Robot.LimeAlign();
     }
+
+    public static void BlueTrench5(){
+        Robot.MoveTo(0,-3.223,0);
+        //intake
+        Robot.MoveTo(7.228,0,0);
+        //linealine
+        //shootball
+    }
+    public static void RedSpinner6(){
+        Robot.MoveTo(0,-3.941,0);
+        //intake
+        Robot.MoveTo(2.458,3.941,0);
+        //linealine
+        //shootball
+    }
+    public static void DoubleCorner7(){
+        Robot.MoveTo(0,-2.5,67.5);
+        Robot.MoveTo(0,-0.7865,0);
+        //intake
+        Robot.MoveTo(0,-0.7865,0);
+    }
     
 
 }
