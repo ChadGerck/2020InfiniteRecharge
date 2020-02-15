@@ -28,8 +28,10 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   public static AHRS nav; 
   public boolean flag = true; 
-  static double finalAngle, directMag; 
+  static double finalAngle, directMag, steering_adjust, x, rotMag;
+  static Boolean fixRotation;
   private Counter m_LIDAR;
+  static double SteerP = -0.025;
   final double off  = 10; //offset for sensor. test with tape measure
   //Compressor c0 = new Compressor(0);
   @Override public void robotInit() { 
@@ -72,6 +74,15 @@ public class Robot extends TimedRobot {
     //m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     //System.out.println("Auto selected: " + m_autoSelected);
 
+  }
+  public static void LimeAlign(){
+    do{
+      x = oi.LimelightTx();
+      steering_adjust = SteerP*-x;
+      finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1),steering_adjust))-90; 
+      directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(1)))/2; 
+      SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
+    }while(x<-3 || x > 3);
   }
   
   public static void MoveTo(double x, double y, double angle){
