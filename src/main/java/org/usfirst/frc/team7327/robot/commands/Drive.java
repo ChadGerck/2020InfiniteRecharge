@@ -61,7 +61,10 @@ public class Drive extends Command {
 
     //Robot.swerve.setTalonFX(oi.RightTrigger(2)-oi.LeftTrigger(2));
     SmartDashboard.putNumber ("Angle", Robot.NavAngle());
-
+    
+    if(oi.AButton(1)){
+      
+    }
 		
 		// if(oi.RightBumperDown(2)) { Redthrottle = .6; } else if(oi.LeftBumperDown(2)) { Redthrottle = -.6;}
 		// else { Redthrottle = 0; } Robot.swerve.setRawIntake(Redthrottle);

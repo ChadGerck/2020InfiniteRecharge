@@ -43,13 +43,14 @@ public class Drivetrain extends Subsystem {
   public static final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(m_kinematics, Rotation2d.fromDegrees(0));
   
   public static ElevatorModule Elevator;
-  //public static TalonFX FalconMotor; 
+  public static TalonFX IntakeMotor; 
   //public static VictorSPX BallVictor, Intake;
   //public static DoubleSolenoid Pincher, Extendor, pullout; 
   public Drivetrain(){
     // Elevator  = new ElevatorModule(8); Intake = new VictorSPX(9); 
     // BallVictor= new VictorSPX(10);    
-    //FalconMotor = new TalonFX(9); 
+    IntakeMotor = new TalonFX(9); 
+    //device number needs to be updated
     turning = new TurnModule(); 
     // Pincher = new DoubleSolenoid(0,3, 4); Extendor = new DoubleSolenoid(0,2, 5);
     // pullout = new DoubleSolenoid(1,0,7); 

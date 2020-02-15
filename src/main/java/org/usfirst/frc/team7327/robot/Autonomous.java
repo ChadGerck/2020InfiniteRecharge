@@ -45,14 +45,14 @@ public class Autonomous {
         Robot.MoveTo(0,-3.223,0);
         //intake
         Robot.MoveTo(7.228,0,0);
-        //linealine
+        Robot.LimeAlign();
         //shootball
     }
     public static void RedSpinner6(){
         Robot.MoveTo(0,-3.941,0);
         //intake
         Robot.MoveTo(2.458,3.941,0);
-        //linealine
+        Robot.LimeAlign();
         //shootball
     }
     public static void DoubleCorner7(){
