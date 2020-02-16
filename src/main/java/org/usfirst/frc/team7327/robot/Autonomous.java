@@ -3,7 +3,7 @@ package org.usfirst.frc.team7327.robot;
 import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+
 
 public class Autonomous {    
 
