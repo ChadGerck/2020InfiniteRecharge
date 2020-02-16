@@ -102,7 +102,7 @@ public class Drivetrain extends Subsystem {
   }
   public static void Shoot(double shooterpower, double handlepower){
     ShooterMotor1.set(ControlMode.PercentOutput, shooterpower);
-    ShooterMotor2.set(ControlMode.PercentOutput, shooterpower);
+    ShooterMotor2.set(ControlMode.PercentOutput, -shooterpower);
     FunnelMotor.set(ControlMode.PercentOutput,handlepower);
     BallHandlerMotor.set(handlepower);
   }
