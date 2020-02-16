@@ -61,6 +61,21 @@ public class Autonomous {
         //intake
         Robot.MoveTo(0,-0.7865,0);
     }
+    public static void sixballsfoot(){
+        //shootball
+        Robot.MoveTo(1.702,0,0);
+        Robot.MoveTo(1.702,-2.976,0);
+        //intake
+        Robot.MoveTo(1.702,-3.713,0);
+        //intake
+        Robot.MoveTo(0,-0.7865,0);
+        Robot.MoveTo(1.702,-4.420,0);
+        //intake
+        Robot.MoveTo(0,4.855,0);
+        Robot.MoveTo(-1.702,0,0);
+        //linealine
+        //shootball
+    }
     
 
 }
