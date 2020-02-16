@@ -1,6 +1,7 @@
 package org.usfirst.frc.team7327.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 // import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -12,6 +13,10 @@ import edu.wpi.first.wpilibj.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
@@ -43,16 +48,22 @@ public class Drivetrain extends Subsystem {
   public static final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(m_kinematics, Rotation2d.fromDegrees(0));
   
   public static ElevatorModule Elevator;
-  public static TalonFX IntakeMotor; 
-  //public static VictorSPX BallVictor, Intake;
-  //public static DoubleSolenoid Pincher, Extendor, pullout; 
+  public static VictorSPX IntakeMotor, FunnelMotor;
+  public static TalonFX ShooterMotor1, ShooterMotor2;
+  public static CANSparkMax BallHandlerMotor;
+  public static DoubleSolenoid Extendor; 
   public Drivetrain(){
     // Elevator  = new ElevatorModule(8); Intake = new VictorSPX(9); 
     // BallVictor= new VictorSPX(10);    
-    IntakeMotor = new TalonFX(9); 
-    //device number needs to be updated
+    IntakeMotor = new VictorSPX(9);//device number subject to change
+    FunnelMotor = new VictorSPX(1); //device number needs to be updated
     turning = new TurnModule(); 
-    // Pincher = new DoubleSolenoid(0,3, 4); Extendor = new DoubleSolenoid(0,2, 5);
+    BallHandlerMotor = new CANSparkMax(9, MotorType.kBrushless);//deviceID needs to change
+    ShooterMotor1 = new TalonFX(1);//device number subject to change
+    ShooterMotor2 = new TalonFX(1);//device number subject to change
+    // Pincher = new DoubleSolenoid(0,3, 4); 
+    Extendor = new DoubleSolenoid(0,2, 5);
+    //double solenoid arguments need to be updated
     // pullout = new DoubleSolenoid(1,0,7); 
   }
   @Override public void initDefaultCommand() { setDefaultCommand(new Drive()); }
@@ -66,7 +77,7 @@ public class Drivetrain extends Subsystem {
   public  SwerveModule getModuleSE(){ return moduleBR; }
   public static Rotation2d getAngle() { return Rotation2d.fromDegrees(Robot.NavAngle()); }
   // public void setPincher(DoubleSolenoid.Value value){ Pincher.set(value); }
-  // public void setExtendor(DoubleSolenoid.Value value){ Extendor.set(value); }
+  // public static void setExtendor(DoubleSolenoid.Value value){ Extendor.set(value); }
   // public void setPullout(DoubleSolenoid.Value value){ pullout.set(value); }
   //public void setTalonFX(double speed){ FalconMotor.set(ControlMode.PercentOutput, speed); }
   public void setAllAngle(double degrees){
@@ -80,6 +91,22 @@ public class Drivetrain extends Subsystem {
     moduleFL.setBrakeOn(brake); moduleFR.setBrakeOn(brake);
     moduleBL.setBrakeOn(brake); moduleBR.setBrakeOn(brake);
   }
+  public static void setIntakeMotors(double intakepower, DoubleSolenoid.Value value){
+    if (intakepower == 0){
+      IntakeMotor.set(ControlMode.PercentOutput, intakepower);
+      Extendor.set(value);}
+    else {
+      Extendor.set(value);
+      IntakeMotor.set(ControlMode.PercentOutput, intakepower);}
+    
+  }
+  public static void Shoot(double shooterpower, double handlepower){
+    ShooterMotor1.set(ControlMode.PercentOutput, shooterpower);
+    ShooterMotor2.set(ControlMode.PercentOutput, shooterpower);
+    FunnelMotor.set(ControlMode.PercentOutput,handlepower);
+    BallHandlerMotor.set(handlepower);
+  }
+
   //  }public void setRawElevator(double speed){ Elevator.setRawElev(speed); }
 	// public void setElevatorPosition(double position){ Elevator.setPosition(position); }
 	// public void ElevOn(boolean On) { Elevator.setOn(On); }
