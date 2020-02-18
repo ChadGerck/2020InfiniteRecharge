@@ -73,7 +73,6 @@ public class Autonomous {
     public static void point32(){
         Robot.LimeAlign();
         Drivetrain.Shoot(0.5, 0.5);
-        Robot.MoveTo(0, -, angle);
 
     }
         

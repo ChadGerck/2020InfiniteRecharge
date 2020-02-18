@@ -54,13 +54,13 @@ public class Drivetrain extends Subsystem {
   public Drivetrain(){
     // Elevator  = new ElevatorModule(8); Intake = new VictorSPX(9); 
     // BallVictor= new VictorSPX(10);    
-    IntakeMotor = new VictorSPX(12);
-    FunnelMotor = new VictorSPX(13);
-    ControlPanelMotor = new VictorSPX(14);
+    ShooterMotor1 = new TalonFX(9);
+    ShooterMotor2 = new TalonFX(10);
+    IntakeMotor       = new VictorSPX(11);
+    FunnelMotor       = new VictorSPX(12);
+    ControlPanelMotor = new VictorSPX(13);
+    BallHandlerMotor = new CANSparkMax(14, MotorType.kBrushless);
     turning = new TurnModule(); 
-    BallHandlerMotor = new CANSparkMax(9, MotorType.kBrushless);
-    ShooterMotor1 = new TalonFX(10);
-    ShooterMotor2 = new TalonFX(11);
     // Pincher = new DoubleSolenoid(0,3, 4); 
     Extendor = new DoubleSolenoid(0,2, 5);
     //double solenoid arguments need to be updated
