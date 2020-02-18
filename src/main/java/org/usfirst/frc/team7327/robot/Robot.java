@@ -51,10 +51,8 @@ public class Robot extends TimedRobot {
   }
   @Override public void robotPeriodic() { 
     double dist;
-    if(m_LIDAR.get() < 1)
-      dist = 0;
-    else
-      dist = (m_LIDAR.getPeriod()*1000000.0/10.0) - off; //convert to distance. sensor is high 10 us for every centimeter. 
+    if(m_LIDAR.get() < 1) dist = 0;
+    else dist = (m_LIDAR.getPeriod()*1000000.0/10.0) - off; //convert to distance. sensor is high 10 us for every centimeter. 
     SmartDashboard.putNumber("Distance", dist); //put the distance on the dashboard
     swerve.updateDashboard();
   }
