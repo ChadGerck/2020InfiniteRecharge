@@ -63,9 +63,9 @@ public class Drivetrain extends Subsystem {
                 case "BL":moduleBL.set(degrees,power);break; case "BR":moduleBR.set(degrees,power);break;
     }
   }public SwerveModule getModuleNW(){ return moduleFL;}
-  public  SwerveModule getModuleNE(){ return moduleFR; }
+  public  SwerveModule getModuleNE(){ return moduleFR;}
 	public  SwerveModule getModuleSW(){ return moduleBL;}
-  public  SwerveModule getModuleSE(){ return moduleBR; }
+  public  SwerveModule getModuleSE(){ return moduleBR;}
   public static Rotation2d getAngle() { return Rotation2d.fromDegrees(Robot.NavAngle()); }
   public void setAllAngle(double degrees){
     moduleFL.setSteeringDegrees(degrees); moduleFR.setSteeringDegrees(degrees);

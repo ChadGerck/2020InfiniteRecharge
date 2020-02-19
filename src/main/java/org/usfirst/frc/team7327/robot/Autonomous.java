@@ -45,6 +45,22 @@ public class Autonomous {
         Robot.MoveTo(0,0,0); 
         Robot.LimeAlign();
     }
+    public static void Auto5(){}
+    public static void Auto6(){}
+    public static void Auto7(){}
+    public static void Auto8(){}
+    public static void Auto9(){}
+    public static void Auto10(){}
+    public static void Auto11(){}
+    public static void Auto12(){}
+    public static void Auto13(){}
+    public static void Auto14(){}
+    public static void Auto15(){}
+    public static void Auto16(){}
+    public static void Auto17(){}
+    public static void Auto18(){}
+    public static void Auto19(){}
+    public static void Auto20(){}
 
     public static void BlueTrench5(){
         Robot.MoveTo(0,-2.223,0); //tune middle alue as needed
