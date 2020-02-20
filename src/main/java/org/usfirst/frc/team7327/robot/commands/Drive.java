@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team7327.robot.Robot;
 import org.usfirst.frc.team7327.robot.SwerveMath;
+import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
+
 import static org.usfirst.frc.team7327.robot.Robot.oi;
 // import org.usfirst.frc.team7327.robot.ElevatorPositions;
 
@@ -20,6 +22,8 @@ public class Drive extends Command {
   double SteerP = -0.025;
   boolean fixRotation, rocketAngle = true, evadeMode = false; 
   double speedThrottle = .5; 
+  double k = 0.5;
+  boolean  loop = true;
 
   private ShuffleboardTab tab = Shuffleboard.getTab("RocketAngle");
   private NetworkTableEntry angleR = tab.add("RocketAngle", rocketAngle).getEntry();
@@ -68,6 +72,26 @@ public class Drive extends Command {
     // else{ ballThrottle = 0; } Robot.swerve.setRawBallIn(ballThrottle); 
     //SmartDashboard.putNumber("this", Robot.NavAngle());
     //
+    if(oi.AButton(2) && loop){
+      Drivetrain.setIntakeMotors(0.5, Value.kForward);
+    }
+    else if(oi.BButton(2) && loop){
+      Drivetrain.setIntakeMotors(0.5, Value.kReverse);
+    }
+    else if(oi.DpadUp(2) && loop){
+      k = k+0.05;
+    }
+    else if(oi.RightTrigger(2)>0.1 && loop){
+      Drivetrain.Shoot(k, 0.5);
+    }
+    else if(oi.DpadDown(2) && loop){
+       k= k-0.05;
+    }
+    else{
+     loop = true;
+    }
+
+    
     if(oi.StartButton(1)) { Robot.nav.reset(); } //if(oi.StartButton(2)) { Robot.swerve.ResetElevator(); }
     // ElevatorPositions.MoveElevators();
 

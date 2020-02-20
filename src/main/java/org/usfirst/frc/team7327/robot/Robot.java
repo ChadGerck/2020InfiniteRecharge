@@ -12,8 +12,8 @@ import com.kauailabs.navx.frc.AHRS;
 import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Counter;
-//import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.I2C;
 
 public class Robot extends TimedRobot {
@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
   private Counter m_LIDAR;
   static double SteerP = -0.025;
   final double off  = 10; //offset for sensor. test with tape measure
-  //Compressor c0 = new Compressor(0);
+  public static Compressor c0 = new Compressor(0);
   @Override public void robotInit() { 
     m_LIDAR = new Counter(0); //plug the lidar into PWM 0
     m_LIDAR.setMaxPeriod(1.00); //set the max period that can be measured
@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
     m_LIDAR.reset();
     nav = new AHRS(I2C.Port.kMXP); 
     CameraServer.getInstance().startAutomaticCapture();
-    // c0.setClosedLoopControl(true); 
+    c0.setClosedLoopControl(true); 
 
     m_chooser.setDefaultOption("FarL", FarL); m_chooser.addOption("Left", Left); m_chooser.addOption("Mid", Mid); m_chooser.addOption("Front", Front);  m_chooser.addOption("FarR", FarR);
     SmartDashboard.putData("Auto choices", m_chooser);
@@ -138,10 +138,10 @@ public class Robot extends TimedRobot {
     Drivetrain.updateOdometry();
     SmartDashboard.putNumber("ODOX", Drivetrain.m_odometry.getPoseMeters().getTranslation().getX());
     SmartDashboard.putNumber("ODOY", Drivetrain.m_odometry.getPoseMeters().getTranslation().getY());
-    // if(oi.LSClick(oi.Controller1)){
-    //   if(flag){ c0.setClosedLoopControl(false); flag = false; }
-    //   else{ c0.setClosedLoopControl(true); flag = true; }
-    // } 
+    if(oi.XButton(2)){
+      if(flag){ c0.setClosedLoopControl(false); flag = false; }
+      else{ c0.setClosedLoopControl(true); flag = true; }
+    } 
   }
   @Override public void testPeriodic() {}
   public static double NavAngle() {return NavAngle(0);}
