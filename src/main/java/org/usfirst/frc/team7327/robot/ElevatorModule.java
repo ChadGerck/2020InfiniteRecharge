@@ -13,7 +13,7 @@ public class ElevatorModule {
     private double PIDOutput;
     private boolean on; 
     static final double kP = .0008; 
-    public ElevatorModule(int kDriveID) {
+    public ElevatorModule(int kDriveID1, int kDriveID2) {
         mLift = new TalonSRX(kDriveID);
         SteeringPID = new Notifier(() -> {
             PIDOutput = kP * getError();
