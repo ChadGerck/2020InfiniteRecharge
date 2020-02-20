@@ -15,7 +15,7 @@ public class ElevatorModule {
     private CANEncoder m_ElevatorEncoder1, m_ElevatorEncoder2; 
     private boolean on; 
     static final double kP = .0008; 
-    public ElevatorModule(int kDriveID1, int kDriveID2) {
+    public ElevatorModule(int kDriveID1, int kDriveID2) { 
         mLift1 = new CANSparkMax(kDriveID1, MotorType.kBrushless);
         mLift2 = new CANSparkMax(kDriveID2, MotorType.kBrushless);
         m_ElevatorEncoder1 = new CANEncoder(mLift1);
