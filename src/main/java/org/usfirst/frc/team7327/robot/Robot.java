@@ -47,6 +47,7 @@ public class Robot extends TimedRobot {
     
     m_chosen.addOption("Default", Default); m_chosen.addOption("P2", P2);
     m_chosen.addOption("P3", P3); m_chosen.addOption("HailMary", HailMary);
+    m_chosen.addOption("Defense", Defense);
   }
   @Override public void robotPeriodic() { 
     double dist;

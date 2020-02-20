@@ -87,7 +87,7 @@ public class Drivetrain extends Subsystem {
     FunnelMotor.set(ControlMode.PercentOutput,handlepower); BallHandlerMotor.set(handlepower);
   }
   public static void ControlPanel(double power){ ControlPanelMotor.set(ControlMode.PercentOutput, power); }
-  public void setRawElevator(double speed){ Elevator.setRawElev(speed); }
+  public static void setRawElevator(double speed){ Elevator.setRawElev(speed); }
 	public void setElevatorPosition(double position){ Elevator.setPosition(position); }
 	public void ElevOn(boolean On) { Elevator.setOn(On); }
 	public void ResetElevator() { Elevator.ElevatorReset(); }
