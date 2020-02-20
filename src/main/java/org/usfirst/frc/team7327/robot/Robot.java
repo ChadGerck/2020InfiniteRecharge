@@ -20,12 +20,11 @@ public class Robot extends TimedRobot {
   public static final Drivetrain swerve = new Drivetrain();
   public static Timer myTimer = new Timer();
   public static final OI oi = new OI();
-  private static final String kAuto = "Auto";
-  private static final String kAuto2 = "Auto2";
-  private static final String kAuto3 = "Auto3";
-  private static final String kAuto4 = "Auto4";
-  private String m_autoSelected;
+  private static final String 
+  FarL = "Far L", Left = "Left", Mid = "Mid", Front = "Front", FarR = "Far R",
+  Default = "Default", P2 = "A1.2", P3 = "A1.3", HailMary = "HailMary", Defense = "Defense"; 
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  private final SendableChooser<String> m_chosen = new SendableChooser<>();
   public static AHRS nav; 
   public boolean flag = true; 
   static double finalAngle, directMag, steering_adjust, x, rotMag;
@@ -43,18 +42,16 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture();
     // c0.setClosedLoopControl(true); 
 
-    m_chooser.setDefaultOption("Auto", kAuto);
-    m_chooser.addOption("Auto2", kAuto2);
-    m_chooser.addOption("Auto3", kAuto3);
-    m_chooser.addOption("Auto4", kAuto4);
+    m_chooser.setDefaultOption("FarL", FarL); m_chooser.addOption("Left", Left); m_chooser.addOption("Mid", Mid); m_chooser.addOption("Front", Front);  m_chooser.addOption("FarR", FarR);
     SmartDashboard.putData("Auto choices", m_chooser);
+    
+    m_chosen.addOption("Default", Default); m_chosen.addOption("P2", P2);
+    m_chosen.addOption("P3", P3); m_chosen.addOption("HailMary", HailMary);
   }
   @Override public void robotPeriodic() { 
     double dist;
-    if(m_LIDAR.get() < 1)
-      dist = 0;
-    else
-      dist = (m_LIDAR.getPeriod()*1000000.0/10.0) - off; //convert to distance. sensor is high 10 us for every centimeter. 
+    if(m_LIDAR.get() < 1) dist = 0;
+    else dist = (m_LIDAR.getPeriod()*1000000.0/10.0) - off; //convert to distance. sensor is high 10 us for every centimeter. 
     SmartDashboard.putNumber("Distance", dist); //put the distance on the dashboard
     swerve.updateDashboard();
   }
@@ -70,9 +67,38 @@ public class Robot extends TimedRobot {
     swerve.OdoReset();
     nav.reset();
     swerve.setALLBrake(false); 
-    m_autoSelected = m_chooser.getSelected();
-    //m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    //System.out.println("Auto selected: " + m_autoSelected);
+    switch(m_chooser.getSelected()){
+      case "FarL": 
+      switch(m_chosen.getSelected()){
+        case "Default": Autonomous.Auto(); break; case "Trench": Autonomous.Auto2(); break; 
+        case "P3": Autonomous.Auto3(); break; case "HailMary": Autonomous.Auto4(); break;   
+        case "Defense": Autonomous.Auto21(); break;   
+      } break; 
+      case "Left": 
+      switch(m_chosen.getSelected()){
+        case "Default": Autonomous.Auto5(); break; case "Trench": Autonomous.Auto6(); break; 
+        case "P3": Autonomous.Auto7(); break; case "HailMary": Autonomous.Auto8(); break; 
+        case "Defense": Autonomous.Auto22(); break;   
+      } break; 
+      case "Mid":
+      switch(m_chosen.getSelected()){
+        case "Default": Autonomous.Auto9(); break; case "Trench": Autonomous.Auto10(); break; 
+        case "P3": Autonomous.Auto11(); break; case "HailMary": Autonomous.Auto12(); break;  
+        case "Defense": Autonomous.Auto23(); break;  
+      } break; 
+      case "Front":
+      switch(m_chosen.getSelected()){
+        case "Default": Autonomous.Auto13(); break; case "Trench": Autonomous.Auto14(); break; 
+        case "P3": Autonomous.Auto15(); break; case "HailMary": Autonomous.Auto16(); break;   
+        case "Defense": Autonomous.Auto24(); break; 
+      } break; 
+      case "FarR":
+      switch(m_chosen.getSelected()){
+        case "Default": Autonomous.Auto17(); break; case "Trench": Autonomous.Auto18(); break; 
+        case "P3": Autonomous.Auto19(); break; case "HailMary": Autonomous.Auto20(); break;   
+        case "Defense": Autonomous.Auto25(); break; 
+      } break; 
+    }
 
   }
   public static void LimeAlign(){
@@ -107,21 +133,6 @@ public class Robot extends TimedRobot {
   public static void SleepFor(long x){try { TimeUnit.SECONDS.sleep(x); } catch (Exception e) {}}
   @Override public void autonomousPeriodic() {
     Drivetrain.updateOdometry();
-    switch (m_autoSelected){
-      case kAuto:
-      default:
-      Autonomous.Auto();
-        break;
-      case kAuto2:
-      Autonomous.Auto2();
-        break;
-      case kAuto3:
-        Autonomous.Auto3();
-        break;
-      case kAuto4:
-        Autonomous.Auto4();
-        break;
-    }
   }
   @Override public void teleopPeriodic() { Scheduler.getInstance().run();
     Drivetrain.updateOdometry();
