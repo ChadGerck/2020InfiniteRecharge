@@ -61,6 +61,12 @@ public class Autonomous {
     public static void Auto18(){}
     public static void Auto19(){}
     public static void Auto20(){}
+    public static void Auto21(){}
+    public static void Auto22(){}
+    public static void Auto23(){}
+    public static void Auto24(){}
+    public static void Auto25(){}
+
 
     public static void BlueTrench5(){
         Robot.MoveTo(0,-2.223,0); //tune middle alue as needed
@@ -91,7 +97,19 @@ public class Autonomous {
         Drivetrain.Shoot(0.5, 0.5);
 
     }
+    public static void number9(){
+        //shootball
+        Robot.MoveTo(0,-2.976,0);
+        //intake
+        Robot.MoveTo(0,-0.737,0);
+        //intake
+        Robot.MoveTo(0,-0.737,0);
+        //intake
         
+
+
+        
+    }
 
     }
     
