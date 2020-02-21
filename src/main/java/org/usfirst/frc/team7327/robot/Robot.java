@@ -50,24 +50,22 @@ public class Robot extends TimedRobot {
     m_chosen.addOption("Defense", Defense);
   }
   @Override public void robotPeriodic() { 
-    double dist, avgdist, subtotal;
-    final double[] disthistory = {0,0,0,0,0};
-    subtotal=0;
-    avgdist=0;
+    double dist;//, avgdist, subtotal;
+    // final double[] disthistory = {0,0,0,0,0};
+    // subtotal=0;
+    // avgdist=0;
     if(m_LIDAR.get() < 1) {dist = 0;}
     else {
       dist = (m_LIDAR.getPeriod()*1000000.0/10.0) - off;
-      for (int i =4; i >0; i--){
-        subtotal+=disthistory[i];
-        disthistory[i] = disthistory[i-1];
-      }
-      subtotal += disthistory[0];
-      avgdist = subtotal/5;
-      disthistory[0]=dist;
+      // for (int i =4; i >0; i--){
+      //   subtotal+=disthistory[i];
+      //   disthistory[i] = disthistory[i-1];
+      // }
+      // subtotal += disthistory[0];
+      // avgdist = subtotal/5;
+      // disthistory[0]=dist;
     } //convert to distance. sensor is high 10 us for every centimeter. 
     SmartDashboard.putNumber("Distance", dist); //put the distance on the dashboard
-    SmartDashboard.putNumber("avgdist", avgdist);
-    SmartDashboard.putNumber("subt", subtotal);
     swerve.updateDashboard();
   }
   @Override public void teleopInit() { 
