@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team7327.robot.Robot;
 import org.usfirst.frc.team7327.robot.SwerveMath;
-import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
+// import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
 import static org.usfirst.frc.team7327.robot.Robot.oi;
 // import org.usfirst.frc.team7327.robot.ElevatorPositions;
@@ -21,14 +21,14 @@ public class Drive extends Command {
   double finalAngle, Redthrottle, ballThrottle, rotMag, rightArc, directMag, steering_adjust, x; 
   double SteerP = -0.025;
   boolean fixRotation, rocketAngle = true, evadeMode = false; 
-  double speedThrottle = .5; 
+  double speedThrottle = .25; 
   double elvthrottle = 0.3;
   double k = 0.5;
   boolean  loop = true;
 
   //private ShuffleboardTab tab = Shuffleboard.getTab("RocketAngle");
   //private NetworkTableEntry angleR = tab.add("RocketAngle", rocketAngle).getEntry();
-  DoubleSolenoid.Value Pincher, Extendor, pullout = Value.kOff; 
+  //DoubleSolenoid.Value Pincher, Extendor, pullout = Value.kOff; 
 
   protected void execute() {
 
@@ -73,25 +73,25 @@ public class Drive extends Command {
     // else{ ballThrottle = 0; } Robot.swerve.setRawBallIn(ballThrottle); 
     //SmartDashboard.putNumber("this", Robot.NavAngle());
     //
-    if(oi.AButton(2) && loop){
-      Drivetrain.setIntakeMotors(0.5, Value.kForward);
-    }
-    else if(oi.BButton(2) && loop){
-      Drivetrain.setIntakeMotors(0.5, Value.kReverse);
-    }
-    else if(oi.DpadUp(2) && loop){
-      k = k+0.05;
-    }
-    else if(oi.DpadDown(2) && loop){
-       k= k-0.05;
-    }
-    else if(oi.RightTrigger(2)>0.1 && loop){
-      Drivetrain.Shoot(k, 0.5);
-    }
-    else{
-     loop = true;
-    }
-    Drivetrain.setRawElevator(elvthrottle*(-oi.LeftTrigger(1) + oi.RightTrigger(1)));
+    // if(oi.AButton(2) && loop){
+    //   Drivetrain.setIntakeMotors(0.5, Value.kForward);
+    // }
+    // else if(oi.BButton(2) && loop){
+    //   Drivetrain.setIntakeMotors(0.5, Value.kReverse);
+    // }
+    // else if(oi.DpadUp(2) && loop){
+    //   k = k+0.05;
+    // }
+    // else if(oi.DpadDown(2) && loop){
+    //    k= k-0.05;
+    // }
+    // else if(oi.RightTrigger(2)>0.1 && loop){
+    //   Drivetrain.Shoot(k, 0.5);
+    // }
+    // else{
+    //  loop = true;
+    // }
+    // Drivetrain.setRawElevator(elvthrottle*(-oi.LeftTrigger(1) + oi.RightTrigger(1)));
 
 
 

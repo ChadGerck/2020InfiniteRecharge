@@ -1,8 +1,8 @@
 package org.usfirst.frc.team7327.robot;
 
-import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
+// import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+// import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 public class Autonomous {    
@@ -68,35 +68,35 @@ public class Autonomous {
     public static void Auto25(){}
     public static void Auto26(){}
 
-    public static void BlueTrench5(){
-        Robot.MoveTo(0,-2.223,0); //tune middle alue as needed
-        Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
-        Robot.MoveTo(0,-5.446,0);
-        Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
-        Robot.MoveTo(7.228,0,0);
-        Robot.LimeAlign();
-        Drivetrain.Shoot(0.5, 0.5);
-    }
-    public static void RedSpinner6(){
-        Robot.MoveTo(0,-3,0);
-        Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
-        Robot.MoveTo(0,-3.941,0);
-        Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
-        Robot.MoveTo(2.458,3.941,0);
-        Robot.LimeAlign();
-        Drivetrain.Shoot(0.5, 0.5);
-    }
-    public static void DoubleCorner7(){
-        Robot.MoveTo(0,-2.5,67.5);
-        Robot.MoveTo(0,-0.7865,0);
-        //intake
-        Robot.MoveTo(0,-0.7865,0);
-    }
-    public static void point32(){
-        Robot.LimeAlign();
-        Drivetrain.Shoot(0.5, 0.5);
+    // public static void BlueTrench5(){
+    //     Robot.MoveTo(0,-2.223,0); //tune middle alue as needed
+    //     Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
+    //     Robot.MoveTo(0,-5.446,0);
+    //     Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
+    //     Robot.MoveTo(7.228,0,0);
+    //     Robot.LimeAlign();
+    //     Drivetrain.Shoot(0.5, 0.5);
+    // }
+    // public static void RedSpinner6(){
+    //     Robot.MoveTo(0,-3,0);
+    //     Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
+    //     Robot.MoveTo(0,-3.941,0);
+    //     Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
+    //     Robot.MoveTo(2.458,3.941,0);
+    //     Robot.LimeAlign();
+    //     Drivetrain.Shoot(0.5, 0.5);
+    // }
+    // public static void DoubleCorner7(){
+    //     Robot.MoveTo(0,-2.5,67.5);
+    //     Robot.MoveTo(0,-0.7865,0);
+    //     //intake
+    //     Robot.MoveTo(0,-0.7865,0);
+    // }
+    // public static void point32(){
+    //     Robot.LimeAlign();
+    //     Drivetrain.Shoot(0.5, 0.5);
 
-    }
+    // }
         
 
     }
