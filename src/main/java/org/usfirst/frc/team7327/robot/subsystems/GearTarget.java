@@ -1,11 +1,11 @@
 package org.usfirst.frc.team7327.robot.subsystems;
 
 public class GearTarget {
-	PixyPacket block1, block2;
-	double avgWidth;
-	double avgHeight;
-	double avgArea;
-	double avgX;
+	PixyPacket PowerCell;
+	double Width;
+	double Height;
+	double Area;
+	double X;
 	double angle;
 	double distance;
 	
@@ -14,24 +14,24 @@ public class GearTarget {
 	
 	final double DEGREES_PER_PIXEL = 75.0 / 320.0;
 	
-	public GearTarget(PixyPacket p1, PixyPacket p2) {
-		block1 = p1;
-		block2 = p2;
-		if (block1 == null && block2 != null)
-			block1 = block2;
-		else if (block1 != null && block2 == null)
-			block2 = block1;
+	public GearTarget(PixyPacket p1) {
+		PowerCell = p1;
+
+		// if (block1 == null && block2 != null)
+		// 	block1 = block2;
+		// else if (block1 != null && block2 == null)
+		// 	block2 = block1;
 		doMath();
 	}
 	
 	// TODO: add some private functions to do math and stuff to convert data in blocks to distance and angle.
 	private void doMath(){
-		avgWidth = (block1.Width + block2.Width) / 2;
-		avgHeight = (block1.Height + block2.Height) / 2;
-		avgArea = avgHeight * avgWidth;
-		avgX = (block1.X + block2.X) / 2;
-		angle = (avgX - TARGET_X) * DEGREES_PER_PIXEL;
-		distance = 106.83987509669 * Math.pow(.96060468112129, avgHeight);
+		Width = (PowerCell.Width) / 2;
+		Height = (PowerCell.Height) / 2;
+		Area = Height * Width;
+		X = (PowerCell.X) / 2;
+		angle = (X - TARGET_X) * DEGREES_PER_PIXEL;
+		distance = 106.83987509669 * Math.pow(.96060468112129, Height);
 	}
 	
 
@@ -46,10 +46,10 @@ public class GearTarget {
 	}
 	public String toString() {
 		return "" +
-	"avgWidth: " + avgWidth + 
-	" avgHeight: " + avgHeight +
-	" avgArea: " + avgArea +
-	" avgX: " + avgX +
+	"Width: " + Width + 
+	" Height: " + Height +
+	" Area: " + Area +
+	" X: " + X +
 	" dpp: " + DEGREES_PER_PIXEL +
 	" angle: " + angle +
 	" distance: " + distance;
