@@ -48,21 +48,21 @@ public class Autonomous {
 
     public static void BlueTrench5(){
         Robot.MoveTo(0,-2.223,0); //tune middle alue as needed
-        Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
+        // Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
         Robot.MoveTo(0,-5.446,0);
-        Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
+        // Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
         Robot.MoveTo(7.228,0,0);
         Robot.LimeAlign();
-        Drivetrain.Shoot(0.5, 0.5);
+        // Drivetrain.Shoot(0.5, 0.5);
     }
     public static void RedSpinner6(){
         Robot.MoveTo(0,-3,0);
-        Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
+        // Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
         Robot.MoveTo(0,-3.941,0);
-        Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
+        // Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
         Robot.MoveTo(2.458,3.941,0);
         Robot.LimeAlign();
-        Drivetrain.Shoot(0.5, 0.5);
+        // Drivetrain.Shoot(0.5, 0.5);
     }
     public static void DoubleCorner7(){
         Robot.MoveTo(0,-2.5,67.5);
@@ -72,7 +72,7 @@ public class Autonomous {
     }
     public static void point32(){
         Robot.LimeAlign();
-        Drivetrain.Shoot(0.5, 0.5);
+        // Drivetrain.Shoot(0.5, 0.5);
 
     }
         

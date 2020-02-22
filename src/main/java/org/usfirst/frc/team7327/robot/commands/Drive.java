@@ -14,7 +14,7 @@ import static org.usfirst.frc.team7327.robot.Robot.oi;
 // import org.usfirst.frc.team7327.robot.ElevatorPositions;
 
 public class Drive extends Command {
-  public Drive() { requires(Robot.swerve); }
+  // public Drive() { requires(Robot.swerve); }
   protected void initialize() { }
   double finalAngle, Redthrottle, ballThrottle, rotMag, rightArc, directMag, steering_adjust, x; 
   double SteerP = -0.025;
@@ -57,7 +57,7 @@ public class Drive extends Command {
     if(oi.LeftBumperDown(1) || oi.RightBumperDown(1) || oi.RightTrigger(1) > .1 || oi.LeftTrigger(1) > .1 || oi.LeftMag(1) >= 0.2 || oi.RightMag(1) > 0.3 || oi.AButtonDown(1) || oi.XButtonDown(1) || oi.YButtonDown(1) || oi.BButtonDown(1)) {
       fixRotation = false; 
     } else{fixRotation = true;}
-    SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
+    // SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
 
     //Robot.swerve.setTalonFX(oi.RightTrigger(2)-oi.LeftTrigger(2));
     SmartDashboard.putNumber ("Angle", Robot.NavAngle());

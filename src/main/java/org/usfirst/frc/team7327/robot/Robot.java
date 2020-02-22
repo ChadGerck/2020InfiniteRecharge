@@ -54,20 +54,20 @@ public class Robot extends TimedRobot {
     if(m_LIDAR.get() < 1) dist = 0;
     else dist = (m_LIDAR.getPeriod()*1000000.0/10.0) - off; //convert to distance. sensor is high 10 us for every centimeter. 
     SmartDashboard.putNumber("Distance", dist); //put the distance on the dashboard
-    swerve.updateDashboard();
+    // swerve.updateDashboard();
   }
   @Override public void teleopInit() { 
-    swerve.setALLBrake(false); 
-    swerve.OdoReset(); 
+    // swerve.setALLBrake(false); 
+    // swerve.OdoReset(); 
   /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/
  }
   @Override public void autonomousInit() { 
-    swerve.setALLBrake(true); 
+    // swerve.setALLBrake(true); 
 		myTimer.reset();
 		myTimer.start();
-    swerve.OdoReset();
+    // swerve.OdoReset();
     nav.reset();
-    swerve.setALLBrake(false); 
+    // swerve.setALLBrake(false); 
     m_autoSelected = m_chooser.getSelected();
     //m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     //System.out.println("Auto selected: " + m_autoSelected);
@@ -79,7 +79,7 @@ public class Robot extends TimedRobot {
       steering_adjust = SteerP*-x;
       finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1),steering_adjust))-90; 
       directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(1)))/2; 
-      SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
+      // SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
     }while(x<-3 || x > 3);
   }
   
@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
       finalAngle = Math.toDegrees(Math.atan2(-(swerve.ODOY()-y),-(swerve.ODOX()-x)))-Robot.NavAngle(); 
       directMag = Math.hypot(swerve.ODOY()-y,swerve.ODOX()-x);
       SwerveMath.ComputeSwerve(finalAngle, directMag, Robot.swerve.turning.getPIDOutput(), false);
-      Drivetrain.updateOdometry(); swerve.updateDashboard();
+      // Drivetrain.updateOdometry(); swerve.updateDashboard();
       SmartDashboard.putNumber("x", x);
       SmartDashboard.putNumber("y", y);
       SmartDashboard.putNumber("angle", angle);
@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
   }
   public static void SleepFor(long x){try { TimeUnit.SECONDS.sleep(x); } catch (Exception e) {}}
   @Override public void autonomousPeriodic() {
-    Drivetrain.updateOdometry();
+    // Drivetrain.updateOdometry();
     switch (m_autoSelected){
       case kAuto:
       default:
@@ -122,7 +122,7 @@ public class Robot extends TimedRobot {
     }
   }
   @Override public void teleopPeriodic() { Scheduler.getInstance().run();
-    Drivetrain.updateOdometry();
+    // Drivetrain.updateOdometry();
     SmartDashboard.putNumber("ODOX", Drivetrain.m_odometry.getPoseMeters().getTranslation().getX());
     SmartDashboard.putNumber("ODOY", Drivetrain.m_odometry.getPoseMeters().getTranslation().getY());
     // if(oi.LSClick(oi.Controller1)){
