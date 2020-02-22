@@ -92,9 +92,9 @@ public class Drivetrain extends Subsystem {
   public static void TopSpin(double shooterpower){ShooterMotor1.set(ControlMode.PercentOutput, shooterpower); }
   public static void BotSpin(double shooterpower){ShooterMotor2.set(ControlMode.PercentOutput, -shooterpower);}
   public static void ControlPanel(double power){ ControlPanelMotor.set(ControlMode.PercentOutput, power); }
-  // public static void setRawElevator(double speed){ Elevator.setRawElev(speed); }
-	// public void setElevatorPosition(double position){ Elevator.setPosition(position); }
-	// public void ElevOn(boolean On) { Elevator.setOn(On); }
+  public static void setRawElevator(double speed){ Elevator.setRawElev(speed); }
+	public static void setElevatorPosition(double position){ Elevator.setPosition(position); }
+	public static void ElevOn(boolean On) { Elevator.setOn(On); }
 	// public void ResetElevator() { Elevator.ElevatorReset(); }
 	// public double getLiftVelocity() { return Elevator.getLiftVelocity(); }
 	// public double getLiftPosition() { return Elevator.getLiftPosition(); }

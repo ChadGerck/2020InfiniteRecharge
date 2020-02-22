@@ -91,8 +91,10 @@ public class Drive extends Command {
      else if(oi.BButton(2)){
        Drivetrain.setIntakeMotors(0, Value.kReverse);
      }
-
-    //Drivetrain.Shoot(k*oi.RightTrigger(2), 0.5);
+     if(oi.RightBumperDown(2)){
+       Drivetrain.BallTransition(0.5);
+     }
+    
     // Drivetrain.setRawElevator(elvthrottle*(-oi.LeftTrigger(1) + oi.RightTrigger(1)));
 
     
