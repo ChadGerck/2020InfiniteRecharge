@@ -185,7 +185,7 @@ public class PixyI2C {
 
 	public PixyPacket[] readBlocks() {
 		// This has to match the max block setting in pixymon?
-		int maxBlocks = 2;
+		int maxBlocks = 1;
 		PixyPacket[] blocks = new PixyPacket[maxBlocks];
 
 		if (!skipStart) {
