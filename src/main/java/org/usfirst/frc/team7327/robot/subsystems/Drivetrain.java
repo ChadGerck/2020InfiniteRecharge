@@ -85,11 +85,9 @@ public class Drivetrain extends Subsystem {
   //   ShooterMotor1.set(ControlMode.PercentOutput, shooterpower); ShooterMotor2.set(ControlMode.PercentOutput, -shooterpower);
   //   FunnelMotor.set(ControlMode.PercentOutput,handlepower); BallHandlerMotor.set(handlepower);
   // }
-  public static void BallTransition(double funnelpower, double handlepower){
-    funnelpower = handlepower;
-    FunnelMotor.set(ControlMode.PercentOutput, funnelpower);
-    BallHandlerMotor.set(handlepower);
-
+  public static void BallTransition(double funnel_handlepower){
+    FunnelMotor.set(ControlMode.PercentOutput, funnel_handlepower);
+    BallHandlerMotor.set(funnel_handlepower);
   }
   public static void TopSpin(double shooterpower){ShooterMotor1.set(ControlMode.PercentOutput, shooterpower); }
   public static void BotSpin(double shooterpower){ShooterMotor2.set(ControlMode.PercentOutput, -shooterpower);}
