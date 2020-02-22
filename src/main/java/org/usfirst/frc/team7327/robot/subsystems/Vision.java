@@ -1,8 +1,8 @@
 package org.usfirst.frc.team7327.robot.subsystems;
 
-import org.usfirst.frc.team7327.robot.*;
+// import org.usfirst.frc.team7327.robot.*;
 
-import org.usfirst.frc.team7327.robot.commands.*;
+// import org.usfirst.frc.team7327.robot.commands.*;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
@@ -95,7 +95,7 @@ public class Vision extends Subsystem {
 		PixyPacket[] packets = getPegPosition();
 		if (packets == null || (packets[0] == null && packets[1] == null))
 			return null;
-		return new GearTarget(packets[0], packets[1]);
+		return new GearTarget(packets[0]);
 	}
 
 	public GearTarget getGearTargetFiltered() {
