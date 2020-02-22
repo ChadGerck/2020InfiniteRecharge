@@ -2,7 +2,6 @@ package org.usfirst.frc.team7327.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-// import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -11,16 +10,13 @@ import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-// import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-// import com.revrobotics.CANSparkMax;
-// import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-// import com.ctre.phoenix.motorcontrol.ControlMode;
-// import org.usfirst.frc.team7327.robot.ElevatorModule;
+import org.usfirst.frc.team7327.robot.ElevatorModule;
 import org.usfirst.frc.team7327.robot.Robot;
 import org.usfirst.frc.team7327.robot.commands.Drive;
 import org.usfirst.frc.team7327.robot.SwerveModule;
@@ -44,21 +40,21 @@ public class Drivetrain extends Subsystem {
   private static final SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
   public static final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(m_kinematics, Rotation2d.fromDegrees(0));
   
-  //public static ElevatorModule Elevator;
+  public static ElevatorModule Elevator;
   public static VictorSPX IntakeMotor, FunnelMotor, ControlPanelMotor;
   public static TalonFX ShooterMotor1, ShooterMotor2;
-  //public static CANSparkMax BallHandlerMotor;
+  public static CANSparkMax BallHandlerMotor;
   public static DoubleSolenoid Extendor; 
    public Drivetrain(){
-     ShooterMotor1 = new TalonFX(9);
-     ShooterMotor2 = new TalonFX(10);
+    ShooterMotor1 = new TalonFX(9);
+    ShooterMotor2 = new TalonFX(10);
     IntakeMotor       = new VictorSPX(11);
     FunnelMotor       = new VictorSPX(12);
     ControlPanelMotor = new VictorSPX(13);
-  //   BallHandlerMotor = new CANSparkMax(14, MotorType.kBrushless);
-  //   Elevator  = new ElevatorModule(15,16); 
-  //   turning = new TurnModule(); 
-  Extendor = new DoubleSolenoid(0,2, 5);
+    BallHandlerMotor = new CANSparkMax(14, MotorType.kBrushless);
+    Elevator  = new ElevatorModule(15,16); 
+    turning = new TurnModule(); 
+    Extendor = new DoubleSolenoid(0,2, 5);
    }
   @Override public void initDefaultCommand() { setDefaultCommand(new Drive()); }
   public static void setModule(String loc,double degrees,double power){
@@ -89,7 +85,12 @@ public class Drivetrain extends Subsystem {
   //   ShooterMotor1.set(ControlMode.PercentOutput, shooterpower); ShooterMotor2.set(ControlMode.PercentOutput, -shooterpower);
   //   FunnelMotor.set(ControlMode.PercentOutput,handlepower); BallHandlerMotor.set(handlepower);
   // }
-  
+  public static void BallTransition(double funnelpower, double handlepower){
+    funnelpower = handlepower;
+    FunnelMotor.set(ControlMode.PercentOutput, funnelpower);
+    BallHandlerMotor.set(handlepower);
+
+  }
   public static void TopSpin(double shooterpower){ShooterMotor1.set(ControlMode.PercentOutput, shooterpower); }
   public static void BotSpin(double shooterpower){ShooterMotor2.set(ControlMode.PercentOutput, -shooterpower);}
   public static void ControlPanel(double power){ ControlPanelMotor.set(ControlMode.PercentOutput, power); }
