@@ -82,15 +82,15 @@ public class Drive extends Command {
         k= k-0.05;
     }
     
-    // Drivetrain.TopSpin(k*oi.RightTrigger(2));
-    // Drivetrain.BotSpin(k*oi.LeftTrigger(2));
+    Drivetrain.TopSpin(k*oi.RightTrigger(2));
+    Drivetrain.BotSpin(k*oi.LeftTrigger(2));
 
-    //  if(oi.AButton(2)){
-    //    Drivetrain.setIntakeMotors(0.5, Value.kForward);
-    //  }
-    //  else if(oi.BButton(2)){
-    //    Drivetrain.setIntakeMotors(0, Value.kReverse);
-    //  }
+     if(oi.AButton(2)){
+       Drivetrain.setIntakeMotors(0.5, Value.kForward);
+     }
+     else if(oi.BButton(2)){
+       Drivetrain.setIntakeMotors(0, Value.kReverse);
+     }
 
     //Drivetrain.Shoot(k*oi.RightTrigger(2), 0.5);
     // Drivetrain.setRawElevator(elvthrottle*(-oi.LeftTrigger(1) + oi.RightTrigger(1)));

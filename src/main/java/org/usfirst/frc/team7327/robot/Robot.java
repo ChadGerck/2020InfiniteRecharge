@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
   final double off  = 10; //offset for sensor. test with tape measure
   public static Compressor c0 = new Compressor(0);
   @Override public void robotInit() { 
-    m_LIDAR = new Counter(0); //plug the lidar into DIO 0
+    m_LIDAR = new Counter(0); //plug the lidar into PWM 0
     m_LIDAR.setMaxPeriod(1.00); //set the max period that can be measured
     m_LIDAR.setSemiPeriodMode(true); //Set the counter to period measurement
     m_LIDAR.reset();
@@ -50,36 +50,24 @@ public class Robot extends TimedRobot {
     m_chosen.addOption("Defense", Defense);
   }
   @Override public void robotPeriodic() { 
-    double dist;//, avgdist, subtotal;
-    // final double[] disthistory = {0,0,0,0,0};
-    // subtotal=0;
-    // avgdist=0;
-    if(m_LIDAR.get() < 1) {dist = 0;}
-    else {
-      dist = (m_LIDAR.getPeriod()*1000000.0/10.0) - off;
-      // for (int i =4; i >0; i--){
-      //   subtotal+=disthistory[i];
-      //   disthistory[i] = disthistory[i-1];
-      // }
-      // subtotal += disthistory[0];
-      // avgdist = subtotal/5;
-      // disthistory[0]=dist;
-    } //convert to distance. sensor is high 10 us for every centimeter. 
+    double dist;
+    if(m_LIDAR.get() < 1) dist = 0;
+    else dist = (m_LIDAR.getPeriod()*1000000.0/10.0) - off; //convert to distance. sensor is high 10 us for every centimeter. 
     SmartDashboard.putNumber("Distance", dist); //put the distance on the dashboard
     swerve.updateDashboard();
   }
   @Override public void teleopInit() { 
-    //swerve.setALLBrake(false); 
+    swerve.setALLBrake(false); 
     swerve.OdoReset(); 
   /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/
  }
   @Override public void autonomousInit() { 
-    //swerve.setALLBrake(true); 
+    swerve.setALLBrake(true); 
 		myTimer.reset();
 		myTimer.start();
     swerve.OdoReset();
     nav.reset();
-    //swerve.setALLBrake(false); 
+    swerve.setALLBrake(false); 
     switch(m_chooser.getSelected()){
       case "FarL": 
       switch(m_chosen.getSelected()){
@@ -124,7 +112,7 @@ public class Robot extends TimedRobot {
     }while(x<-3 || x > 3);
   }
   
-  public static void MoveTo(final double x, double y, double angle){
+  public static void MoveTo(double x, double y, double angle){
     y = -y; 
     angle = -angle; 
     finalAngle = 0; 
@@ -132,24 +120,23 @@ public class Robot extends TimedRobot {
     while((Math.sqrt(Math.pow(swerve.ODOX()-x,2)+Math.pow(swerve.ODOY()-y,2)) > .1 || Math.abs(-angle-Robot.NavAngle()) > 5)){
       SmartDashboard.putNumber("Time: ", myTimer.get());
       if(myTimer.get() > 20){ break; }
-      try { Robot.swerve.turning.setYaw(angle + Robot.NavAngle());} catch (final Exception e) {}
+      try { Robot.swerve.turning.setYaw(angle + Robot.NavAngle());} catch (Exception e) {}
       finalAngle = Math.toDegrees(Math.atan2(-(swerve.ODOY()-y),-(swerve.ODOX()-x)))-Robot.NavAngle(); 
       directMag = Math.hypot(swerve.ODOY()-y,swerve.ODOX()-x);
       SwerveMath.ComputeSwerve(finalAngle, directMag, Robot.swerve.turning.getPIDOutput(), false);
-      //Drivetrain.updateOdometry(); 
-      swerve.updateDashboard();
+      Drivetrain.updateOdometry(); swerve.updateDashboard();
       SmartDashboard.putNumber("x", x);
       SmartDashboard.putNumber("y", y);
       SmartDashboard.putNumber("angle", angle);
     }
     SwerveMath.ComputeSwerve(finalAngle, 0, 0, false);
   }
-  public static void SleepFor(final long x){try { TimeUnit.SECONDS.sleep(x); } catch (final Exception e) {}}
+  public static void SleepFor(long x){try { TimeUnit.SECONDS.sleep(x); } catch (Exception e) {}}
   @Override public void autonomousPeriodic() {
-    //Drivetrain.updateOdometry();
+    Drivetrain.updateOdometry();
   }
   @Override public void teleopPeriodic() { Scheduler.getInstance().run();
-    //Drivetrain.updateOdometry();
+    Drivetrain.updateOdometry();
     SmartDashboard.putNumber("ODOX", Drivetrain.m_odometry.getPoseMeters().getTranslation().getX());
     SmartDashboard.putNumber("ODOY", Drivetrain.m_odometry.getPoseMeters().getTranslation().getY());
     if(oi.XButton(2)){
@@ -159,7 +146,7 @@ public class Robot extends TimedRobot {
   }
   @Override public void testPeriodic() {}
   public static double NavAngle() {return NavAngle(0);}
-  public static double NavAngle(final double add){double angle = Robot.nav.getAngle()+add;
+  public static double NavAngle(double add){double angle = Robot.nav.getAngle()+add;
     while(angle>180)angle-=360;while(angle<-180)angle+=360;return angle; 
   }
 }
