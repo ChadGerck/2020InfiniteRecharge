@@ -3,6 +3,38 @@ package org.usfirst.frc.team7327.robot;
 import java.awt.Color;
 import java.util.concurrent.TimeUnit;
 
+import org.usfirst.frc.team7327.robot.I2CLink;
+import org.usfirst.frc.team7327.robot.Link;
+
+/**
+ * Java Port of Pixy2 Arduino Library
+ * 
+ * Interfaces with the Pixy2 over any provided, compatible link
+ * 
+ * https://github.com/PseudoResonance/Pixy2JavaAPI
+ * 
+ * @author PseudoResonance (Josh Otake)
+ *
+ *         ORIGINAL HEADER -
+ *         https://github.com/charmedlabs/pixy2/blob/master/src/host/arduino/libraries/Pixy2/TPixy2.h
+ *         ==========================================================================================
+ *         begin license header
+ *
+ *         This file is part of Pixy CMUcam5 or "Pixy" for short
+ *
+ *         All Pixy source code is provided under the terms of the GNU General
+ *         Public License v2 (http://www.gnu.org/licenses/gpl-2.0.html). Those
+ *         wishing to use Pixy source code, software and/or technologies under
+ *         different licensing terms should contact us at cmucam@cs.cmu.edu.
+ *         Such licensing terms are available for all portions of the Pixy
+ *         codebase presented here.
+ *
+ *         end license header
+ *
+ *         Main Pixy template class. This class takes a link class and uses it
+ *         to communicate with Pixy over I2C, SPI, UART or USB using the Pixy
+ *         packet protocol.
+ */
 
 public class Pixy2 {
 
@@ -42,7 +74,7 @@ public class Pixy2 {
 	public final static int PIXY_RCS_CENTER_POS = ((PIXY_RCS_MAX_POS - PIXY_RCS_MIN_POS) / 2);
 
 	public enum LinkType {
-		SPI, I2C, UART;
+		I2C// SPI, , UART;
 	}
 
 	private Link link = null;
@@ -58,8 +90,8 @@ public class Pixy2 {
 	protected Version version = null;
 
 	protected Pixy2CCC ccc = null;
-	//protected Pixy2Line line = null;
-	//protected Pixy2Video video = null;
+	protected Pixy2Line line = null;
+	protected Pixy2Video video = null;
 
 	protected boolean m_cs = false;
 
@@ -75,8 +107,8 @@ public class Pixy2 {
 		bufferPayload = new byte[PIXY_BUFFERSIZE];
 		// Initializes tracker objects
 		this.ccc = new Pixy2CCC(this);
-		//this.line = new Pixy2Line(this);
-		//this.video = new Pixy2Video(this);
+		this.line = new Pixy2Line(this);
+		this.video = new Pixy2Video(this);
 	}
 
 	/**
@@ -138,15 +170,15 @@ public class Pixy2 {
 	public static Pixy2 createInstance(LinkType type) {
 		Link link = null;
 		switch (type) {
-		//case SPI:
-		//	link = new SPILink();
-		//	break;
+		// case SPI:
+		// 	link = new SPILink();
+		// 	break;
 		case I2C:
 			link = new I2CLink();
 			break;
-		//case UART:
-		//	link = new UARTLink();
-		//	break;
+		// case UART:
+		// 	link = new UARTLink();
+		// 	break;
 		default:
 			return null;
 		}
@@ -174,18 +206,18 @@ public class Pixy2 {
 	 * 
 	 * @return Pixy2 line tracker
 	 */
-	//public Pixy2Line getLine() {
-	//	return this.line;
-	//}
+	public Pixy2Line getLine() {
+		return this.line;
+	}
 
 	/**
 	 * Get Pixy2 video tracker
 	 * 
 	 * @return Pixy2 video tracker
 	 */
-	//public Pixy2Video getVideo() {
-	//	return this.video;
-	//}
+	public Pixy2Video getVideo() {
+		return this.video;
+	}
 
 	public class Version {
 

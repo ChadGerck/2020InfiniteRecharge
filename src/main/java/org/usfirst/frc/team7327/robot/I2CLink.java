@@ -1,12 +1,41 @@
+  
 package org.usfirst.frc.team7327.robot;
 
 import java.util.Arrays;
 
+import edu.wpi.first.wpilibj.I2C;
+import org.usfirst.frc.team7327.robot.Pixy2;
 import org.usfirst.frc.team7327.robot.Pixy2.Checksum;
 
-import edu.wpi.first.wpilibj.I2C;
-
-
+/**
+ * Java Port of Pixy2 Arduino Library
+ * 
+ * FIRST Robotics WPI API I2C Link to Pixy2
+ * 
+ * CURRENTLY UNTESTED - Use SPI if possible!
+ * 
+ * https://github.com/PseudoResonance/Pixy2JavaAPI
+ * 
+ * @author PseudoResonance (Josh Otake)
+ * 
+ *         ORIGINAL HEADER -
+ *         https://github.com/charmedlabs/pixy2/blob/master/src/host/arduino/libraries/Pixy2/Pixy2I2C.h
+ *         ============================================================================================
+ *         begin license header
+ *
+ *         This file is part of Pixy CMUcam5 or "Pixy" for short
+ *
+ *         All Pixy source code is provided under the terms of the GNU General
+ *         Public License v2 (http://www.gnu.org/licenses/gpl-2.0.html). Those
+ *         wishing to use Pixy source code, software and/or technologies under
+ *         different licensing terms should contact us at cmucam@cs.cmu.edu.
+ *         Such licensing terms are available for all portions of the Pixy
+ *         codebase presented here.
+ *
+ *         end license header
+ *
+ *         Arduino I2C link class
+ */
 
 public class I2CLink implements Link {
 	private final static int PIXY_I2C_DEFAULT_ADDR = 0x54;

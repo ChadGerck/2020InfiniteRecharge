@@ -2,6 +2,16 @@ package org.usfirst.frc.team7327.robot;
 
 import org.usfirst.frc.team7327.robot.Pixy2.Checksum;
 
+/**
+ * Java Port of Pixy2 Arduino Library
+ * 
+ * Link interface for connecting to Pixy2
+ * 
+ * https://github.com/PseudoResonance/Pixy2JavaAPI
+ * 
+ * @author PseudoResonance (Josh Otake)
+ */
+
 public interface Link {
 	
 	/**
