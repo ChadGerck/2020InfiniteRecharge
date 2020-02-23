@@ -24,7 +24,9 @@ public class Drive extends Command {
   boolean fixRotation, rocketAngle = true, evadeMode = false; 
   double speedThrottle = .25; 
   double elvthrottle = 0.3;
+  //ShooterThrottles
   double k = 0.5;
+  double p = 0.5;
  
 
   //private ShuffleboardTab tab = Shuffleboard.getTab("RocketAngle");
@@ -81,10 +83,16 @@ public class Drive extends Command {
     else if(oi.DpadDown(2)){
         k= k-0.05;
     }
-    
+    if(oi.DpadLeft(2)){
+      p = p-0.05;
+    }
+    else if(oi.DpadRight(2)){
+      p = p+0.05;
+    }
     Drivetrain.TopSpin(k*oi.RightTrigger(2));
-    Drivetrain.BotSpin(k*oi.LeftTrigger(2));
-
+    Drivetrain.BotSpin(p*oi.LeftTrigger(2));
+    SmartDashboard.putNumber("TopThrottle", k);
+    SmartDashboard.putNumber("BotThrottle", p);
      if(oi.AButton(2)){
        Drivetrain.setIntakeMotors(0.5, Value.kForward);
      }
