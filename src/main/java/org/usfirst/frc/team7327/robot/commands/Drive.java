@@ -50,7 +50,8 @@ public class Drive extends Command {
       else if(oi.XButtonDown(1) && rocketAngle) { rightArc = 135; } else if(oi.XButtonDown(1) && !rocketAngle){ rightArc = 225; }
       else if(oi.YButtonDown(1) && rocketAngle) { rightArc = 45;  } else if(oi.YButtonDown(1) && !rocketAngle){ rightArc = 315; }
       else if(oi.BButtonDown(1)){ rightArc = 0; }
-      try { Robot.swerve.turning.setYaw(rightArc + Robot.NavAngle());} catch (Exception e) {}
+      try { Robot.swerve.turning.setYaw(rightArc + Robot.NavAngle());} catch (final Exception e) {
+      }
       rotMag = Robot.swerve.turning.getPIDOutput();
     } else{ rotMag = 0; }
 
@@ -61,6 +62,11 @@ public class Drive extends Command {
     else if(oi.RightBumperDown(1)) { finalAngle = 0; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 180; directMag = .05; }
     else if(oi.LeftTrigger(1) > .1) { finalAngle = 90; directMag = .125; } else if(oi.RightTrigger(1) > .1) {finalAngle = 270; directMag = .125; }
     else { directMag = 0; }
+
+    if( oi.LeftY(2)>0){
+      Drivetrain.setElevatorSpeed(1);}
+    else if( oi.LeftY(2)>0)Drivetrain.setElevatorSpeed(.25);
+
 
     if(oi.LeftBumperDown(1) || oi.RightBumperDown(1) || oi.RightTrigger(1) > .1 || oi.LeftTrigger(1) > .1 || oi.LeftMag(1) >= 0.2 || oi.RightMag(1) > 0.3 || oi.AButtonDown(1) || oi.XButtonDown(1) || oi.YButtonDown(1) || oi.BButtonDown(1)) {
       fixRotation = false; 

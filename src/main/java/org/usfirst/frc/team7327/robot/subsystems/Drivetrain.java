@@ -109,4 +109,8 @@ public class Drivetrain extends Subsystem {
   public double ODOX() { return m_odometry.getPoseMeters().getTranslation().getX(); }
   public double ODOY() { return m_odometry.getPoseMeters().getTranslation().getY(); }
   public void OdoReset(){ m_odometry.resetPosition(new Pose2d(new Translation2d(0.0,0.0), Rotation2d.fromDegrees(0)), Rotation2d.fromDegrees(0));}
+public static void setElevatorSpeed(double d) {
+}
+public static void setElevatorSpeed(int d) {
+}
 }
