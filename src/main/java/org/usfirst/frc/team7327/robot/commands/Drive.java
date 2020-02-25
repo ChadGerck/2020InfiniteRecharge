@@ -1,20 +1,12 @@
 package org.usfirst.frc.team7327.robot.commands;
 
-//import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
-//import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-//import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team7327.robot.Robot;
 import org.usfirst.frc.team7327.robot.SwerveMath;
-// import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
-
 import static org.usfirst.frc.team7327.robot.Robot.oi;
-// import org.usfirst.frc.team7327.robot.ElevatorPositions;
 
 public class Drive extends Command {
   public Drive() { requires(Robot.swerve); }
@@ -67,7 +59,6 @@ public class Drive extends Command {
     } else{fixRotation = true;}
     SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
 
-    //Robot.swerve.setTalonFX(oi.RightTrigger(2)-oi.LeftTrigger(2));
     SmartDashboard.putNumber ("Angle", Robot.NavAngle());
 		
 		// if(oi.RightBumperDown(2)) { Redthrottle = .6; } else if(oi.LeftBumperDown(2)) { Redthrottle = -.6;}
@@ -93,10 +84,10 @@ public class Drive extends Command {
     Drivetrain.BotSpin(p*oi.LeftTrigger(2));
     SmartDashboard.putNumber("TopThrottle", k);
     SmartDashboard.putNumber("BotThrottle", p);
-     if(oi.AButton(2)){
+     if(oi.YButton(2)){
        Drivetrain.setIntakeMotors(0.5, Value.kForward);
      }
-     else if(oi.BButton(2)){
+     else if(oi.AButton(2)){
        Drivetrain.setIntakeMotors(0, Value.kReverse);
      }
      if(oi.RightBumperDown(2)){

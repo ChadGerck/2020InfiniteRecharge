@@ -15,7 +15,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import org.usfirst.frc.team7327.robot.ElevatorModule;
 import org.usfirst.frc.team7327.robot.Robot;
 import org.usfirst.frc.team7327.robot.commands.Drive;
@@ -54,7 +53,7 @@ public class Drivetrain extends Subsystem {
     BallHandlerMotor = new CANSparkMax(14, MotorType.kBrushless);
     Elevator  = new ElevatorModule(15,16); 
     turning = new TurnModule(); 
-    Extendor = new DoubleSolenoid(0,2, 5);
+    Extendor = new DoubleSolenoid(0,1);
    }
   @Override public void initDefaultCommand() { setDefaultCommand(new Drive()); }
   public static void setModule(String loc,double degrees,double power){
@@ -81,10 +80,7 @@ public class Drivetrain extends Subsystem {
       IntakeMotor.set(ControlMode.PercentOutput, intakepower);
       Extendor.set(value);
   }
-  // public static void Shoot(double shooterpower, double handlepower){
-  //   ShooterMotor1.set(ControlMode.PercentOutput, shooterpower); ShooterMotor2.set(ControlMode.PercentOutput, -shooterpower);
-  //   FunnelMotor.set(ControlMode.PercentOutput,handlepower); BallHandlerMotor.set(handlepower);
-  // }
+  
   public static void BallTransition(double funnel_handlepower){
     FunnelMotor.set(ControlMode.PercentOutput, funnel_handlepower);
     BallHandlerMotor.set(funnel_handlepower);
