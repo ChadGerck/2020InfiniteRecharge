@@ -80,7 +80,8 @@ public class Drivetrain extends Subsystem {
       IntakeMotor.set(ControlMode.PercentOutput, intakepower);
       Extendor.set(value);
   }
-  
+  public static void setPiston(DoubleSolenoid.Value value){Extendor.set(value);}
+  public static void setIntakeSpeed(double intakepower){IntakeMotor.set(ControlMode.PercentOutput, intakepower);}
   public static void BallTransition(double funnel_handlepower){
     FunnelMotor.set(ControlMode.PercentOutput, funnel_handlepower);
     BallHandlerMotor.set(funnel_handlepower);
@@ -91,7 +92,7 @@ public class Drivetrain extends Subsystem {
   public static void setRawElevator(double speed){ Elevator.setRawElev(speed); }
 	public static void setElevatorPosition(double position){ Elevator.setPosition(position); }
 	public static void ElevOn(boolean On) { Elevator.setOn(On); }
-	// public void ResetElevator() { Elevator.ElevatorReset(); }
+  public static void ResetElevator() { Elevator.ElevatorReset(); }
 	// public double getLiftVelocity() { return Elevator.getLiftVelocity(); }
 	// public double getLiftPosition() { return Elevator.getLiftPosition(); }
   public void updateDashboard(){ SmartDashboard.putNumber("ODOX", ODOX()); SmartDashboard.putNumber("ODOY", ODOY()); }
