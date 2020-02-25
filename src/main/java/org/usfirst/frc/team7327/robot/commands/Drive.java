@@ -60,12 +60,6 @@ public class Drive extends Command {
     SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
 
     SmartDashboard.putNumber ("Angle", Robot.NavAngle());
-		
-		// if(oi.RightBumperDown(2)) { Redthrottle = .6; } else if(oi.LeftBumperDown(2)) { Redthrottle = -.6;}
-		// else { Redthrottle = 0; } Robot.swerve.setRawIntake(Redthrottle);
-		// if(oi.RightMag(2) > .3) { ballThrottle = .75*oi.RightY(2); } else if(oi.RightBumperDown(2)) { ballThrottle = .5; }
-    // else{ ballThrottle = 0; } Robot.swerve.setRawBallIn(ballThrottle); 
-    //SmartDashboard.putNumber("this", Robot.NavAngle());
     
     //PLAYER TWO CONTROLS
     if(oi.DpadUp(2)){k = k+0.05;}
@@ -82,6 +76,7 @@ public class Drive extends Command {
     else if(oi.AButton(2)){Drivetrain.setPiston(Value.kReverse);}
     Drivetrain.setIntakeSpeed(0.25*oi.RightY(2));
     if(oi.RightBumperDown(2)){Drivetrain.BallTransition(0.5);}
+    else if(oi.LeftBumperDown(2)){Drivetrain.BallTransition(-0.3);}
     if(oi.StartButton(2)){Drivetrain.ResetElevator();}
     // Drivetrain.setRawElevator(elvthrottle*(-oi.LeftTrigger(1) + oi.RightTrigger(1)));
 
