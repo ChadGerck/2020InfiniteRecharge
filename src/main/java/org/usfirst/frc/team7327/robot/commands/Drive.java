@@ -44,8 +44,7 @@ public class Drive extends Command {
       else if(oi.XButtonDown(1) && rocketAngle) { rightArc = 135; } else if(oi.XButtonDown(1) && !rocketAngle){ rightArc = 225; }
       else if(oi.YButtonDown(1) && rocketAngle) { rightArc = 45;  } else if(oi.YButtonDown(1) && !rocketAngle){ rightArc = 315; }
       else if(oi.BButtonDown(1)){ rightArc = 0; }
-      try { Robot.swerve.turning.setYaw(rightArc + Robot.NavAngle());} catch (final Exception e) {
-      }
+      try { Robot.swerve.turning.setYaw(rightArc + Robot.NavAngle());} catch (Exception e) {}
       rotMag = Robot.swerve.turning.getPIDOutput();
     } else{ rotMag = 0; }
 
@@ -56,10 +55,6 @@ public class Drive extends Command {
     else if(oi.RightBumperDown(1)) { finalAngle = 0; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 180; directMag = .05; }
     else if(oi.LeftTrigger(1) > .1) { finalAngle = 90; directMag = .125; } else if(oi.RightTrigger(1) > .1) {finalAngle = 270; directMag = .125; }
     else { directMag = 0; }
-
-    if( oi.LeftY(2)>0){
-      Drivetrain.setRawElevator(1);}
-    else if( oi.LeftY(2)>0)Drivetrain.setRawElevator(.25);
 
     if(oi.LeftBumperDown(1) || oi.RightBumperDown(1) || oi.RightTrigger(1) > .1 || oi.LeftTrigger(1) > .1 || oi.LeftMag(1) >= 0.2 || oi.RightMag(1) > 0.3 || oi.AButtonDown(1) || oi.XButtonDown(1) || oi.YButtonDown(1) || oi.BButtonDown(1)) {
       fixRotation = false; 
@@ -73,34 +68,23 @@ public class Drive extends Command {
 		// if(oi.RightMag(2) > .3) { ballThrottle = .75*oi.RightY(2); } else if(oi.RightBumperDown(2)) { ballThrottle = .5; }
     // else{ ballThrottle = 0; } Robot.swerve.setRawBallIn(ballThrottle); 
     //SmartDashboard.putNumber("this", Robot.NavAngle());
-    //
+    
     //PLAYER TWO CONTROLS
-    if(oi.DpadUp(2)){
-       k = k+0.05;
-     }
-    else if(oi.DpadDown(2)){
-        k= k-0.05;
-    }
-    if(oi.DpadLeft(2)){
-      p = p-0.05;
-    }
-    else if(oi.DpadRight(2)){
-      p = p+0.05;
-    }
+    if(oi.DpadUp(2)){k = k+0.05;}
+    else if(oi.DpadDown(2)){k= k-0.05;}
+    if(oi.DpadLeft(2)){p = p-0.05;}
+    else if(oi.DpadRight(2)){p = p+0.05;}
+
     Drivetrain.TopSpin(k*oi.RightTrigger(2));
     Drivetrain.BotSpin(p*oi.LeftTrigger(2));
     SmartDashboard.putNumber("TopThrottle", k);
     SmartDashboard.putNumber("BotThrottle", p);
-     if(oi.YButton(2)){
-       Drivetrain.setIntakeMotors(0.5, Value.kForward);
-     }
-     else if(oi.AButton(2)){
-       Drivetrain.setIntakeMotors(0, Value.kReverse);
-     }
-     if(oi.RightBumperDown(2)){
-       Drivetrain.BallTransition(0.5);
-     }
-    
+
+    if(oi.YButton(2)){Drivetrain.setPiston(Value.kForward);}
+    else if(oi.AButton(2)){Drivetrain.setPiston(Value.kReverse);}
+    Drivetrain.setIntakeSpeed(0.25*oi.RightY(2));
+    if(oi.RightBumperDown(2)){Drivetrain.BallTransition(0.5);}
+    if(oi.StartButton(2)){Drivetrain.ResetElevator();}
     // Drivetrain.setRawElevator(elvthrottle*(-oi.LeftTrigger(1) + oi.RightTrigger(1)));
 
     
