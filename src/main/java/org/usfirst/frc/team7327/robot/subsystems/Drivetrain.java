@@ -90,7 +90,7 @@ public class Drivetrain extends Subsystem {
   public static void BotSpin(double shooterpower){ShooterMotor2.set(ControlMode.PercentOutput, -shooterpower);}
   public static void ControlPanel(double power){ ControlPanelMotor.set(ControlMode.PercentOutput, power); }
   public static void setRawElevator(double speed){ Elevator.setRawElev(speed); }
-	public static void setElevatorPosition(double position){ Elevator.setPosition(position); }
+  public static void setElevatorPosition(double position){ Elevator.setPosition(position); }
 	public static void ElevOn(boolean On) { Elevator.setOn(On); }
   public static void ResetElevator() { Elevator.ElevatorReset(); }
 	// public double getLiftVelocity() { return Elevator.getLiftVelocity(); }
@@ -106,8 +106,5 @@ public class Drivetrain extends Subsystem {
   public double ODOX() { return m_odometry.getPoseMeters().getTranslation().getX(); }
   public double ODOY() { return m_odometry.getPoseMeters().getTranslation().getY(); }
   public void OdoReset(){ m_odometry.resetPosition(new Pose2d(new Translation2d(0.0,0.0), Rotation2d.fromDegrees(0)), Rotation2d.fromDegrees(0));}
-public static void setElevatorSpeed(double d) {
 }
-public static void setElevatorSpeed(int d) {
-}
-}
+
