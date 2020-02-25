@@ -8,6 +8,8 @@ import org.usfirst.frc.team7327.robot.SwerveMath;
 import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 import static org.usfirst.frc.team7327.robot.Robot.oi;
 
+// import org.usfirst.frc.team7327.robot.ElevatorPositions;
+
 public class Drive extends Command {
   public Drive() { requires(Robot.swerve); }
   protected void initialize() { }
@@ -56,9 +58,8 @@ public class Drive extends Command {
     else { directMag = 0; }
 
     if( oi.LeftY(2)>0){
-      Drivetrain.setElevatorSpeed(1);}
-    else if( oi.LeftY(2)>0)Drivetrain.setElevatorSpeed(.25);
-
+      Drivetrain.setRawElevator(1);}
+    else if( oi.LeftY(2)>0)Drivetrain.setRawElevator(.25);
 
     if(oi.LeftBumperDown(1) || oi.RightBumperDown(1) || oi.RightTrigger(1) > .1 || oi.LeftTrigger(1) > .1 || oi.LeftMag(1) >= 0.2 || oi.RightMag(1) > 0.3 || oi.AButtonDown(1) || oi.XButtonDown(1) || oi.YButtonDown(1) || oi.BButtonDown(1)) {
       fixRotation = false; 
