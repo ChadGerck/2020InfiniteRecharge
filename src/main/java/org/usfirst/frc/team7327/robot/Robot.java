@@ -139,7 +139,7 @@ public class Robot extends TimedRobot {
     Drivetrain.updateOdometry();
     SmartDashboard.putNumber("ODOX", Drivetrain.m_odometry.getPoseMeters().getTranslation().getX());
     SmartDashboard.putNumber("ODOY", Drivetrain.m_odometry.getPoseMeters().getTranslation().getY());
-    if(oi.XButton(2)){
+    if(oi.RSClick(2)){
       if(flag){ c0.setClosedLoopControl(false); flag = false; }
       else{ c0.setClosedLoopControl(true); flag = true; }
     } 
