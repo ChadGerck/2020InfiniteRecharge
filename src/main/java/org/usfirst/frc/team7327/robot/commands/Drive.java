@@ -10,6 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team7327.robot.Robot;
 import org.usfirst.frc.team7327.robot.SwerveMath;
+import org.usfirst.frc.team7327.robot.subsystems.PowerCellTarget;
+import org.usfirst.frc.team7327.robot.subsystems.Vision;
+
 import static org.usfirst.frc.team7327.robot.Robot.oi;
 // import org.usfirst.frc.team7327.robot.ElevatorPositions;
 
@@ -24,9 +27,10 @@ public class Drive extends Command {
   private ShuffleboardTab tab = Shuffleboard.getTab("RocketAngle");
   private NetworkTableEntry angleR = tab.add("RocketAngle", rocketAngle).getEntry();
   DoubleSolenoid.Value Pincher, Extendor, pullout = Value.kOff; 
+  public static final Vision cell = new Vision(); 
 
   protected void execute() {
-
+    cell.testPowerPixy();
     if(Robot.oi.BackButton(1)){ if(oi.LEDValue() == 1 || oi.LEDValue() == 0){ oi.LEDOn(); } else if(oi.LEDValue() == 3){ oi.LEDOff(); }}
     //if(Robot.oi.BackButton(2)){ if(rocketAngle){ rocketAngle = false;} else{ rocketAngle = true; } angleR.setBoolean(rocketAngle); }
 

@@ -1,6 +1,6 @@
 package org.usfirst.frc.team7327.robot.subsystems;
 
-public class GearTarget {
+public class PowerCellTarget {
 	PixyPacket PowerCell;
 	double Width;
 	double Height;
@@ -14,7 +14,7 @@ public class GearTarget {
 	
 	final double DEGREES_PER_PIXEL = 75.0 / 320.0;
 	
-	public GearTarget(PixyPacket p1) {
+	public PowerCellTarget(PixyPacket p1) {
 		PowerCell = p1;
 
 		// if (block1 == null && block2 != null)
@@ -33,7 +33,6 @@ public class GearTarget {
 		angle = (X - TARGET_X) * DEGREES_PER_PIXEL;
 		distance = 106.83987509669 * Math.pow(.96060468112129, Height);
 	}
-	
 
 	public double distance() {
 		// return distance needed to drive to hang gear.
