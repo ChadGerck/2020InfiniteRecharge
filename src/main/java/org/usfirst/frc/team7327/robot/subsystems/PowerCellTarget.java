@@ -29,7 +29,7 @@ public class PowerCellTarget {
 		Width = (PowerCell.Width);
 		Height = (PowerCell.Height);
 		Area = Height * Width;
-		X = (PowerCell.X);
+		X = (PowerCell.X) / 2;
 		angle = (X - TARGET_X) * DEGREES_PER_PIXEL;
 		distance = 106.83987509669 * Math.pow(.96060468112129, Height);
 	}
