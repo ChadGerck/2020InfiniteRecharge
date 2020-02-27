@@ -146,7 +146,7 @@ public class Robot extends TimedRobot {
   }
   @Override public void testPeriodic() {}
   public static double NavAngle() {return NavAngle(0);}
-  public static double NavAngle(double add){double angle = Robot.nav.getAngle()+add;
+  public static double NavAngle(double add){double angle = Robot.nav.getAngle()-90+add;
     while(angle>180)angle-=360;while(angle<-180)angle+=360;return angle; 
   }
 }
