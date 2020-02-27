@@ -137,7 +137,7 @@ public class Autonomous {
         Robot.LimeAlign();
         Drivetrain.Shoot(0.5, 0.5);
     }
-    public static void Left (){
+    public static void Left(){
         Robot.MoveTo(0,0,67.2);
         Robot.LimeAlign();
         Drivetrain.Shoot(0.5, 0.5);
@@ -148,9 +148,20 @@ public class Autonomous {
         Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
         Robot.MoveTo(1.3,0,0);
         Robot.LimeAlign();
-        Drivetrain.Shoot(0.5, 0.5); 
+        Drivetrain.Shoot(0.5, 0.5);  
     }
+    public static void ChadsBalls(){
+        Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
+        Robot.MoveTo(0,-3.4,0);
+        Robot.MoveTo(-.535,-3.4,90);
+        Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
+        Robot.MoveTo(4.8,0,0);
+        Robot.LimeAlign();
+        Drivetrain.Shoot(0.5, 0.5);
+        
+        
 
+    }
 }
     
 
