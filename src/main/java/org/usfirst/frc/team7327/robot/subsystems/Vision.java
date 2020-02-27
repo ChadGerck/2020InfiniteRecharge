@@ -14,15 +14,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Vision extends Subsystem {
 
-	public PixyI2C PowerPixy;
-	public PixyI2C boilerPixy;
+	public PixyI2C PowerCellPixy;
+	// public PixyI2C boilerPixy;
 	Port port = Port.kOnboard;
 	String print; 
 	public PixyPacket[] packet1 = new PixyPacket[7];
 	// public PixyPacket[] packet2 = new PixyPacket[7];
 
 	public Vision() {
-		PowerPixy = new PixyI2C("gear", new I2C(port, 0x54), packet1, new PixyException(print), new PixyPacket());
+		PowerCellPixy = new PixyI2C("gear", new I2C(port, 0x54), packet1, new PixyException(print), new PixyPacket());
 // boilerPixy = new PixyI2C("boiler", new I2C(port, 0x55), packet2, new PixyException(print), new PixyPacket());
 	}
 
@@ -32,25 +32,25 @@ public class Vision extends Subsystem {
 		// to dashboard? Eh.. if robot isn't aimed at the target we get nothing.
 	}
 
-	public void testPowerPixy() {
+	public void testPowerCellPixy() {
 		for (int i = 0; i < packet1.length; i++)
 			packet1[i] = null;
-		SmartDashboard.putString("PowerPixy hello", "working");
+		SmartDashboard.putString("PowerCellPixy hello", "working");
 		for (int i = 1; i < 8; i++) {
 			try {
-				packet1[i - 1] = PowerPixy.readPacket(i);
+				packet1[i - 1] = PowerCellPixy.readPacket(i);
 			} catch (PixyException e) {
-				SmartDashboard.putString("PowerPixy Error: " + i, "exception");
+				SmartDashboard.putString("PowerCellPixy Error: " + i, "exception");
 			}
 			if (packet1[i - 1] == null) {
-				SmartDashboard.putString("PowerPixy Error: " + i, "True");
+				SmartDashboard.putString("PowerCellPixy Error: " + i, "True");
 				continue;
 			}
-			SmartDashboard.putNumber("PowerPixy X Value: " + i, packet1[i - 1].X);
-			SmartDashboard.putNumber("PowerPixy Y Value: " + i, packet1[i - 1].Y);
-			SmartDashboard.putNumber("PowerPixy Width Value: " + i, packet1[i - 1].Width);
-			SmartDashboard.putNumber("PowerPixy Height Value: " + i, packet1[i - 1].Height);
-			SmartDashboard.putString("PowerPixy Error: " + i, "False");
+			SmartDashboard.putNumber("PowerCellPixy X Value: " + i, packet1[i - 1].X);
+			SmartDashboard.putNumber("PowerCellPixy Y Value: " + i, packet1[i - 1].Y);
+			SmartDashboard.putNumber("PowerCellPixy Width Value: " + i, packet1[i - 1].Width);
+			SmartDashboard.putNumber("PowerCellPixy Height Value: " + i, packet1[i - 1].Height);
+			SmartDashboard.putString("PowerCellPixy Error: " + i, "False");
 		}
 	}
 
@@ -80,7 +80,7 @@ public class Vision extends Subsystem {
 	// Get blocks that represent the vision tape on either side of the peg. This
 	// can return 0,1, or 2 blocks depending what is found in a frame.
 	public PixyPacket[] getPegPosition() {
-		PixyPacket[] blocks = PowerPixy.readBlocks();
+		PixyPacket[] blocks = PowerCellPixy.readBlocks();
 		SmartDashboard.putBoolean("Peg Blocks Array is null", blocks == null);
 		if (blocks == null)
 			return null;
