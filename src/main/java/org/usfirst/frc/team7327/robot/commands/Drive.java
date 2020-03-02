@@ -51,7 +51,7 @@ public class Drive extends Command {
     if( oi.AButtonDown(1)){ 
       x = oi.LimelightTx(); if(x >= -3 && x <= 3){ steering_adjust = 0; }else{ steering_adjust = SteerP*-x; } 
       finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1),steering_adjust))-90; directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(1)))/2; 
-    }else if(oi.LeftMag(1) >= .2){ finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1), oi.LeftX(1))) - Robot.NavAngle(); directMag = speedThrottle*oi.LeftMag(1); }
+    }else if(oi.LeftMag(1) >= .2){ finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1), oi.LeftX(1))) - Robot.NavAngle()-90; directMag = speedThrottle*oi.LeftMag(1); }
     else if(oi.RightBumperDown(1)) { finalAngle = 0; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 180; directMag = .05; }
     else if(oi.LeftTrigger(1) > .1) { finalAngle = 90; directMag = .125; } else if(oi.RightTrigger(1) > .1) {finalAngle = 270; directMag = .125; }
     else { directMag = 0; }
@@ -76,9 +76,11 @@ public class Drive extends Command {
 
     if(oi.YButton(2)){Drivetrain.setPiston(Value.kForward);}
     else if(oi.AButton(2)){Drivetrain.setPiston(Value.kReverse);}
-    Drivetrain.setIntakeSpeed(0.25*oi.RightY(2));
-    if(oi.RightBumperDown(2)){Drivetrain.BallTransition(0.5);}
-    else if(oi.LeftBumperDown(2)){Drivetrain.BallTransition(-0.3);}
+    Drivetrain.setIntakeSpeed(0.5*oi.RightY(2));
+    if(oi.RightBumperDown(2)){Drivetrain.setFunnelSpeed(1);}
+    else if(oi.LeftBumperDown(2)){Drivetrain.setFunnelSpeed(-.7);}
+    else{Drivetrain.setFunnelSpeed(0);}
+    Drivetrain.setBallSpeed(oi.LeftY(2));
     if(oi.StartButton(2)){Drivetrain.ResetElevator();}
     // Drivetrain.setRawElevator(elvthrottle*(-oi.LeftTrigger(1) + oi.RightTrigger(1)));
 
