@@ -71,6 +71,7 @@ public class Drive extends Command {
 
     Drivetrain.TopSpin(k*oi.RightTrigger(2));
     Drivetrain.BotSpin(p*oi.LeftTrigger(2));
+    if(oi.XButtonDown(2)){Drivetrain.TopSpin(.35); Drivetrain.BotSpin(.45);}
     SmartDashboard.putNumber("TopThrottle", k);
     SmartDashboard.putNumber("BotThrottle", p);
 

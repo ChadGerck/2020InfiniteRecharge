@@ -45,9 +45,10 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("FarL", FarL); m_chooser.addOption("Left", Left); m_chooser.addOption("Mid", Mid); m_chooser.addOption("Front", Front);  m_chooser.addOption("FarR", FarR);
     SmartDashboard.putData("Auto choices", m_chooser);
     
-    m_chosen.addOption("Default", Default); m_chosen.addOption("P2", P2);
+    m_chosen.setDefaultOption("Default", Default); m_chosen.addOption("P2", P2);
     m_chosen.addOption("P3", P3); m_chosen.addOption("HailMary", HailMary);
     m_chosen.addOption("Defense", Defense);
+    SmartDashboard.putData("the Auto: ", m_chosen);
   }
   @Override public void robotPeriodic() { 
     double dist;

@@ -1,5 +1,8 @@
 package org.usfirst.frc.team7327.robot;
 
+import org.usfirst.frc.team7327.robot.commands.Drive;
+import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
+
 // import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
 // import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -49,7 +52,12 @@ public class Autonomous {
     public static void Auto6(){}
     public static void Auto7(){}
     public static void Auto8(){}
-    public static void Auto9(){}
+    public static void Auto9(){
+        Drivetrain.TopSpin(.35);
+        Drivetrain.BotSpin(.45);
+        Robot.SleepFor(6);
+        Drivetrain.setBallSpeed(-.25);
+    }
     public static void Auto10(){}
     public static void Auto11(){}
     public static void Auto12(){}
