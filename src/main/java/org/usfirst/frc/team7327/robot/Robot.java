@@ -45,9 +45,10 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("FarL", FarL); m_chooser.addOption("Left", Left); m_chooser.addOption("Mid", Mid); m_chooser.addOption("Front", Front);  m_chooser.addOption("FarR", FarR);
     SmartDashboard.putData("Auto choices", m_chooser);
     
-    m_chosen.addOption("Default", Default); m_chosen.addOption("P2", P2);
+    m_chosen.setDefaultOption("Default", Default); m_chosen.addOption("P2", P2);
     m_chosen.addOption("P3", P3); m_chosen.addOption("HailMary", HailMary);
     m_chosen.addOption("Defense", Defense);
+    SmartDashboard.putData("the Auto: ", m_chosen);
   }
   @Override public void robotPeriodic() { 
     double dist;
@@ -59,6 +60,7 @@ public class Robot extends TimedRobot {
   @Override public void teleopInit() { 
     swerve.setALLBrake(false); 
     swerve.OdoReset(); 
+    nav.reset();
   /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/
  }
   @Override public void autonomousInit() { 
@@ -146,7 +148,7 @@ public class Robot extends TimedRobot {
   }
   @Override public void testPeriodic() {}
   public static double NavAngle() {return NavAngle(0);}
-  public static double NavAngle(double add){double angle = Robot.nav.getAngle()-90+add;
+  public static double NavAngle(double add){double angle = Robot.nav.getAngle()+add;
     while(angle>180)angle-=360;while(angle<-180)angle+=360;return angle; 
   }
 }
