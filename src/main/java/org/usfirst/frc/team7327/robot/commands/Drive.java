@@ -21,10 +21,7 @@ public class Drive extends Command {
   //ShooterThrottles
   double k = 0.5;
   double p = 0.5;
- 
-
-  //private ShuffleboardTab tab = Shuffleboard.getTab("RocketAngle");
-  //private NetworkTableEntry angleR = tab.add("RocketAngle", rocketAngle).getEntry();
+  double e = 3;
   //DoubleSolenoid.Value Pincher, Extendor, pullout = Value.kOff; 
 
   protected void execute() {
@@ -32,7 +29,7 @@ public class Drive extends Command {
     if(Robot.oi.BackButton(1)){ if(oi.LEDValue() == 1 || oi.LEDValue() == 0){ oi.LEDOn(); } else if(oi.LEDValue() == 3){ oi.LEDOff(); }}
     //if(Robot.oi.BackButton(2)){ if(rocketAngle){ rocketAngle = false;} else{ rocketAngle = true; } angleR.setBoolean(rocketAngle); }
 
-    if(oi.RSClickDown(1)){if(evadeMode){evadeMode=false;}else{evadeMode=true;}}
+    if(oi.RSClickDown(1)){evadeMode=false;} else{evadeMode=true;}
     if(oi.LSClickDown(1)){speedThrottle = 1;}
     else{speedThrottle = 0.5;}
 
@@ -68,6 +65,11 @@ public class Drive extends Command {
     else if(oi.DpadDown(2)){k= k-0.05;}
     if(oi.DpadLeft(2)){p = p-0.05;}
     else if(oi.DpadRight(2)){p = p+0.05;}
+
+    if(oi.BButton(2)){e = e+3; Drivetrain.ServoMotor.setAngle(e);Drivetrain.ServoMotor1.setAngle(e);}
+      else{Drivetrain.ServoMotor.setAngle(0);Drivetrain.ServoMotor1.setAngle(0);}
+    SmartDashboard.putNumber("ServoDegrees1", Drivetrain.ServoMotor1.getAngle());
+    SmartDashboard.putNumber("ServoDegrees", Drivetrain.ServoMotor.getAngle());
 
     Drivetrain.TopSpin(k*oi.RightTrigger(2));
     Drivetrain.BotSpin(p*oi.LeftTrigger(2));

@@ -2,6 +2,7 @@ package org.usfirst.frc.team7327.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -10,6 +11,8 @@ import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.ctre.phoenix.CANifier.PWMChannel;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -44,6 +47,7 @@ public class Drivetrain extends Subsystem {
   public static TalonFX ShooterMotor1, ShooterMotor2;
   public static CANSparkMax BallHandlerMotor;
   public static DoubleSolenoid Extendor; 
+  public static Servo ServoMotor, ServoMotor1;
    public Drivetrain(){
     ShooterMotor1 = new TalonFX(9);
     ShooterMotor2 = new TalonFX(10);
@@ -54,6 +58,8 @@ public class Drivetrain extends Subsystem {
     Elevator  = new ElevatorModule(15,16); 
     turning = new TurnModule(); 
     Extendor = new DoubleSolenoid(6,7);
+    ServoMotor = new Servo(0);
+    ServoMotor1 = new Servo(1);
    }
   @Override public void initDefaultCommand() { setDefaultCommand(new Drive()); }
   public static void setModule(String loc,double degrees,double power){
@@ -95,6 +101,9 @@ public class Drivetrain extends Subsystem {
   public static void setElevatorPosition(double position){ Elevator.setPosition(position); }
 	public static void ElevOn(boolean On) { Elevator.setOn(On); }
   public static void ResetElevator() { Elevator.ElevatorReset(); }
+  public static void ServoMotor(double degrees){ServoMotor.setAngle(degrees);}
+  public static void ServoMotor1(double degrees){ServoMotor1.setAngle(degrees);}
+
 	// public double getLiftVelocity() { return Elevator.getLiftVelocity(); }
 	// public double getLiftPosition() { return Elevator.getLiftPosition(); }
   public void updateDashboard(){ SmartDashboard.putNumber("ODOX", ODOX()); SmartDashboard.putNumber("ODOY", ODOY()); }
