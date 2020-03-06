@@ -30,8 +30,8 @@ public class Drive extends Command {
     //if(Robot.oi.BackButton(2)){ if(rocketAngle){ rocketAngle = false;} else{ rocketAngle = true; } angleR.setBoolean(rocketAngle); }
 
     if(oi.RSClickDown(1)){evadeMode=false;} else{evadeMode=true;}
-    if(oi.LSClickDown(1)){speedThrottle = 1;}
-    else{speedThrottle = 0.5;}
+    if(oi.LSClickDown(1)){speedThrottle = 1;}else{speedThrottle = 0.5;}
+    if(oi.YButtonDown(1)){speedThrottle = .25;}else{speedThrottle = 0.5;}
 
     SmartDashboard.putBoolean("evademode: ", evadeMode); 
     //SmartDashboard.putNumber("NavAngle: ", Robot.NavAngle()); 
