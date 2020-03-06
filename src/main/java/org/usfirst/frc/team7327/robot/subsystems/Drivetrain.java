@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.ctre.phoenix.CANifier.PWMChannel;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -47,7 +46,7 @@ public class Drivetrain extends Subsystem {
   public static TalonFX ShooterMotor1, ShooterMotor2;
   public static CANSparkMax BallHandlerMotor;
   public static DoubleSolenoid Extendor; 
-  public static Servo ServoMotor, ServoMotor1;
+  public static Servo ServoMotor;
    public Drivetrain(){
     ShooterMotor1 = new TalonFX(9);
     ShooterMotor2 = new TalonFX(10);
@@ -59,7 +58,7 @@ public class Drivetrain extends Subsystem {
     turning = new TurnModule(); 
     Extendor = new DoubleSolenoid(6,7);
     ServoMotor = new Servo(0);
-    ServoMotor1 = new Servo(1);
+    
    }
   @Override public void initDefaultCommand() { setDefaultCommand(new Drive()); }
   public static void setModule(String loc,double degrees,double power){
@@ -102,7 +101,7 @@ public class Drivetrain extends Subsystem {
 	public static void ElevOn(boolean On) { Elevator.setOn(On); }
   public static void ResetElevator() { Elevator.ElevatorReset(); }
   public static void ServoMotor(double degrees){ServoMotor.setAngle(degrees);}
-  public static void ServoMotor1(double degrees){ServoMotor1.setAngle(degrees);}
+  
 
 	// public double getLiftVelocity() { return Elevator.getLiftVelocity(); }
 	// public double getLiftPosition() { return Elevator.getLiftPosition(); }

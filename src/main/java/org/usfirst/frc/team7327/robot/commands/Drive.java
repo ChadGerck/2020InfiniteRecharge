@@ -66,9 +66,8 @@ public class Drive extends Command {
     if(oi.DpadLeft(2)){p = p-0.05;}
     else if(oi.DpadRight(2)){p = p+0.05;}
 
-    if(oi.BButton(2)){e = e+3; Drivetrain.ServoMotor.setAngle(e);Drivetrain.ServoMotor1.setAngle(e);}
-      else{Drivetrain.ServoMotor.setAngle(0);Drivetrain.ServoMotor1.setAngle(0);}
-    SmartDashboard.putNumber("ServoDegrees1", Drivetrain.ServoMotor1.getAngle());
+    if(oi.BButton(2)){e = e+3; Drivetrain.ServoMotor.setAngle(e);}
+      else{Drivetrain.ServoMotor.setAngle(0);}
     SmartDashboard.putNumber("ServoDegrees", Drivetrain.ServoMotor.getAngle());
 
     Drivetrain.TopSpin(k*oi.RightTrigger(2));
