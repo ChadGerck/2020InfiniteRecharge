@@ -29,7 +29,7 @@ public class Drive extends Command {
     if(Robot.oi.BackButton(1)){ if(oi.LEDValue() == 1 || oi.LEDValue() == 0){ oi.LEDOn(); } else if(oi.LEDValue() == 3){ oi.LEDOff(); }}
     //if(Robot.oi.BackButton(2)){ if(rocketAngle){ rocketAngle = false;} else{ rocketAngle = true; } angleR.setBoolean(rocketAngle); }
 
-    if(oi.RSClickDown(1)){evadeMode=false;} else{evadeMode=true;}
+    if(oi.RSClickDown(1)){evadeMode=true;} else{evadeMode=false;}
     if(oi.LSClickDown(1)){speedThrottle = 1;}else{speedThrottle = 0.5;}
     if(oi.YButtonDown(1)){speedThrottle = .25;}else{speedThrottle = 0.5;}
 
@@ -48,10 +48,12 @@ public class Drive extends Command {
     if( oi.AButtonDown(1)){ 
       x = oi.LimelightTx(); if(x >= -3 && x <= 3){ steering_adjust = 0; }else{ steering_adjust = SteerP*-x; } 
       finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1),steering_adjust))-90; directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(1)))/2; 
-    }else if(oi.LeftMag(1) >= .2){ finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1), oi.LeftX(1))) - Robot.NavAngle()-90; directMag = speedThrottle*oi.LeftMag(1); }
-    else if(oi.RightBumperDown(1)) { finalAngle = 0; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 180; directMag = .05; }
-    else if(oi.LeftTrigger(1) > .1) { finalAngle = 90; directMag = .125; } else if(oi.RightTrigger(1) > .1) {finalAngle = 270; directMag = .125; }
-    else { directMag = 0; }
+      oi.LEDOn();
+    } 
+    else if(oi.LeftMag(1) >= .2){ oi.LEDOff(); finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1), oi.LeftX(1))) - Robot.NavAngle()-90; directMag = speedThrottle*oi.LeftMag(1); }
+    else if(oi.RightBumperDown(1)) { oi.LEDOff(); finalAngle = 0; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 180; directMag = .05; }
+    else if(oi.LeftTrigger(1) > .1) { oi.LEDOff(); finalAngle = 90; directMag = .125; } else if(oi.RightTrigger(1) > .1) {finalAngle = 270; directMag = .125; }
+    else { oi.LEDOff(); directMag = 0; }
 
     if(oi.LeftBumperDown(1) || oi.RightBumperDown(1) || oi.RightTrigger(1) > .1 || oi.LeftTrigger(1) > .1 || oi.LeftMag(1) >= 0.2 || oi.RightMag(1) > 0.3 || oi.AButtonDown(1) || oi.XButtonDown(1) || oi.YButtonDown(1) || oi.BButtonDown(1)) {
       fixRotation = false; 
@@ -66,8 +68,8 @@ public class Drive extends Command {
     if(oi.DpadLeft(2)){p = p-0.05;}
     else if(oi.DpadRight(2)){p = p+0.05;}
 
-    if(oi.BButton(2)){e = e+3; Drivetrain.ServoMotor.setAngle(e);}
-      else{Drivetrain.ServoMotor.setAngle(0);}
+    // if(oi.BButton(2)){e = e+3; Drivetrain.ServoMotor.setAngle(e);}
+    Drivetrain.ServoMotor.setAngle(0);
     SmartDashboard.putNumber("ServoDegrees", Drivetrain.ServoMotor.getAngle());
 
     Drivetrain.TopSpin(k*oi.RightTrigger(2));
@@ -84,7 +86,7 @@ public class Drive extends Command {
     else{Drivetrain.setFunnelSpeed(0);}
     Drivetrain.setBallSpeed(oi.LeftY(2));
     if(oi.StartButton(2)){Drivetrain.ResetElevator();}
-    // Drivetrain.setRawElevator(elvthrottle*(-oi.LeftTrigger(1) + oi.RightTrigger(1)));
+    //Drivetrain.setRawElevator(elvthrottle*(-oi.LeftTrigger(2) + oi.RightTrigger(2)));
 
     
     if(oi.StartButton(1)) { Robot.nav.reset(); } //if(oi.StartButton(2)) { Robot.swerve.ResetElevator(); }

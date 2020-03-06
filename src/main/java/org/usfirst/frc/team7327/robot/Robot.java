@@ -60,10 +60,10 @@ public class Robot extends TimedRobot {
   @Override public void teleopInit() { 
     swerve.setALLBrake(false); 
     swerve.OdoReset(); 
-    nav.reset();
   /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/
  }
   @Override public void autonomousInit() { 
+    nav.reset();
     swerve.setALLBrake(true); 
 		myTimer.reset();
 		myTimer.start();

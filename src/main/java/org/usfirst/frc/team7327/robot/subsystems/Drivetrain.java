@@ -30,8 +30,8 @@ public class Drivetrain extends Subsystem {
   private static final Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
   private static final Translation2d m_backRightLocation = new Translation2d(-0.381, -0.381);
 
-  public static Potentiometer abeFL = new AnalogPotentiometer(0, 360, 69), abeFR = new AnalogPotentiometer(1, 360, 274), 
-                              abeBL = new AnalogPotentiometer(2, 360, 397), abeBR = new AnalogPotentiometer(3, 360, -17); 
+  public static Potentiometer abeFL = new AnalogPotentiometer(0, 360, 69), abeFR = new AnalogPotentiometer(1, 360, 279), 
+                              abeBL = new AnalogPotentiometer(2, 360, 460), abeBR = new AnalogPotentiometer(3, 360, -17); 
 
   static double kSwerveP = .8, kSwerveD = .1; 
   private static SwerveModule 

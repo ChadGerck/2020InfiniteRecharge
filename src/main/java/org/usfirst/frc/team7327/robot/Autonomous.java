@@ -53,8 +53,10 @@ public class Autonomous {
     public static void Auto9(){
         Drivetrain.TopSpin(.35);
         Drivetrain.BotSpin(.45);
-        Robot.SleepFor(6);
+        Robot.SleepFor(4);
         Drivetrain.setBallSpeed(-.25);
+        Robot.SleepFor(4); 
+        Robot.MoveTo(0, -.7, 180);
     }
     public static void Auto10(){}
     public static void Auto11(){}
