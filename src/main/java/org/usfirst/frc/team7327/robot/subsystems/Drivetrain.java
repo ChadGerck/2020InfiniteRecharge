@@ -59,7 +59,7 @@ public class Drivetrain extends Subsystem {
     Extendor = new DoubleSolenoid(6,7);
     ServoMotor = new Servo(0);
     
-   }
+  }
   @Override public void initDefaultCommand() { setDefaultCommand(new Drive()); }
   public static void setModule(String loc,double degrees,double power){
     switch(loc){case "FL":moduleFL.set(degrees,power);break; case "FR":moduleFR.set(degrees,power);break;

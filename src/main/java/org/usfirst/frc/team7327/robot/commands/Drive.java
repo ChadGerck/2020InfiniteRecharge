@@ -21,7 +21,7 @@ public class Drive extends Command {
   //ShooterThrottles
   double k = 0.5;
   double p = 0.5;
-  double e = 3;
+  double e = 270;
   //DoubleSolenoid.Value Pincher, Extendor, pullout = Value.kOff; 
 
   protected void execute() {
@@ -63,13 +63,9 @@ public class Drive extends Command {
     SmartDashboard.putNumber ("Angle", Robot.NavAngle());
     
     //PLAYER TWO CONTROLS
-    if(oi.DpadUp(2)){k = k+0.05;}
-    else if(oi.DpadDown(2)){k= k-0.05;}
-    if(oi.DpadLeft(2)){p = p-0.05;}
-    else if(oi.DpadRight(2)){p = p+0.05;}
-
-    // if(oi.BButton(2)){e = e+3; Drivetrain.ServoMotor.setAngle(e);}
-    Drivetrain.ServoMotor.setAngle(0);
+    if(oi.DpadUp(2)){e= 270;}
+    else if(oi.DpadDown(2)){e=102;}
+    Drivetrain.ServoMotor.setAngle(e);
     SmartDashboard.putNumber("ServoDegrees", Drivetrain.ServoMotor.getAngle());
 
     Drivetrain.TopSpin(k*oi.RightTrigger(2));
@@ -80,13 +76,14 @@ public class Drive extends Command {
 
     if(oi.YButton(2)){Drivetrain.setPiston(Value.kForward);}
     else if(oi.AButton(2)){Drivetrain.setPiston(Value.kReverse);}
-    Drivetrain.setIntakeSpeed(0.5*oi.RightY(2));
-    if(oi.RightBumperDown(2)){Drivetrain.setFunnelSpeed(1);}
-    else if(oi.LeftBumperDown(2)){Drivetrain.setFunnelSpeed(-.7);}
+    Drivetrain.setIntakeSpeed(0.65*oi.RightY(2));
+    if(oi.BButtonDown(2)){Drivetrain.setFunnelSpeed(1);}
     else{Drivetrain.setFunnelSpeed(0);}
     Drivetrain.setBallSpeed(oi.LeftY(2));
     if(oi.StartButton(2)){Drivetrain.ResetElevator();}
-    //Drivetrain.setRawElevator(elvthrottle*(-oi.LeftTrigger(2) + oi.RightTrigger(2)));
+    if(oi.LeftBumperDown(2)){ Drivetrain.setRawElevator(1); }
+    else if(oi.RightBumperDown(2)){ Drivetrain.setRawElevator(-1);}
+    else{ Drivetrain.setRawElevator(0); }
 
     
     if(oi.StartButton(1)) { Robot.nav.reset(); } //if(oi.StartButton(2)) { Robot.swerve.ResetElevator(); }

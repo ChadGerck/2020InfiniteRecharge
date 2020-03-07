@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import com.kauailabs.navx.frc.AHRS;
 import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
-import edu.wpi.first.cameraserver.CameraServer;
+//import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.I2C;
@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
     m_LIDAR.setSemiPeriodMode(true); //Set the counter to period measurement
     m_LIDAR.reset();
     nav = new AHRS(I2C.Port.kMXP); 
-    CameraServer.getInstance().startAutomaticCapture();
+    //CameraServer.getInstance().startAutomaticCapture();
     c0.setClosedLoopControl(true); 
 
     m_chooser.setDefaultOption("FarL", FarL); m_chooser.addOption("Left", Left); m_chooser.addOption("Mid", Mid); m_chooser.addOption("Front", Front);  m_chooser.addOption("FarR", FarR);
@@ -61,6 +61,7 @@ public class Robot extends TimedRobot {
     swerve.setALLBrake(false); 
     swerve.OdoReset(); 
   /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/
+    nav.reset();
  }
   @Override public void autonomousInit() { 
     nav.reset();
