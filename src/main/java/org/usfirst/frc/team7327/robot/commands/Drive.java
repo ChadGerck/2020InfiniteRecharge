@@ -39,7 +39,7 @@ public class Drive extends Command {
     else if(oi.RightMag(1) > .7  || oi.XButtonDown(1) || oi.YButtonDown(1) || oi.BButtonDown(1) || oi.LeftTrigger(1) > .1 || oi.RightTrigger(1) > .1){
       if(oi.RightMag(1) > .7) { rightArc = -oi.RightArc(1); }
       else if(oi.XButtonDown(1) && rocketAngle) { rightArc = 135; } else if(oi.XButtonDown(1) && !rocketAngle){ rightArc = 225; }
-      else if(oi.YButtonDown(1) && rocketAngle) { rightArc = 45;  } else if(oi.YButtonDown(1) && !rocketAngle){ rightArc = 315; }
+      //else if(oi.YButtonDown(1) && rocketAngle) { rightArc = 45;  } else if(oi.YButtonDown(1) && !rocketAngle){ rightArc = 315; }
       else if(oi.BButtonDown(1)){ rightArc = 0; }
       try { Robot.swerve.turning.setYaw(rightArc + Robot.NavAngle());} catch (Exception e) {}
       rotMag = Robot.swerve.turning.getPIDOutput();
@@ -51,7 +51,7 @@ public class Drive extends Command {
       oi.LEDOn();
     } 
     else if(oi.LeftMag(1) >= .2){ oi.LEDOff(); finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1), oi.LeftX(1))) - Robot.NavAngle()-90; directMag = speedThrottle*oi.LeftMag(1); }
-    else if(oi.RightBumperDown(1)) { oi.LEDOff(); finalAngle = 0; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 180; directMag = .05; }
+    else if(oi.RightBumperDown(1)) { oi.LEDOff(); finalAngle = 90; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 270; directMag = .05; }
     else if(oi.LeftTrigger(1) > .1) { oi.LEDOff(); finalAngle = 90; directMag = .125; } else if(oi.RightTrigger(1) > .1) {finalAngle = 270; directMag = .125; }
     else { oi.LEDOff(); directMag = 0; }
 
@@ -70,13 +70,13 @@ public class Drive extends Command {
 
     Drivetrain.TopSpin(k*oi.RightTrigger(2));
     Drivetrain.BotSpin(p*oi.LeftTrigger(2));
-    if(oi.XButtonDown(2)){Drivetrain.TopSpin(.35); Drivetrain.BotSpin(.45);}
+    if(oi.XButtonDown(2)){Drivetrain.TopSpin(.315); Drivetrain.BotSpin(.315);}
     SmartDashboard.putNumber("TopThrottle", k);
     SmartDashboard.putNumber("BotThrottle", p);
 
     if(oi.YButton(2)){Drivetrain.setPiston(Value.kForward);}
     else if(oi.AButton(2)){Drivetrain.setPiston(Value.kReverse);}
-    Drivetrain.setIntakeSpeed(0.65*oi.RightY(2));
+    Drivetrain.setIntakeSpeed(0.5*oi.RightY(2));
     if(oi.BButtonDown(2)){Drivetrain.setFunnelSpeed(1);}
     else{Drivetrain.setFunnelSpeed(0);}
     Drivetrain.setBallSpeed(oi.LeftY(2));
@@ -88,13 +88,6 @@ public class Drive extends Command {
     
     if(oi.StartButton(1)) { Robot.nav.reset(); } //if(oi.StartButton(2)) { Robot.swerve.ResetElevator(); }
     // ElevatorPositions.MoveElevators();
-
-    // if(oi.XButton(2)){ Pincher = Value.kForward; } else if(oi.BButton(2)){ Pincher = Value.kReverse; }
-    // else { Pincher = Value.kOff; } Robot.swerve.setPincher(Pincher);
-    // if(oi.YButton(2)){Extendor = Value.kForward; } else if(oi.AButton(2)){Extendor = Value.kReverse; }
-    // else { Extendor = Value.kOff; } Robot.swerve.setExtendor(Extendor);
-    // if(oi.LeftY(2) > .7){ pullout = Value.kForward; } else if(oi.LeftY(2) < -.7){ pullout = Value.kReverse; }
-    // else { pullout = Value.kOff; } Robot.swerve.setPullout(pullout);
 
   }
   protected boolean isFinished() { return false;}

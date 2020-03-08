@@ -3,7 +3,7 @@ import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
 // import org.usfirst.frc.team7327.robot.subsystems.Drivetrain;
 
-// import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 public class Autonomous {    
@@ -20,7 +20,6 @@ public class Autonomous {
         Robot.SleepFor(2);
         Robot.MoveTo(0, 0, 0);
         Robot.LimeAlign();
-        
     }   
 //use -180 to 180; ie, 270 = -90
     public static void Auto2(){
@@ -28,8 +27,7 @@ public class Autonomous {
         Robot.MoveTo(0,.20,90);
         Robot.MoveTo(0,0.25,180);
         Robot.MoveTo(-.25,0,-90);
-        Robot.LimeAlign();
-                                      
+        Robot.LimeAlign();                          
     }
 
     public static void Auto3(){
@@ -46,20 +44,38 @@ public class Autonomous {
         Robot.MoveTo(0,0,0); 
         Robot.LimeAlign();
     }
-    public static void Auto5(){}
+    public static void LeftRealign(){
+        Drivetrain.TopSpin(.5);
+        Drivetrain.BotSpin(.5);
+        Robot.SleepFor(5);
+        Drivetrain.setBallSpeed(-.25);
+        Robot.SleepFor(4); 
+        Robot.MoveTo(0, 1, -20);
+    }
     public static void Auto6(){}
     public static void Auto7(){}
     public static void Auto8(){}
-    public static void Auto9(){
-        Drivetrain.TopSpin(.35);
-        Drivetrain.BotSpin(.45);
+    public static void MidDefault(){
+        Drivetrain.TopSpin(.315);
+        Drivetrain.BotSpin(.315);
         Robot.SleepFor(5);
         Drivetrain.setBallSpeed(-.25);
         Robot.SleepFor(4); 
         Robot.MoveTo(0, 1, 180);
     }
     public static void Auto10(){}
-    public static void Auto11(){}
+    public static void MidRight2Balls(){
+        Drivetrain.TopSpin(.315);
+        Drivetrain.BotSpin(.315);
+        Robot.SleepFor(5);
+        Drivetrain.setBallSpeed(-.25);
+        Robot.SleepFor(4); 
+        Robot.MoveTo(0,-2.6,119.3);
+        Drivetrain.setIntakeMotors(0.5, DoubleSolenoid.Value.kForward);
+        Robot.MoveTo(-.66,-2.87,119.3);
+        Robot.MoveTo(-.5,-3.26,119.3); 
+        Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
+    }
     public static void Auto12(){}
     public static void Auto13(){}
     public static void Auto14(){}
@@ -76,6 +92,9 @@ public class Autonomous {
     public static void Auto25(){}
     public static void Auto26(){}
 
+    public static void AutoTest(){
+        Robot.MoveTo(0, 1, 0);
+    }
     // public static void BlueTrench5(){
     //     Robot.MoveTo(0,-2.223,0); //tune middle alue as needed
     //     Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);

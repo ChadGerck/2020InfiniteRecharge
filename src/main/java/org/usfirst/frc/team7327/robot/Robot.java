@@ -39,6 +39,8 @@ public class Robot extends TimedRobot {
     m_LIDAR.setSemiPeriodMode(true); //Set the counter to period measurement
     m_LIDAR.reset();
     nav = new AHRS(I2C.Port.kMXP); 
+    
+    nav.reset();
     //CameraServer.getInstance().startAutomaticCapture();
     c0.setClosedLoopControl(true); 
 
@@ -61,10 +63,8 @@ public class Robot extends TimedRobot {
     swerve.setALLBrake(false); 
     swerve.OdoReset(); 
   /*swerve.SetElevatorStatus(); swerve.ConfigElevator();*/
-    nav.reset();
  }
   @Override public void autonomousInit() { 
-    nav.reset();
     swerve.setALLBrake(true); 
 		myTimer.reset();
 		myTimer.start();
@@ -80,14 +80,14 @@ public class Robot extends TimedRobot {
       } break; 
       case "Left": 
       switch(m_chosen.getSelected()){
-        case "Default": Autonomous.Auto5(); break; case "Trench": Autonomous.Auto6(); break; 
+        case "Default": Autonomous.LeftRealign(); break; case "Trench": Autonomous.Auto6(); break; 
         case "P3": Autonomous.Auto7(); break; case "HailMary": Autonomous.Auto8(); break; 
         case "Defense": Autonomous.Auto22(); break;   
       } break; 
       case "Mid":
       switch(m_chosen.getSelected()){
-        case "Default": Autonomous.Auto9(); break; case "Trench": Autonomous.Auto10(); break; 
-        case "P3": Autonomous.Auto11(); break; case "HailMary": Autonomous.Auto12(); break;  
+        case "Default": Autonomous.MidDefault(); break; case "Trench": Autonomous.Auto10(); break; 
+        case "P3": Autonomous.MidRight2Balls(); break; case "HailMary": Autonomous.Auto12(); break;  
         case "Defense": Autonomous.Auto23(); break;  
       } break; 
       case "Front":
@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
       switch(m_chosen.getSelected()){
         case "Default": Autonomous.Auto17(); break; case "Trench": Autonomous.Auto18(); break; 
         case "P3": Autonomous.Auto19(); break; case "HailMary": Autonomous.Auto20(); break;   
-        case "Defense": Autonomous.Auto25(); break; 
+        case "Defense": Autonomous.AutoTest(); break; 
       } break; 
     }
 
@@ -115,7 +115,7 @@ public class Robot extends TimedRobot {
     }while(x<-3 || x > 3);
   }
   
-  public static void MoveTo(double x, double y, double angle){
+  public static void MoveTo(double y, double x, double angle){
     y = -y; 
     angle = -angle; 
     finalAngle = 0; 
