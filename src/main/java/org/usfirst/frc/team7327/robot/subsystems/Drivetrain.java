@@ -58,6 +58,7 @@ public class Drivetrain extends Subsystem {
     turning = new TurnModule(); 
     Extendor = new DoubleSolenoid(6,7);
     ServoMotor = new Servo(0);
+    ServoMotor.setAngle(270);
   }
   @Override public void initDefaultCommand() { setDefaultCommand(new Drive()); }
   public static void setModule(String loc,double degrees,double power){
