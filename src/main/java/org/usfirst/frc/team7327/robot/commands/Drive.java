@@ -1,5 +1,6 @@
 package org.usfirst.frc.team7327.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,6 +19,7 @@ public class Drive extends Command {
   boolean fixRotation, rocketAngle = true, evadeMode = false; 
   double speedThrottle = .25; 
   double elvthrottle = 0.3;
+  DoubleSolenoid.Value Piston = Value.kReverse; 
   //ShooterThrottles
   double k = 0.5;
   double p = 0.5;
@@ -30,8 +32,10 @@ public class Drive extends Command {
     //if(Robot.oi.BackButton(2)){ if(rocketAngle){ rocketAngle = false;} else{ rocketAngle = true; } angleR.setBoolean(rocketAngle); }
 
     if(oi.RSClickDown(1)){evadeMode=true;} else{evadeMode=false;}
-    if(oi.LSClickDown(1)){speedThrottle = 1;}else{speedThrottle = 0.5;}
-    if(oi.YButtonDown(1)){speedThrottle = .25;}else{speedThrottle = 0.5;}
+
+    if(oi.LSClickDown(1)){speedThrottle = 1;}
+    else if(oi.YButtonDown(1)){speedThrottle = .25;} 
+    else{speedThrottle = 0.5;}
 
     SmartDashboard.putBoolean("evademode: ", evadeMode); 
     //SmartDashboard.putNumber("NavAngle: ", Robot.NavAngle()); 
@@ -45,12 +49,12 @@ public class Drive extends Command {
       rotMag = Robot.swerve.turning.getPIDOutput();
     } else{ rotMag = 0; }
 
-    if( oi.AButtonDown(1)){ 
-      x = oi.LimelightTx(); if(x >= -3 && x <= 3){ steering_adjust = 0; }else{ steering_adjust = SteerP*-x; } 
-      finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1),steering_adjust))-90; directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(1)))/2; 
-      oi.LEDOn();
-    } 
-    else if(oi.LeftMag(1) >= .2){ oi.LEDOff(); finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1), oi.LeftX(1))) - Robot.NavAngle()-90; directMag = speedThrottle*oi.LeftMag(1); }
+    // if( oi.AButtonDown(1)){ 
+    //   x = oi.LimelightTx(); if(x >= -3 && x <= 3){ steering_adjust = 0; }else{ steering_adjust = SteerP*-x; } 
+    //   finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1),steering_adjust))-90; directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(1)))/2; 
+    //   oi.LEDOn();
+    // } 
+    if(oi.LeftMag(1) >= .2){ oi.LEDOff(); finalAngle = Math.toDegrees(Math.atan2(oi.LeftY(1), oi.LeftX(1))) - Robot.NavAngle()-90; directMag = speedThrottle*oi.LeftMag(1); }
     else if(oi.RightBumperDown(1)) { oi.LEDOff(); finalAngle = 90; directMag = .05; } else if(oi.LeftBumperDown(1)) { finalAngle = 270; directMag = .05; }
     else if(oi.LeftTrigger(1) > .1) { oi.LEDOff(); finalAngle = 90; directMag = .125; } else if(oi.RightTrigger(1) > .1) {finalAngle = 270; directMag = .125; }
     else { oi.LEDOff(); directMag = 0; }
@@ -74,8 +78,9 @@ public class Drive extends Command {
     SmartDashboard.putNumber("TopThrottle", k);
     SmartDashboard.putNumber("BotThrottle", p);
 
-    if(oi.YButton(2)){Drivetrain.setPiston(Value.kForward);}
-    else if(oi.AButton(2)){Drivetrain.setPiston(Value.kReverse);}
+    if(oi.YButton(2)){Piston = Value.kForward;}
+    else if(oi.AButton(2)){Piston = Value.kReverse;}
+    Drivetrain.setPiston(Piston);
     Drivetrain.setIntakeSpeed(0.5*oi.RightY(2));
     if(oi.BButtonDown(2)){Drivetrain.setFunnelSpeed(1);}
     else{Drivetrain.setFunnelSpeed(0);}

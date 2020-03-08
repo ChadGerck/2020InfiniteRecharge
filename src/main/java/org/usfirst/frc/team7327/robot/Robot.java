@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("FarL", FarL); m_chooser.addOption("Left", Left); m_chooser.addOption("Mid", Mid); m_chooser.addOption("Front", Front);  m_chooser.addOption("FarR", FarR);
     SmartDashboard.putData("Auto choices", m_chooser);
     
-    m_chosen.setDefaultOption("Default", Default); m_chosen.addOption("P2", P2);
+    m_chosen.setDefaultOption("Default", Default); m_chosen.addOption("PlayerStation", P2);
     m_chosen.addOption("P3", P3); m_chosen.addOption("HailMary", HailMary);
     m_chosen.addOption("Defense", Defense);
     SmartDashboard.putData("the Auto: ", m_chosen);
@@ -74,31 +74,31 @@ public class Robot extends TimedRobot {
     switch(m_chooser.getSelected()){
       case "FarL": 
       switch(m_chosen.getSelected()){
-        case "Default": Autonomous.Auto(); break; case "Trench": Autonomous.Auto2(); break; 
+        case "Default": Autonomous.Auto(); break; case "PlayerStation": Autonomous.Auto2(); break; 
         case "P3": Autonomous.Auto3(); break; case "HailMary": Autonomous.Auto4(); break;   
         case "Defense": Autonomous.Auto21(); break;   
       } break; 
       case "Left": 
       switch(m_chosen.getSelected()){
-        case "Default": Autonomous.LeftRealign(); break; case "Trench": Autonomous.Auto6(); break; 
+        case "Default": Autonomous.LeftRealign(); break; case "PlayerStation": Autonomous.Auto6(); break; 
         case "P3": Autonomous.Auto7(); break; case "HailMary": Autonomous.Auto8(); break; 
         case "Defense": Autonomous.Auto22(); break;   
       } break; 
       case "Mid":
       switch(m_chosen.getSelected()){
-        case "Default": Autonomous.MidDefault(); break; case "Trench": Autonomous.Auto10(); break; 
+        case "Default": Autonomous.MidDefault(); break; case "PlayerStation": Autonomous.MidPlayerStation(); break; 
         case "P3": Autonomous.MidRight2Balls(); break; case "HailMary": Autonomous.Auto12(); break;  
         case "Defense": Autonomous.Auto23(); break;  
       } break; 
       case "Front":
       switch(m_chosen.getSelected()){
-        case "Default": Autonomous.Auto13(); break; case "Trench": Autonomous.Auto14(); break; 
+        case "Default": Autonomous.Auto13(); break; case "PlayerStation": Autonomous.Auto14(); break; 
         case "P3": Autonomous.Auto15(); break; case "HailMary": Autonomous.Auto16(); break;   
         case "Defense": Autonomous.Auto24(); break; 
       } break; 
       case "FarR":
       switch(m_chosen.getSelected()){
-        case "Default": Autonomous.Auto17(); break; case "Trench": Autonomous.Auto18(); break; 
+        case "Default": Autonomous.Auto17(); break; case "PlayerStation": Autonomous.Auto18(); break; 
         case "P3": Autonomous.Auto19(); break; case "HailMary": Autonomous.Auto20(); break;   
         case "Defense": Autonomous.AutoTest(); break; 
       } break; 

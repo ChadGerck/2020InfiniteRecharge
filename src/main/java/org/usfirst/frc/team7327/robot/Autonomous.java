@@ -63,7 +63,14 @@ public class Autonomous {
         Robot.SleepFor(4); 
         Robot.MoveTo(0, 1, 180);
     }
-    public static void Auto10(){}
+    public static void MidPlayerStation(){
+        Drivetrain.TopSpin(.315);
+        Drivetrain.BotSpin(.315);
+        Robot.SleepFor(5);
+        Drivetrain.setBallSpeed(-.25);
+        Robot.SleepFor(4); 
+        Robot.MoveTo(0, 6.5, 180);
+    }
     public static void MidRight2Balls(){
         Drivetrain.TopSpin(.315);
         Drivetrain.BotSpin(.315);
