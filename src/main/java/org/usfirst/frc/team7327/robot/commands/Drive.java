@@ -21,13 +21,17 @@ public class Drive extends Command {
   double elvthrottle = 0.3;
   DoubleSolenoid.Value Piston = Value.kReverse; 
   //ShooterThrottles
-  double k = 0.5;
-  double p = 0.5;
+  double k = 0.315;
   double e = 270;
   //DoubleSolenoid.Value Pincher, Extendor, pullout = Value.kOff; 
 
   protected void execute() {
 
+
+    
+    if(oi.BButtonDown(2)){ Drivetrain.setRawElevator(1); }
+    else if(oi.XButtonDown(2)){ Drivetrain.setRawElevator(-1);}
+    if(oi.BackButton(1)){Robot.MoveTo(0, 0, 0);}
     if(oi.RSClickDown(1)){evadeMode=true;} else{evadeMode=false;}
 
     if(oi.LSClickDown(1)){speedThrottle = 1;}
@@ -65,11 +69,14 @@ public class Drive extends Command {
     //PLAYER TWO CONTROLS
     SmartDashboard.putNumber("ServoDegrees", Drivetrain.ServoMotor.getAngle());
 
+    if(oi.BackButton(2)){Drivetrain.ServoMotor.setAngle(102);}
     Drivetrain.TopSpin(k*oi.RightTrigger(2));
-    Drivetrain.BotSpin(p*oi.LeftTrigger(2));
+    Drivetrain.BotSpin(k*oi.LeftTrigger(2));
+    if(oi.RightBumperDown(2)){k += .05; }
+    if(oi.LeftBumperDown(2)){k -= .05; }
     if(oi.XButtonDown(2)){Drivetrain.TopSpin(.315); Drivetrain.BotSpin(.315);}
-    SmartDashboard.putNumber("TopThrottle", k);
-    SmartDashboard.putNumber("BotThrottle", p);
+    else if(oi.BButtonDown(2)){Drivetrain.TopSpin(.1); Drivetrain.BotSpin(.1);}
+    SmartDashboard.putNumber("Throttle", k);
 
     if(oi.DpadUp(2)){Drivetrain.setFunnelSpeed(1);}
     else if(oi.DpadDown(2)){Drivetrain.setFunnelSpeed(-1);}
@@ -79,11 +86,8 @@ public class Drive extends Command {
     else if(oi.AButton(2)){Piston = Value.kReverse;}
     Drivetrain.setPiston(Piston);
     Drivetrain.setIntakeSpeed(0.5*oi.RightY(2));
-    if(oi.BButton(2)){Drivetrain.ServoMotor.setAngle(102);}
     Drivetrain.setBallSpeed(oi.LeftY(2));
     if(oi.StartButton(2)){Drivetrain.ResetElevator();}
-    if(oi.LeftBumperDown(2)){ Drivetrain.setRawElevator(1); }
-    else if(oi.RightBumperDown(2)){ Drivetrain.setRawElevator(-1);}
     else{ Drivetrain.setRawElevator(0); }
 
     
