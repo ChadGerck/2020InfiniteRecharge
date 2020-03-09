@@ -29,8 +29,10 @@ public class Drive extends Command {
 
 
     
-    if(oi.BButtonDown(2)){ Drivetrain.setRawElevator(1); }
-    else if(oi.XButtonDown(2)){ Drivetrain.setRawElevator(-1);}
+    if(oi.LeftBumperDown(2)){ Drivetrain.setRawElevator(0.25); }
+    else if(oi.RightBumperDown(2)){ Drivetrain.setRawElevator(-0.25);}
+    else{Drivetrain.setRawElevator(0);}
+
     if(oi.BackButton(1)){Robot.MoveTo(0, 0, 0);}
     if(oi.RSClickDown(1)){evadeMode=true;} else{evadeMode=false;}
 
@@ -41,7 +43,7 @@ public class Drive extends Command {
     SmartDashboard.putBoolean("evademode: ", evadeMode); 
     //SmartDashboard.putNumber("NavAngle: ", Robot.NavAngle()); 
     if(evadeMode && oi.RightMag(1)>.3){ rotMag = -0.5*oi.RightX(1); }
-    else if(oi.RightMag(1) > .7  || oi.BButtonDown(1) ){
+    else if(oi.RightMag(1) > .7 ){
       if(oi.RightMag(1) > .7) { rightArc = -oi.RightArc(1); }
       else if(oi.DpadUp(1)){ rightArc = 0; } else if(oi.DpadRight(1)){ rightArc = 90; }
       else if(oi.DpadDown(1)){ rightArc = 180; } else if(oi.DpadLeft(1)){ rightArc = 270; }
@@ -59,7 +61,7 @@ public class Drive extends Command {
     else if(oi.LeftTrigger(1) > .1) { oi.LEDOff(); finalAngle = 180; directMag = .05; } else if(oi.RightTrigger(1) > .1) {finalAngle = 0; directMag = .05; }
     else { oi.LEDOff(); directMag = 0; }
 
-    if(oi.LeftBumperDown(1) || oi.RightBumperDown(1) || oi.RightTrigger(1) > .1 || oi.LeftTrigger(1) > .1 || oi.LeftMag(1) >= 0.2 || oi.RightMag(1) > 0.3 || oi.AButtonDown(1) || oi.XButtonDown(1) || oi.YButtonDown(1) || oi.BButtonDown(1)) {
+    if(oi.LeftBumperDown(1) || oi.RightBumperDown(1) || oi.RightTrigger(1) > .1 || oi.LeftTrigger(1) > .1 || oi.LeftMag(1) >= 0.2 || oi.RightMag(1) > 0.3 || oi.AButtonDown(1)) {
       fixRotation = false; 
     } else{fixRotation = true;}
     SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
@@ -72,8 +74,6 @@ public class Drive extends Command {
     if(oi.BackButton(2)){Drivetrain.ServoMotor.setAngle(102);}
     Drivetrain.TopSpin(k*oi.RightTrigger(2));
     Drivetrain.BotSpin(k*oi.LeftTrigger(2));
-    if(oi.RightBumperDown(2)){k += .05; }
-    if(oi.LeftBumperDown(2)){k -= .05; }
     if(oi.XButtonDown(2)){Drivetrain.TopSpin(.315); Drivetrain.BotSpin(.315);}
     else if(oi.BButtonDown(2)){Drivetrain.TopSpin(.1); Drivetrain.BotSpin(.1);}
     SmartDashboard.putNumber("Throttle", k);
