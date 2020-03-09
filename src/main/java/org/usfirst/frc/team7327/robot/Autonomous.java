@@ -83,7 +83,14 @@ public class Autonomous {
         Robot.MoveTo(-.5,-3.26,119.3); 
         Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
     }
-    public static void Auto12(){}
+    public static void MidRight3Balls(){
+        Drivetrain.TopSpin(.315);
+        Drivetrain.BotSpin(.315);
+        Robot.SleepFor(5);
+        Drivetrain.setBallSpeed(-.25);
+        Robot.SleepFor(4); 
+        
+    }
     public static void Auto13(){}
     public static void Auto14(){}
     public static void Auto15(){}
