@@ -86,7 +86,7 @@ public class Drive extends Command {
     else if(oi.AButton(2)){Piston = Value.kReverse;}
     Drivetrain.setPiston(Piston);
     Drivetrain.setIntakeSpeed(0.5*oi.RightY(2));
-    Drivetrain.setBallSpeed(oi.LeftY(2));
+    Drivetrain.setBallSpeed(0.25*oi.LeftY(2));
     if(oi.StartButton(2)){Drivetrain.ResetElevator();}
     else{ Drivetrain.setRawElevator(0); }
 
