@@ -89,7 +89,7 @@ public class Autonomous {
         Robot.SleepFor(5);
         Drivetrain.setBallSpeed(-.25);
         Robot.SleepFor(4); 
-        
+
     }
     public static void Auto13(){}
     public static void Auto14(){}
@@ -107,8 +107,10 @@ public class Autonomous {
     public static void Auto26(){}
 
     public static void AutoTest(){
-        Robot.MoveTo(0, 1, 0);
+        Robot.MoveTo(1,1,0);
     }
+
+
     // public static void BlueTrench5(){
     //     Robot.MoveTo(0,-2.223,0); //tune middle alue as needed
     //     Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
@@ -138,7 +140,10 @@ public class Autonomous {
     //     Drivetrain.Shoot(0.5, 0.5);
 
     // }
-        
+
+                
+
+
 
     }
     
