@@ -106,7 +106,13 @@ public class Drivetrain extends Subsystem {
 
 	// public double getLiftVelocity() { return Elevator.getLiftVelocity(); }
 	// public double getLiftPosition() { return Elevator.getLiftPosition(); }
-  public void updateDashboard(){ SmartDashboard.putNumber("ODOX", ODOX()); SmartDashboard.putNumber("ODOY", ODOY()); }
+  public void updateDashboard(){ 
+    SmartDashboard.putNumber("ODOX", ODOX()); 
+    SmartDashboard.putNumber("ODOY", ODOY());
+    SmartDashboard.putNumber("FalconTopVelocity: ", ShooterMotor2.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("FalconTopVelocity: ", ShooterMotor1.getSelectedSensorVelocity());
+
+  }
   public static void updateOdometry() {
     m_odometry.update(
         getAngle(),
