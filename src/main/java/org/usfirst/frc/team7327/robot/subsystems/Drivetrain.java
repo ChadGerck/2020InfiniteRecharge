@@ -104,13 +104,14 @@ public class Drivetrain extends Subsystem {
   public static void ServoMotor(double degrees){ServoMotor.setAngle(degrees);}
   
 
+  
 	// public double getLiftVelocity() { return Elevator.getLiftVelocity(); }
 	// public double getLiftPosition() { return Elevator.getLiftPosition(); }
   public void updateDashboard(){ 
     SmartDashboard.putNumber("ODOX", ODOX()); 
     SmartDashboard.putNumber("ODOY", ODOY());
     SmartDashboard.putNumber("FalconTopVelocity: ", ShooterMotor2.getSelectedSensorVelocity());
-    SmartDashboard.putNumber("FalconTopVelocity: ", ShooterMotor1.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("FalconBotVelocity: ", ShooterMotor1.getSelectedSensorVelocity());
 
   }
   public static void updateOdometry() {
