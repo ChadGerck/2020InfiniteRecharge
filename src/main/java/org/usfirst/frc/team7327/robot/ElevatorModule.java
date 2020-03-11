@@ -27,8 +27,8 @@ public class ElevatorModule {
             if(on) { mLift1.set(PIDOutput); mLift2.set(PIDOutput); }
         });
         SteeringPID.startPeriodic(0.0001);
-		mLift1.setIdleMode(IdleMode.kCoast);
-		mLift2.setIdleMode(IdleMode.kCoast);
+		mLift1.setIdleMode(IdleMode.kBrake);
+		mLift2.setIdleMode(IdleMode.kBrake);
     }
     public double getError(){ return setPoint - getLiftPosition(); }
     public void setPosition(double position){ setPoint = position; }

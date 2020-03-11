@@ -30,7 +30,7 @@ public class Drivetrain extends Subsystem {
   private static final Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
   private static final Translation2d m_backRightLocation = new Translation2d(-0.381, -0.381);
 
-  public static Potentiometer abeFL = new AnalogPotentiometer(0, 360, 69), abeFR = new AnalogPotentiometer(1, 360, 279), 
+  public static Potentiometer abeFL = new AnalogPotentiometer(0, 360, 59), abeFR = new AnalogPotentiometer(1, 360, 279), 
                               abeBL = new AnalogPotentiometer(2, 360, 460), abeBR = new AnalogPotentiometer(3, 360, -17); 
 
   static double kSwerveP = .8, kSwerveD = .1; 
@@ -95,6 +95,7 @@ public class Drivetrain extends Subsystem {
   }
   public static void TopSpin(double shooterpower){ShooterMotor2.set(ControlMode.PercentOutput, shooterpower); }
   public static void BotSpin(double shooterpower){ShooterMotor1.set(ControlMode.PercentOutput, -shooterpower);}
+  public static void Shoot(double shooterpower){TopSpin(-shooterpower); BotSpin(-shooterpower);}
   public static void ControlPanel(double power){ ControlPanelMotor.set(ControlMode.PercentOutput, power); }
   public static void setRawElevator(double speed){ Elevator.setRawElev(speed); }
   public static void setElevatorPosition(double position){ Elevator.setPosition(position); }
@@ -113,8 +114,8 @@ public class Drivetrain extends Subsystem {
         moduleBL.getState(), moduleBR.getState()
     );
   }
-  public double ODOX() { return m_odometry.getPoseMeters().getTranslation().getX(); }
-  public double ODOY() { return m_odometry.getPoseMeters().getTranslation().getY(); }
+  public double ODOX() { return m_odometry.getPoseMeters().getTranslation().getY(); }
+  public double ODOY() { return m_odometry.getPoseMeters().getTranslation().getX(); }
   public void OdoReset(){ m_odometry.resetPosition(new Pose2d(new Translation2d(0.0,0.0), Rotation2d.fromDegrees(0)), Rotation2d.fromDegrees(0));}
 }
 

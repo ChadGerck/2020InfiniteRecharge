@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
   public static Timer myTimer = new Timer();
   public static final OI oi = new OI();
   private static final String 
-  FarL = "Far L", Left = "Left", Mid = "Mid", Front = "Front", FarR = "Far R",
+  FarL = "FarL", Left = "Left", Mid = "Mid", Front = "Front", FarR = "FarR",
   Default = "Default", P2 = "A1.2", P3 = "A1.3", HailMary = "HailMary", Defense = "Defense"; 
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private final SendableChooser<String> m_chosen = new SendableChooser<>();
@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
       case "Mid":
       switch(m_chosen.getSelected()){
         case "Default": Autonomous.MidDefault(); break; case "PlayerStation": Autonomous.MidPlayerStation(); break; 
-        case "P3": Autonomous.MidRight2Balls(); break; case "HailMary": Autonomous.Auto12(); break;  
+        case "P3": Autonomous.MidRight2Balls(); break; case "HailMary": Autonomous.MidRight3Balls(); break;  
         case "Defense": Autonomous.Auto23(); break;  
       } break; 
       case "Front":
@@ -115,17 +115,17 @@ public class Robot extends TimedRobot {
     }while(x<-3 || x > 3);
   }
   
-  public static void MoveTo(double y, double x, double angle){
-    y = -y; 
+  public static void MoveTo(double x, double y, double angle){
+    x = -x; 
     angle = -angle; 
     finalAngle = 0; 
     directMag = 0; 
-    while((Math.sqrt(Math.pow(swerve.ODOX()-x,2)+Math.pow(swerve.ODOY()-y,2)) > .1 || Math.abs(-angle-Robot.NavAngle()) > 5)){
+    while((Math.sqrt(Math.pow(swerve.ODOY()-y,2)+Math.pow(swerve.ODOX()-x,2)) > .1 || Math.abs(-angle-Robot.NavAngle()) > 5)){
       SmartDashboard.putNumber("Time: ", myTimer.get());
       if(myTimer.get() > 20){ break; }
       try { Robot.swerve.turning.setYaw(angle + Robot.NavAngle());} catch (Exception e) {}
-      finalAngle = Math.toDegrees(Math.atan2(-(swerve.ODOY()-y),-(swerve.ODOX()-x)))-Robot.NavAngle(); 
-      directMag = Math.hypot(swerve.ODOY()-y,swerve.ODOX()-x);
+      finalAngle = Math.toDegrees(Math.atan2(-(swerve.ODOX()-x),-(swerve.ODOY()-y)))-Robot.NavAngle(); 
+      directMag = Math.hypot(swerve.ODOX()-x,swerve.ODOY()-y);
       SwerveMath.ComputeSwerve(finalAngle, directMag, Robot.swerve.turning.getPIDOutput(), false);
       Drivetrain.updateOdometry(); swerve.updateDashboard();
       SmartDashboard.putNumber("x", x);
