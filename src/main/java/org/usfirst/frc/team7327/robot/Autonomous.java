@@ -94,7 +94,10 @@ public class Autonomous {
         Robot.MoveTo(1.7, 1, 180);
         Drivetrain.setIntakeMotors(0.5, DoubleSolenoid.Value.kForward);
         Robot.SleepFor(1);
-        Robot.MoveTo(1.7,3,180);
+        Robot.MoveTo(1.7,3.5,180);
+        Robot.MoveTo(0,0,0);
+        Drivetrain.setFunnelSpeed(1);
+
     }
     public static void Auto12(){}
     public static void Auto13(){}
