@@ -106,11 +106,11 @@ public class Drivetrain extends Subsystem {
   public static void ResetElevator() { Elevator.ElevatorReset(); }
   public static void ServoMotor(double degrees){ServoMotor.setAngle(degrees);}
 
-  public static int BotVelocity(){return ShooterMotor1.getSelectedSensorPosition(); }
-  public static int TopVelocity(){return ShooterMotor2.getSelectedSensorPosition(); }
+  public static int BotVelocity(){return ShooterMotor1.getSelectedSensorVelocity(); }
+  public static int TopVelocity(){return ShooterMotor2.getSelectedSensorVelocity(); }
   
 
-  
+
 	// public double getLiftVelocity() { return Elevator.getLiftVelocity(); }
 	// public double getLiftPosition() { return Elevator.getLiftPosition(); }
   public void updateDashboard(){ 
