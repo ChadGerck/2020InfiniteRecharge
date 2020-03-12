@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
       case "Mid":
       switch(m_chosen.getSelected()){
         case "Default": Autonomous.MidDefault(); break; case "PlayerStation": Autonomous.MidPlayerStation(); break; 
-        case "P3": Autonomous.MidRight2Balls(); break; case "HailMary": Autonomous.Auto12(); break;  
+        case "P3": Autonomous.MidRight2Balls(); break; case "HailMary": Autonomous.AutoTest(); break;  
         case "Defense": Autonomous.Auto23(); break;  
       } break; 
       case "Front":
