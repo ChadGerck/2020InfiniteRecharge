@@ -9,17 +9,18 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class Autonomous {    
 
     public static void Auto(){
-        //x,y,angle
-        Robot.MoveTo(0, 0.25,0);
-        Robot.SleepFor(2);
-        Robot.MoveTo(.25, 0, 90);
-        Robot.SleepFor(2);
-        Robot.MoveTo(0, -0.25, 180);
-        Robot.SleepFor(2);
-        Robot.MoveTo(-.25, 0, -90);
-        Robot.SleepFor(2);
-        Robot.MoveTo(0, 0, 0);
-        Robot.LimeAlign();
+        Robot.MoveTo(.25, 0,0); 
+        // //x,y,angle
+        // Robot.MoveTo(0, 0.25,0);
+        // Robot.SleepFor(2);
+        // Robot.MoveTo(.25, 0, 90);
+        // Robot.SleepFor(2);
+        // Robot.MoveTo(0, -0.25, 180);
+        // Robot.SleepFor(2);
+        // Robot.MoveTo(-.25, 0, -90);
+        // Robot.SleepFor(2);
+        // Robot.MoveTo(0, 0, 0);
+        // Robot.LimeAlign();
     }   
 //use -180 to 180; ie, 270 = -90
     public static void Auto2(){
@@ -89,8 +90,13 @@ public class Autonomous {
         Robot.SleepFor(5);
         Drivetrain.setBallSpeed(-.25);
         Robot.SleepFor(4); 
-
+        Robot.MoveTo(0,1,180);
+        Robot.MoveTo(1.7, 1, 180);
+        Drivetrain.setIntakeMotors(0.5, DoubleSolenoid.Value.kForward);
+        Robot.SleepFor(1);
+        Robot.MoveTo(1.7,3,180);
     }
+    public static void Auto12(){}
     public static void Auto13(){}
     public static void Auto14(){}
     public static void Auto15(){}
