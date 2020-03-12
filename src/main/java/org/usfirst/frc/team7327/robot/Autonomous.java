@@ -119,6 +119,18 @@ public class Autonomous {
         Robot.MoveTo(1,1,0);
     }
 
+    
+    public static void noname(){
+        Drivetrain.setIntakeMotors(0.75, DoubleSolenoid.Value.kForward);
+        Robot.MoveTo(0,2.7,0);
+        Robot.MoveTo(.4,2.7,-90);
+        Drivetrain.setIntakeMotors(0,DoubleSolenoid.Value.kReverse);
+        Drivetrain.setBallSpeed(-.25);
+        Drivetrain.Shoot(0.5);
+        Robot.MoveTo(4.87,.426,180);
+        Drivetrain.setFunnelSpeed(1);
+    }
+
 
     // public static void BlueTrench5(){
     //     Robot.MoveTo(0,-2.223,0); //tune middle alue as needed
