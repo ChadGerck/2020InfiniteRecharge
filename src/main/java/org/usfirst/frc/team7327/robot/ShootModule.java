@@ -9,7 +9,7 @@ public class ShootModule{
     private double error, diffError, lastError, testPIDOutput; 
     private int topVel; 
     private volatile double PIDOutput = 0;
-    static final double kP = .0011, kD = 0; 
+    static final double kP = .0002049999, kD = 0; 
     public ShootModule() {
     	lastError = getError(); 
     	ShootPID = new Notifier(() ->  {
@@ -17,8 +17,8 @@ public class ShootModule{
             SmartDashboard.putNumber("errorShoot", error); 
     		diffError = lastError - error; 
             testPIDOutput = kP * error + kD * diffError; 
-            testPIDOutput = Math.min(testPIDOutput, .5);
-            PIDOutput = Math.max(testPIDOutput, -.5); 
+            testPIDOutput = Math.min(testPIDOutput, 1);
+            PIDOutput = Math.max(testPIDOutput, -1); 
             Drivetrain.Shoot(PIDOutput);
             lastError = error; 
             SmartDashboard.putNumber("PIDOutput: ", PIDOutput); 

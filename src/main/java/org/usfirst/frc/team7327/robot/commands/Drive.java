@@ -73,9 +73,12 @@ public class Drive extends Command {
 
     if(oi.BackButton(2)){Drivetrain.ServoMotor.setAngle(102);}
     //Drivetrain.Shoot(oi.LeftY(2));
-    if(oi.XButtonDown(2)){Robot.swerve.shooter.setVelocity(1000);} //5400
+    if(oi.XButtonDown(2)){Robot.swerve.shooter.setVelocity(17400);} //5400
     //else if(oi.BButtonDown(2)){Drivetrain.TopSpin(-.15); Drivetrain.BotSpin(-.15);}
+    //if(oi.XButtonDown(2)){Drivetrain.Shoot(.315);}
+    //else{Drivetrain.Shoot(0); }
     else{Robot.swerve.shooter.setVelocity(0);}
+    SmartDashboard.putNumber("VelocityShoot", Drivetrain.ShooterMotor1.getSelectedSensorVelocity()); 
     SmartDashboard.putNumber("Throttle", k);
 
     if(oi.DpadDown(2)){Drivetrain.setFunnelSpeed(1);}
