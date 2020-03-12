@@ -19,12 +19,14 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import org.usfirst.frc.team7327.robot.ElevatorModule;
 import org.usfirst.frc.team7327.robot.Robot;
+import org.usfirst.frc.team7327.robot.ShootModule;
 import org.usfirst.frc.team7327.robot.commands.Drive;
 import org.usfirst.frc.team7327.robot.SwerveModule;
 import org.usfirst.frc.team7327.robot.TurnModule;
 
 public class Drivetrain extends Subsystem {
   public TurnModule turning;   
+  public ShootModule shooter; 
   private static final Translation2d m_frontLeftLocation = new Translation2d(0.381, -0.381);
   private static final Translation2d m_frontRightLocation = new Translation2d(0.381, 0.381);
   private static final Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
@@ -56,6 +58,7 @@ public class Drivetrain extends Subsystem {
     BallHandlerMotor = new CANSparkMax(14, MotorType.kBrushless);
     Elevator  = new ElevatorModule(15,16); 
     turning = new TurnModule(); 
+    shooter = new ShootModule(); 
     Extendor = new DoubleSolenoid(6,7);
     ServoMotor = new Servo(0);
     ServoMotor.setAngle(270);
@@ -102,6 +105,9 @@ public class Drivetrain extends Subsystem {
 	public static void ElevOn(boolean On) { Elevator.setOn(On); }
   public static void ResetElevator() { Elevator.ElevatorReset(); }
   public static void ServoMotor(double degrees){ServoMotor.setAngle(degrees);}
+
+  public static int BotVelocity(){return ShooterMotor1.getSelectedSensorPosition(); }
+  public static int TopVelocity(){return ShooterMotor2.getSelectedSensorPosition(); }
   
 
   
