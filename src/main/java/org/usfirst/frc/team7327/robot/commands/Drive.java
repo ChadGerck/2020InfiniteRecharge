@@ -29,8 +29,8 @@ public class Drive extends Command {
 
 
     
-    if(oi.LeftBumperDown(2)){ Drivetrain.setRawElevator(0.75); }
-    else if(oi.RightBumperDown(2)){ Drivetrain.setRawElevator(-0.75);}
+    if(oi.AButtonDown(3)){ Drivetrain.setRawElevator(0.75); }
+    else if(oi.XButtonDown(3)){ Drivetrain.setRawElevator(-0.75);}
     else{Drivetrain.setRawElevator(0);}
 
     if(oi.BackButton(1)){Robot.MoveTo(0, 0, 0);}
@@ -71,7 +71,7 @@ public class Drive extends Command {
     //PLAYER TWO CONTROLS
     SmartDashboard.putNumber("ServoDegrees", Drivetrain.ServoMotor.getAngle());
 
-    if(oi.BackButton(2)){Drivetrain.ServoMotor.setAngle(102);}
+    if(oi.YButton(3)){Drivetrain.ServoMotor.setAngle(102);}
     //Drivetrain.Shoot(oi.LeftY(2));
     if(oi.XButtonDown(2)){Robot.swerve.shooter.setVelocity(1000);} //5400
     //else if(oi.BButtonDown(2)){Drivetrain.TopSpin(-.15); Drivetrain.BotSpin(-.15);}
@@ -93,6 +93,8 @@ public class Drive extends Command {
     if(oi.StartButton(1)) { Robot.nav.reset(); } //if(oi.StartButton(2)) { Robot.swerve.ResetElevator(); }
     // ElevatorPositions.MoveElevators();
 
+    //NEScontroller 
+    
   }
   protected boolean isFinished() { return false;}
   protected void end() {}
