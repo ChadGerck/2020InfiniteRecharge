@@ -72,9 +72,10 @@ public class Drive extends Command {
     SmartDashboard.putNumber("ServoDegrees", Drivetrain.ServoMotor.getAngle());
 
     if(oi.BackButton(2)){Drivetrain.ServoMotor.setAngle(102);}
-    Drivetrain.Shoot(oi.LeftY(2));
-    if(oi.XButtonDown(2)){Drivetrain.TopSpin(.315); Drivetrain.BotSpin(.315);}
-    else if(oi.BButtonDown(2)){Drivetrain.TopSpin(-.15); Drivetrain.BotSpin(-.15);}
+    //Drivetrain.Shoot(oi.LeftY(2));
+    if(oi.XButtonDown(2)){Robot.swerve.shooter.setVelocity(1000);} //5400
+    //else if(oi.BButtonDown(2)){Drivetrain.TopSpin(-.15); Drivetrain.BotSpin(-.15);}
+    else{Robot.swerve.shooter.setVelocity(0);}
     SmartDashboard.putNumber("Throttle", k);
 
     if(oi.DpadDown(2)){Drivetrain.setFunnelSpeed(1);}
