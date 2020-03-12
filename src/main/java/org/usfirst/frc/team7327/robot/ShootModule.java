@@ -9,7 +9,11 @@ public class ShootModule{
     private double error, diffError, lastError, testPIDOutput; 
     private int topVel; 
     private volatile double PIDOutput = 0;
+<<<<<<< HEAD
     static final double kP = .0002049999, kD = 0; 
+=======
+    static final double kP = .001, kD = 0; 
+>>>>>>> 37bd622878286f71d0606b7fdb843dca8abca53d
     public ShootModule() {
     	lastError = getError(); 
     	ShootPID = new Notifier(() ->  {
