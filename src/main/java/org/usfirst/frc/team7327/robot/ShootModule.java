@@ -16,7 +16,7 @@ public class ShootModule{
             error = getError(); 
             SmartDashboard.putNumber("errorShoot", error); 
     		diffError = lastError - error; 
-            testPIDOutput = kP * error + kD * diffError; 
+            testPIDOutput = kP * error + kD * diffError+.315; 
             testPIDOutput = Math.min(testPIDOutput, 1);
             PIDOutput = Math.max(testPIDOutput, -1); 
             Drivetrain.Shoot(PIDOutput);
