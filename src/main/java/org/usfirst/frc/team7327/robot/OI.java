@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 public class OI{
     private static final double DEADZONE_LIMIT = 0.1;
+	public static final String LeftY = null;
     public final XboxController Controller0 = new XboxController(0), Controller1 = new XboxController(1);
     public XboxController control; 
     public void Remote(int x){if(x==1){control=Controller0;}else if(x==2){control=Controller1;}}
