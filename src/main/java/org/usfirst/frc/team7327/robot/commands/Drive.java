@@ -30,7 +30,7 @@ public class Drive extends Command {
 
     
     if(oi.AButtonDown(3)){ Drivetrain.setRawElevator(0.75); }
-    else if(oi.XButtonDown(3)){ Drivetrain.setRawElevator(-0.75);}
+    else if(oi.BButtonDown(3)){ Drivetrain.setRawElevator(-0.75);}
     else{Drivetrain.setRawElevator(0);}
 
     if(oi.BackButton(1)){Robot.MoveTo(0, 0, 0);}
