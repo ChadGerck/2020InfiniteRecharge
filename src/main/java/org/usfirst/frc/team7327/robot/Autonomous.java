@@ -166,7 +166,7 @@ public class Autonomous {
 
 
 
-    }
+    
     public static void sixballsfoot(){
         //shootball
         Robot.MoveTo(1.702,0,0);
@@ -185,3 +185,4 @@ public class Autonomous {
     
 
 
+}
