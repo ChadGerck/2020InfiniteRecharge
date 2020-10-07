@@ -26,7 +26,6 @@ import org.usfirst.frc.team7327.robot.TurnModule;
 
 public class Drivetrain extends Subsystem {
   public TurnModule turning;   
-  public ShootModule shooter; 
   private static final Translation2d m_frontLeftLocation = new Translation2d(0.381, -0.381);
   private static final Translation2d m_frontRightLocation = new Translation2d(0.381, 0.381);
   private static final Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
@@ -49,6 +48,8 @@ public class Drivetrain extends Subsystem {
   public static CANSparkMax BallHandlerMotor;
   public static DoubleSolenoid Extendor; 
   public static Servo ServoMotor;
+  public static ShootModule shooter; 
+
    public Drivetrain(){
     ShooterMotor1 = new TalonFX(9);
     ShooterMotor2 = new TalonFX(10);
@@ -96,13 +97,14 @@ public class Drivetrain extends Subsystem {
     FunnelMotor.set(ControlMode.PercentOutput, funnel_handlepower);
     BallHandlerMotor.set(funnel_handlepower);
   }
-  public static void TopSpin(double shooterpower){ShooterMotor2.set(ControlMode.PercentOutput, shooterpower); }
+  public static void TopSpin(double shooterpower){ShooterMotor2.set(ControlMode.PercentOutput, -shooterpower); }
   public static void BotSpin(double shooterpower){ShooterMotor1.set(ControlMode.PercentOutput, -shooterpower);}
-  public static void Shoot(double shooterpower){TopSpin(-shooterpower); BotSpin(-shooterpower);}
+  public static void Shoot(double shooterpower){TopSpin(shooterpower); BotSpin(shooterpower);}
   public static void ControlPanel(double power){ ControlPanelMotor.set(ControlMode.PercentOutput, power); }
   public static void setRawElevator(double speed){ Elevator.setRawElev(speed); }
   public static void setElevatorPosition(double position){ Elevator.setPosition(position); }
-	public static void ElevOn(boolean On) { Elevator.setOn(On); }
+  public static void ElevOn(boolean On) { Elevator.setOn(On); }
+  public static void ShootOn(boolean On){ shooter.setOn(On);}
   public static void ResetElevator() { Elevator.ElevatorReset(); }
   public static void ServoMotor(double degrees){ServoMotor.setAngle(degrees);}
 
