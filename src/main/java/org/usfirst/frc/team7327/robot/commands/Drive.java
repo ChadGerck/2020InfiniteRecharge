@@ -70,7 +70,7 @@ public class Drive extends Command {
     
     //PLAYER TWO CONTROLS
     SmartDashboard.putNumber("ServoDegrees", Drivetrain.ServoMotor.getAngle());
-
+//test
     if(oi.BackButton(2)){Drivetrain.ServoMotor.setAngle(102);}
     //Drivetrain.Shoot(oi.LeftY(2));
     if(oi.XButtonDown(2)){Robot.swerve.shooter.setVelocity(17400);} //5400
