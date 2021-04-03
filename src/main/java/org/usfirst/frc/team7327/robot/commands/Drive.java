@@ -27,13 +27,11 @@ public class Drive extends Command {
 
   protected void execute() {
 
-
-    
     if(oi.LeftBumperDown(2)){ Drivetrain.setRawElevator(0.75); }
     else if(oi.RightBumperDown(2)){ Drivetrain.setRawElevator(-0.75);}
     else{Drivetrain.setRawElevator(0);}
 
-    if(oi.BackButton(1)){Robot.MoveTo(0, 0, 0);}
+    
     if(oi.RSClickDown(1)){evadeMode=true;} else{evadeMode=false;}
 
     if(oi.LSClickDown(1)){speedThrottle = 1;}

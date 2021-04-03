@@ -26,6 +26,9 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private final SendableChooser<String> m_chosen = new SendableChooser<>();
   public static AHRS nav; 
+  static double autoAngle = 0;
+  static double autoX = 0; 
+  static double autoY = 0; 
   public boolean flag = true; 
   static double finalAngle, directMag, steering_adjust, x, rotMag;
   static Boolean fixRotation;
@@ -71,38 +74,7 @@ public class Robot extends TimedRobot {
     swerve.OdoReset();
     nav.reset();
     swerve.setALLBrake(false); 
-    switch(m_chooser.getSelected()){
-      case "FarL": 
-      switch(m_chosen.getSelected()){
-        case "Default": Autonomous.Auto(); break; case "PlayerStation": Autonomous.Auto2(); break; 
-        case "P3": Autonomous.Auto3(); break; case "HailMary": Autonomous.Auto4(); break;   
-        case "Defense": Autonomous.Auto21(); break;   
-      } break; 
-      case "Left": 
-      switch(m_chosen.getSelected()){
-        case "Default": Autonomous.LeftRealign(); break; case "PlayerStation": Autonomous.Auto6(); break; 
-        case "P3": Autonomous.Auto7(); break; case "HailMary": Autonomous.Auto8(); break; 
-        case "Defense": Autonomous.Auto22(); break;   
-      } break; 
-      case "Mid":
-      switch(m_chosen.getSelected()){
-        case "Default": Autonomous.MidDefault(); break; case "PlayerStation": Autonomous.MidPlayerStation(); break; 
-        case "P3": Autonomous.MidRight2Balls(); break; case "HailMary": Autonomous.MidRight3Balls(); break;  
-        case "Defense": Autonomous.Auto23(); break;  
-      } break; 
-      case "Front":
-      switch(m_chosen.getSelected()){
-        case "Default": Autonomous.Auto13(); break; case "PlayerStation": Autonomous.Auto14(); break; 
-        case "P3": Autonomous.Auto15(); break; case "HailMary": Autonomous.Auto16(); break;   
-        case "Defense": Autonomous.Auto24(); break; 
-      } break; 
-      case "FarR":
-      switch(m_chosen.getSelected()){
-        case "Default": Autonomous.Auto17(); break; case "PlayerStation": Autonomous.Auto18(); break; 
-        case "P3": Autonomous.Auto19(); break; case "HailMary": Autonomous.Auto20(); break;   
-        case "Defense": Autonomous.AutoTest(); break; 
-      } break; 
-    }
+    Autonomous.Auto();
 
   }
   public static void LimeAlign(){
@@ -113,6 +85,14 @@ public class Robot extends TimedRobot {
       directMag = (Math.abs(steering_adjust) + Math.abs(oi.LeftY(1)))/2; 
       SwerveMath.ComputeSwerve(finalAngle, directMag, rotMag, fixRotation); 
     }while(x<-3 || x > 3);
+  }
+  public static void MoveForward(){
+    autoY += .3048;
+    Robot.MoveTo(autoX, autoY, autoAngle);
+  }
+  public static void TurnRight(){
+    autoAngle += 90; 
+    Robot.MoveTo(autoX, autoY, autoAngle);
   }
   
   public static void MoveTo(double x, double y, double angle){
@@ -134,6 +114,7 @@ public class Robot extends TimedRobot {
     }
     SwerveMath.ComputeSwerve(finalAngle, 0, 0, false);
   }
+  
   public static void SleepFor(long x){try { TimeUnit.SECONDS.sleep(x); } catch (Exception e) {}}
   @Override public void autonomousPeriodic() {
     Drivetrain.updateOdometry();
